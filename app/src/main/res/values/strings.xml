@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Movies</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="upcoming">Coming Soon</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="see_all">See All</string>
+    <string name="image_start_url">https://image.tmdb.org/t/p/w640/</string>
+</resources>
