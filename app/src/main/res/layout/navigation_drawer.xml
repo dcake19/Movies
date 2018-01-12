@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_drawer"
+    android:layout_width="@dimen/navigation_drawer_width"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_gravity="start"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="0dp"
+    android:background="@color/colorPrimary"
+    android:drawSelectorOnTop="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_small"
+            android:text="@string/films"
+            android:textSize="@dimen/text_size_medium"
+            android:gravity="center"
+            android:textColor="@color/colorTextLight"/>
+
+        <LinearLayout
+            android:id="@+id/navigation_film_home"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_medium"
+                android:paddingBottom="@dimen/padding_medium"
+                android:paddingRight="@dimen/padding_medium"
+                android:paddingLeft="@dimen/padding_large"
+                android:background="@mipmap/ic_launcher"
+                android:id="@+id/imageView"/>
+
+            <TextView
+                android:padding="@dimen/padding_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:gravity="center_vertical"
+                android:text="@string/home"
+                android:textColor="@color/colorTextLight"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

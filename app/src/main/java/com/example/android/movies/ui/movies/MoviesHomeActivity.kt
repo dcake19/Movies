@@ -2,16 +2,19 @@ package com.example.android.movies.ui.movies
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.widget.DrawerLayout
+import android.support.v7.widget.Toolbar
 import com.example.android.movies.BuildConfig
 import com.example.android.movies.R
+import com.example.android.movies.ui.NavigationIconActivity
+import kotlinx.android.synthetic.main.movies_home_activity.*
+import kotlinx.android.synthetic.main.movies_home_appbar.*
 
-class MoviesHomeActivity : AppCompatActivity() {
+class MoviesHomeActivity : NavigationIconActivity() {
 
     companion object {
         const val DOWNLOAD_TYPE_KEY = "download_key"
     }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,5 +46,21 @@ class MoviesHomeActivity : AppCompatActivity() {
             MoviesDownloadTypes.TOP_RATED -> return R.id.top_rated_content
             else->{return -1}
         }
+    }
+
+    override fun getLayoutResourceId(): Int {
+        return R.layout.movies_home_activity
+    }
+
+    override fun getViewId(): Int {
+        return R.id.navigation_film_home
+    }
+
+    override fun getDrawerLayout(): DrawerLayout {
+        return movies_home_drawer_layout
+    }
+
+    override fun getToolbar(): Toolbar {
+        return movies_home_toolbar
     }
 }
