@@ -12,7 +12,7 @@ import com.example.android.movies.loadImage
 import kotlinx.android.synthetic.main.movies_item_small.view.*
 import com.squareup.picasso.Picasso
 
-class MoviesAdapter(val context: Context, val presenter: MoviesContract.Presenter,var size:Int = 0) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MoviesAdapter(val presenter: MoviesContract.Presenter,var size:Int = 0) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     fun update(size: Int) {
         this.size = size
