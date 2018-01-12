@@ -24,15 +24,12 @@ class MoviesHomeFragment :Fragment(), MoviesContract.View{
 
         val app : App = activity.application as App
 
-
         val component = DaggerMoviesHomeComponent.builder()
                 .appComponent(app.component)
                 .moviesHomeModule(MoviesHomeModule(this,type))
                 .build()
 
         component.inject(this)
-
-       // adapter = MoviesAdapter(presenter)
 
         return inflater!!.inflate(R.layout.movies_home_fragment,container,false)
     }
