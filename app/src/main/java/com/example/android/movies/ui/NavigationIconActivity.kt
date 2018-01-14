@@ -9,10 +9,6 @@ import com.example.android.movies.R
 
 abstract class NavigationIconActivity : BaseNavigationActivity() {
 
-    override protected fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     // sets the hamburger icon and the back arrow
     private fun setupToolbarIcon() {
         val actionBarDrawerToggle = ActionBarDrawerToggle(
