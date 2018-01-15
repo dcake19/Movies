@@ -1,9 +1,5 @@
 package com.example.android.movies.ui.movies
 
-import com.example.android.movies.api.data.movie.MovieResults
-import io.reactivex.Observable
-
-
 interface MoviesContract {
 
     interface View{
@@ -12,7 +8,9 @@ interface MoviesContract {
 
     interface Presenter{
         fun downloadMoviesData()
+        fun downloadMoviesDataNextPage()
         fun getPosterPath(index:Int):String
+        fun getTitle(index: Int): String
     }
 
 }

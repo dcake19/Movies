@@ -1,8 +1,8 @@
-package com.example.android.movies.di.movies
+package com.example.android.movies.di.movies.home
 
 import com.example.android.movies.di.AppComponent
 import com.example.android.movies.di.FragmentScope
-import com.example.android.movies.ui.movies.MoviesHomeFragment
+import com.example.android.movies.ui.movies.home.MoviesHomeFragment
 import dagger.Component
 
 @FragmentScope

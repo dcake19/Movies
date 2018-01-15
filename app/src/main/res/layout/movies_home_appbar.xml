@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.movies.MoviesHomeActivity">
+    tools:context=".ui.movies.home.MoviesHomeActivity">
     <LinearLayout
         android:id="@+id/main_background"
         android:layout_width="match_parent"
@@ -39,7 +39,6 @@
 
     </android.support.design.widget.AppBarLayout>
         <LinearLayout
-            android:id="@+id/find_discover_activity"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

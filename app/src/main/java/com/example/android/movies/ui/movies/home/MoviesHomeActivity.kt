@@ -1,12 +1,11 @@
-package com.example.android.movies.ui.movies
+package com.example.android.movies.ui.movies.home
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
-import com.example.android.movies.BuildConfig
 import com.example.android.movies.R
 import com.example.android.movies.ui.NavigationIconActivity
+import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import kotlinx.android.synthetic.main.movies_home_activity.*
 import kotlinx.android.synthetic.main.movies_home_appbar.*
 
@@ -28,15 +27,15 @@ class MoviesHomeActivity : NavigationIconActivity() {
     }
 
     private fun setFragment(type:Int){
-        val nowPlayingFragment = MoviesHomeFragment()
-        var bundle = Bundle()
+        val fragment = MoviesHomeFragment()
+        val bundle = Bundle()
         bundle.putInt(DOWNLOAD_TYPE_KEY,type)
-        nowPlayingFragment.arguments = bundle
+        fragment.arguments = bundle
         val ft = supportFragmentManager.beginTransaction()
         ft.setCustomAnimations(
                 R.anim.abc_fade_in, R.anim.abc_fade_out)
-        ft.replace(getContent(type),nowPlayingFragment);
-        ft.commit();
+        ft.replace(getContent(type),fragment)
+        ft.commit()
     }
 
     private fun getContent(type:Int): Int{

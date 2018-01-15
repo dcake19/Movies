@@ -1,6 +1,5 @@
 package com.example.android.movies.api.data.movie
-import com.example.android.movies.api.data.actor.Cast
-import com.example.android.movies.api.data.actor.Crew
+
 import com.google.gson.annotations.SerializedName
 
 data class MovieCredits(
