@@ -5,7 +5,7 @@ data class MovieResults(
 		@SerializedName("page") val page: Int,
 		@SerializedName("total_results") val totalResults: Int,
 		@SerializedName("total_pages") val totalPages: Int,
-		@SerializedName("results") val results: List<Result?>
+		@SerializedName("results") val results: List<Result>
 )
 
 data class Result(
@@ -18,7 +18,7 @@ data class Result(
 		@SerializedName("poster_path") val posterPath: String,
 		@SerializedName("original_language") val originalLanguage: String,
 		@SerializedName("original_title") val originalTitle: String,
-		@SerializedName("genre_ids") val genreIds: List<Int?>,
+		@SerializedName("genre_ids") val genreIds: List<Int>,
 		@SerializedName("backdrop_path") val backdropPath: String,
 		@SerializedName("adult") val adult: Boolean,
 		@SerializedName("overview") val overview: String,

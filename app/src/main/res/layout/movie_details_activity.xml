@@ -8,14 +8,13 @@
     android:layout_height="match_parent">
 
     <android.support.v4.widget.DrawerLayout
-        android:id="@+id/movies_home_drawer_layout"
+        android:id="@+id/movie_details_drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/movies_home_appbar"/>
+        <include layout="@layout/movie_details_appbar"/>
 
         <include layout="@layout/navigation_drawer"/>
 
     </android.support.v4.widget.DrawerLayout>
-
 </LinearLayout>

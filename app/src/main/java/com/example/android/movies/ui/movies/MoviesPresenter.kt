@@ -57,11 +57,15 @@ class MoviesPresenter(val interactor: MoviesInteractor, val view: MoviesContract
                 })
     }
 
+    override fun getMovieId(index:Int): Int {
+        return moviesResults.results.get(index).id
+    }
+
     override fun getPosterPath(index:Int): String {
-        return moviesResults.results.get(index)?.posterPath?:""
+        return moviesResults.results.get(index).posterPath
     }
 
     override fun getTitle(index: Int): String {
-        return moviesResults.results.get(index)?.originalTitle?:""
+        return moviesResults.results.get(index).originalTitle
     }
 }

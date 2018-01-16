@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.example.android.movies.R
 import com.example.android.movies.loadImage
 import com.example.android.movies.ui.movies.MoviesContract
+import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
 import kotlinx.android.synthetic.main.movies_list_item.view.*
 
 class MoviesListAdapter(val presenter: MoviesContract.Presenter, var size:Int = 0) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
@@ -36,6 +37,13 @@ class MoviesListAdapter(val presenter: MoviesContract.Presenter, var size:Int = 
         fun setData(title:String,posterPath:String) = with(itemView){
             text_movie_title.text = title
             image_poster.loadImage(context.getString(R.string.image_start_url),posterPath)
+
+            layout_movies_item.setOnClickListener {
+                context.startActivity(
+                        MovieDetailsActivity.getIntent(context,
+                                presenter.getMovieId(adapterPosition),
+                                presenter.getTitle(adapterPosition)))
+            }
         }
 
 

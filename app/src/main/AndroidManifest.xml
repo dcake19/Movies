@@ -17,12 +17,16 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.movies.list.MoviesListActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".ui.movies.list.MoviesListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.movies.detailed.MovieDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

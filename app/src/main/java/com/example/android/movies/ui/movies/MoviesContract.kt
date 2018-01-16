@@ -9,6 +9,7 @@ interface MoviesContract {
     interface Presenter{
         fun downloadMoviesData()
         fun downloadMoviesDataNextPage()
+        fun getMovieId(index:Int): Int
         fun getPosterPath(index:Int):String
         fun getTitle(index: Int): String
     }
