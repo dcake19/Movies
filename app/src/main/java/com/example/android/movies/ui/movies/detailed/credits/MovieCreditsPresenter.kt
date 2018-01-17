@@ -36,7 +36,6 @@ class MovieCreditsPresenter(val interactor: MovieCreditsInteractor, val view: Mo
 
                     }
                 })
-
     }
 
     override fun getCastName(position: Int): String {
@@ -48,7 +47,7 @@ class MovieCreditsPresenter(val interactor: MovieCreditsInteractor, val view: Mo
     }
 
     override fun getCastPosterPath(position: Int): String {
-        return movieCredits.cast.get(position).profilePath
+        return movieCredits.cast.get(position).profilePath?:""
     }
 
     override fun getCrewtName(position: Int): String {
@@ -60,6 +59,6 @@ class MovieCreditsPresenter(val interactor: MovieCreditsInteractor, val view: Mo
     }
 
     override fun getCrewPosterPath(position: Int): String {
-        return movieCredits.crew.get(position).profilePath
+        return movieCredits.crew.get(position).profilePath?:""
     }
 }

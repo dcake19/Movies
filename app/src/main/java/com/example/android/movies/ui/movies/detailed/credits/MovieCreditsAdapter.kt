@@ -1,6 +1,7 @@
 package com.example.android.movies.ui.movies.detailed.credits
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.android.movies.R
@@ -26,28 +27,50 @@ class MovieCreditsAdapter(val presenter: MovieCreditsContract.Presenter)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        if (position==0){
+//        if (position==0){
+//            holder as TitleViewHolder
+//            if (sizeCast>0)
+//                holder.setTitle(0)
+//            else if(sizeCrew>0)
+//                holder.setTitle(1)
+//        }else if (position==sizeCast+1){
+//            holder as TitleViewHolder
+//            if(sizeCrew>0)
+//                holder.setTitle(1)
+//        }else if(sizeCast>0 && position<=sizeCast) {
+//            holder as CreditsViewHolder
+//            holder.setInfo(presenter.getCastName(position-1),
+//                    presenter.getCharacter(position-1),
+//                    presenter.getCastPosterPath(position-1))
+//        }else{
+//            holder as CreditsViewHolder
+//            var crewPosition = position - 1 - sizeCast
+//            if(sizeCast>0)crewPosition--
+//            holder.setInfo(presenter.getCrewtName(crewPosition),
+//                    presenter.getJob(crewPosition),
+//                    presenter.getCrewPosterPath(crewPosition))
+//        }
+
+        val type = getItemViewType(position)
+        if (type==1){
             holder as TitleViewHolder
-            if (sizeCast>0)
-                holder.setTitle(0)
-            else if(sizeCrew>0)
-                holder.setTitle(1)
-        }else if (position==sizeCast+1){
-            holder as TitleViewHolder
-            if(sizeCrew>0)
-                holder.setTitle(1)
-        }else if(sizeCast>0 && position<=sizeCast) {
-            holder as CreditsViewHolder
-            holder.setInfo(presenter.getCastName(position-1),
-                    presenter.getCharacter(position-1),
-                    presenter.getCastPosterPath(position-1))
+            if(position==0 && sizeCast>0) holder.setTitle(0)
+            else holder.setTitle(1)
         }else{
             holder as CreditsViewHolder
-            var crewPosition = position - 1 - sizeCast
-            if(sizeCast>0)crewPosition--
-            holder.setInfo(presenter.getCrewtName(crewPosition),
-                    presenter.getJob(crewPosition),
-                    presenter.getCrewPosterPath(crewPosition))
+            if (position<=sizeCast) {
+                holder.setInfo(presenter.getCastName(position - 1),
+                        presenter.getCharacter(position - 1),
+                        presenter.getCastPosterPath(position - 1))
+            }
+            else {
+                var crewPosition = position - 1 - sizeCast
+                if(sizeCast>0)crewPosition--
+
+                holder.setInfo(presenter.getCrewtName(crewPosition),
+                        presenter.getJob(crewPosition),
+                        presenter.getCrewPosterPath(crewPosition))
+            }
         }
     }
 

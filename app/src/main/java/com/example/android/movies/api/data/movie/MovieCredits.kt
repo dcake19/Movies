@@ -16,7 +16,7 @@ data class Cast(
 		@SerializedName("id") val id: Int,
 		@SerializedName("name") val name: String,
 		@SerializedName("order") val order: Int,
-		@SerializedName("profile_path") val profilePath: String
+		@SerializedName("profile_path") val profilePath: String?
 )
 
 data class Crew(
@@ -26,5 +26,5 @@ data class Crew(
 		@SerializedName("id") val id: Int,
 		@SerializedName("job") val job: String,
 		@SerializedName("name") val name: String,
-		@SerializedName("profile_path") val profilePath: String
+		@SerializedName("profile_path") val profilePath: String?
 )
