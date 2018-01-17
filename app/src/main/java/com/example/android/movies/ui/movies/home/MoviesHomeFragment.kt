@@ -60,6 +60,7 @@ class MoviesHomeFragment :Fragment(), MoviesContract.View {
             MoviesDownloadTypes.NOW_PLAYING -> text_title_type.text = context.getString(R.string.now_playing)
             MoviesDownloadTypes.UPCOMING -> text_title_type.text = context.getString(R.string.upcoming)
             MoviesDownloadTypes.TOP_RATED -> text_title_type.text = context.getString(R.string.top_rated)
+            MoviesDownloadTypes.POPULAR -> text_title_type.text = context.getString(R.string.popular)
         }
     }
 

@@ -59,6 +59,12 @@ interface MoviesApi {
             @Query("api_key") apiKey: String,
             @Query("page") pageNumber: String): Observable<MovieResults>
 
+    @GET("/3/movie/popular")
+    fun getPopular(
+            // api key in gradle file
+            @Query("api_key") apiKey: String,
+            @Query("page") pageNumber: String): Observable<MovieResults>
+
     // detailed movie info
     @GET("/3/movie/{id}")
     fun getMovieInfo(

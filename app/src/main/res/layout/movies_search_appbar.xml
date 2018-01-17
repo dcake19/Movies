@@ -19,27 +19,22 @@
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/movies_home_toolbar"
+                android:id="@+id/movies_search_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
-                <TextView
-                    android:id="@+id/text_toolbar_title"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textColor="@color/colorTextLight"
-                    android:layout_gravity="center_vertical"
-                    tools:text="@string/home_title"/>
+                <SearchView
+                    android:id="@+id/search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>
         <FrameLayout
-            android:id="@+id/movies_list_content"
+            android:id="@+id/search_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         </FrameLayout>

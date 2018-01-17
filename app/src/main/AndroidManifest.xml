@@ -28,6 +28,10 @@
             android:name=".ui.movies.detailed.MovieDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".ui.movies.list.search.MoviesSearchActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

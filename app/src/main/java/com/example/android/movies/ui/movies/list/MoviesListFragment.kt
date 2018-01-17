@@ -1,6 +1,5 @@
 package com.example.android.movies.ui.movies.list
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -14,10 +13,11 @@ import com.example.android.movies.di.movies.home.MoviesHomeModule
 import com.example.android.movies.di.movies.list.DaggerMoviesListComponent
 import com.example.android.movies.di.movies.list.MoviesListModule
 import com.example.android.movies.ui.movies.MoviesContract
+import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.home.MoviesHomeActivity
+import com.example.android.movies.ui.movies.list.search.MoviesSearchActivity
 import kotlinx.android.synthetic.main.movies_home_fragment.*
 import javax.inject.Inject
-
 
 class MoviesListFragment : Fragment(), MoviesContract.View {
 
@@ -40,7 +40,13 @@ class MoviesListFragment : Fragment(), MoviesContract.View {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        presenter.downloadMoviesData()
+        val type = arguments.getInt(MoviesListActivity.DOWNLOAD_TYPE_KEY)
+
+        if (type == MoviesDownloadTypes.SEARCH)
+            presenter.search(arguments.getString(MoviesSearchActivity.SEARCH_QUERY,""))
+        else
+            presenter.downloadMoviesData()
+
         super.onViewCreated(view, savedInstanceState)
 
         recycler_movies.apply {

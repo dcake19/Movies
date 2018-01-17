@@ -2,10 +2,12 @@ package com.example.android.movies.ui.movies.home
 
 import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
+import android.widget.SearchView
 import android.support.v7.widget.Toolbar
 import com.example.android.movies.R
 import com.example.android.movies.ui.NavigationIconActivity
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
+import com.example.android.movies.ui.movies.list.search.MoviesSearchActivity
 import kotlinx.android.synthetic.main.movies_home_activity.*
 import kotlinx.android.synthetic.main.movies_home_appbar.*
 
@@ -23,7 +25,21 @@ class MoviesHomeActivity : NavigationIconActivity() {
             setFragment(MoviesDownloadTypes.NOW_PLAYING)
             setFragment(MoviesDownloadTypes.UPCOMING)
             setFragment(MoviesDownloadTypes.TOP_RATED)
+            setFragment(MoviesDownloadTypes.POPULAR)
         }
+
+        search.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                startActivity(MoviesSearchActivity.getIntent(
+                        this@MoviesHomeActivity,query?:""))
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
     }
 
     private fun setFragment(type:Int){
@@ -43,6 +59,7 @@ class MoviesHomeActivity : NavigationIconActivity() {
             MoviesDownloadTypes.NOW_PLAYING -> return R.id.now_playing_content
             MoviesDownloadTypes.UPCOMING -> return R.id.upcoming_content
             MoviesDownloadTypes.TOP_RATED -> return R.id.top_rated_content
+            MoviesDownloadTypes.POPULAR -> return R.id.popular_content
             else->{return -1}
         }
     }
