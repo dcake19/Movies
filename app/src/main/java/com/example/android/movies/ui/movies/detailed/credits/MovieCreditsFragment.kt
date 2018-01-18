@@ -16,20 +16,28 @@ import javax.inject.Inject
 
 class MovieCreditsFragment : Fragment(), MovieCreditsContract.View{
 
+    companion object {
+        const val CREDITS_TYPE = "credits_type"
+    }
+
     @Inject lateinit var presenter: MovieCreditsContract.Presenter
     @Inject lateinit var adapter: MovieCreditsAdapter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val app : App = activity.application as App
-
+       // val app : App = activity.application as App
+        val movieDetailed = activity as MovieDetailsActivity
+//        val component = DaggerMovieCreditsComponent.builder()
+//                .appComponent(app.component)
+//                .movieCreditsModule(MovieCreditsModule(this,arguments.getInt(CREDITS_TYPE)))
+//                .build()
         val component = DaggerMovieCreditsComponent.builder()
-                .appComponent(app.component)
-                .movieCreditsModule(MovieCreditsModule(this))
+                .movieDetailedComponent(movieDetailed.component)
+                .movieCreditsModule(MovieCreditsModule(arguments.getInt(CREDITS_TYPE)))
                 .build()
 
         component.inject(this)
-
+        presenter.changeView(this)
         return inflater!!.inflate(R.layout.movie_details_cast_fragment,container,false)
     }
 

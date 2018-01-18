@@ -8,6 +8,7 @@ interface MovieCreditsContract {
     }
 
     interface Presenter{
+        fun changeView(view: View)
         fun downloadCredits(id:Int)
         fun getCastName(position:Int):String
         fun getCharacter(position:Int):String

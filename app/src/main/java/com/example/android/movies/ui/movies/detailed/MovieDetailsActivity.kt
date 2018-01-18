@@ -7,13 +7,21 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.widget.DrawerLayout
 import com.example.android.movies.R
+import com.example.android.movies.di.App
+import com.example.android.movies.di.DaggerAppComponent
+import com.example.android.movies.di.movies.detailed.DaggerMovieDetailedComponent
+import com.example.android.movies.di.movies.detailed.MovieDetailedComponent
+import com.example.android.movies.di.movies.detailed.MovieDetailedModule
 import com.example.android.movies.ui.BaseNavigationActivity
+import com.example.android.movies.ui.movies.detailed.credits.CreditsType
 import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsFragment
 import com.example.android.movies.ui.movies.detailed.info.MoviesInfoFragment
 import kotlinx.android.synthetic.main.movie_details_activity.*
 import kotlinx.android.synthetic.main.movie_details_appbar.*
 
 class MovieDetailsActivity : BaseNavigationActivity() {
+
+    lateinit var component: MovieDetailedComponent
 
     companion object {
         const val MOVIE_ID = "movie_id"
@@ -31,27 +39,22 @@ class MovieDetailsActivity : BaseNavigationActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.movie_details_activity)
 
+        val app : App = application as App
+        component = DaggerMovieDetailedComponent.builder()
+                .appComponent(app.component)
+                .movieDetailedModule(MovieDetailedModule())
+                .build()
+
         movies_details_toolbar.title = intent.getStringExtra(MOVIE_TITLE)
 
         setupTabs()
         setFragment(0)
     }
 
-//    fun setupTabs(){
-//        val bundle = Bundle()
-//        bundle.putInt(MOVIE_ID,intent.getIntExtra(MOVIE_ID,0))
-//        tab_host.setup(this, getSupportFragmentManager(), android.R.id.tabcontent)
-//        tab_host.addTab(tab_host.newTabSpec("tab1")
-//                .setIndicator("tab 1",null),
-//                MoviesInfoFragment::class.java,bundle)
-//        tab_host.addTab(tab_host.newTabSpec("tab2")
-//                .setIndicator("tab 2",null),
-//                MovieCreditsFragment::class.java,bundle)
-//    }
-
     fun setupTabs(){
         tabs.addTab(tabs.newTab().setText("one"),true)
         tabs.addTab(tabs.newTab().setText("two"))
+        tabs.addTab(tabs.newTab().setText("three"))
 
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -69,16 +72,22 @@ class MovieDetailsActivity : BaseNavigationActivity() {
     }
 
     private fun setFragment(position:Int){
+        val bundle = Bundle()
+        bundle.putInt(MOVIE_ID,intent.getIntExtra(MOVIE_ID,0))
+
         val fragment:Fragment
 
         when(position){
             0 -> fragment = MoviesInfoFragment()
-            1 -> fragment = MovieCreditsFragment()
+            1 -> { fragment = MovieCreditsFragment()
+                bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CAST)
+            }
+            2 -> {
+                fragment = MovieCreditsFragment()
+                bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CREW)
+            }
             else -> {return}
         }
-
-        val bundle = Bundle()
-        bundle.putInt(MOVIE_ID,intent.getIntExtra(MOVIE_ID,0))
 
         fragment.arguments = bundle
 
@@ -87,7 +96,6 @@ class MovieDetailsActivity : BaseNavigationActivity() {
                 R.anim.abc_fade_in, R.anim.abc_fade_out)
         ft.replace(R.id.frame_container,fragment)
         ft.commit()
-
     }
 
     override fun getLayoutResourceId(): Int {

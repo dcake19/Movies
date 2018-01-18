@@ -13,8 +13,6 @@ import com.example.android.movies.ui.movies.list.MoviesListActivity
 import com.example.android.movies.ui.movies.list.MoviesListFragment
 import kotlinx.android.synthetic.main.movies_search_activity.*
 import kotlinx.android.synthetic.main.movies_search_appbar.*
-import kotlinx.android.synthetic.main.navigation_drawer.*
-
 
 class MoviesSearchActivity: NavigationIconActivity() {
 
@@ -23,7 +21,6 @@ class MoviesSearchActivity: NavigationIconActivity() {
 
         fun getIntent(context: Context,query:String): Intent {
             val intent = Intent(context, MoviesSearchActivity::class.java)
-           // intent.putExtra(MoviesListActivity.DOWNLOAD_TYPE_KEY,MoviesDownloadTypes.SEARCH)
             intent.putExtra(SEARCH_QUERY,query)
             return intent
         }
