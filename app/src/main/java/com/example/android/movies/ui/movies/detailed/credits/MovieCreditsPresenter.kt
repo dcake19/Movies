@@ -8,10 +8,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class MovieCreditsPresenter(val interactor: MovieCreditsInteractor):
-        MovieCreditsContract.Presenter {
-//class MovieCreditsPresenter(val interactor: MovieCreditsInteractor, val view: MovieCreditsContract.View):
-//        MovieCreditsContract.Presenter {
+class MovieCreditsPresenter(val interactor: MovieCreditsInteractor): MovieCreditsContract.Presenter {
+
     lateinit var view: MovieCreditsContract.View
     private lateinit var movieCredits:MovieCredits
     private var downloadComplete = false

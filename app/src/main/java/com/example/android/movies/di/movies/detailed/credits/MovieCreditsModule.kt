@@ -12,32 +12,6 @@ import dagger.Module
 import dagger.Provides
 
 @Module class MovieCreditsModule(val creditsType:Int) {
-//@Module class MovieCreditsModule(val view: MovieCreditsContract.View,val creditsType:Int) {
-
-//    @Provides
-//    @FragmentScope
-//    fun provideMovieCreditsPresenter(interactor: MovieCreditsInteractor): MovieCreditsContract.Presenter{
-//        return MovieCreditsPresenter(interactor)
-//    }
-//    @Provides
-//    @FragmentScope
-//    fun provideMovieCreditsPresenter(interactor: MovieCreditsInteractor): MovieCreditsContract.Presenter{
-//        return MovieCreditsPresenter(interactor,view)
-//    }
-//
-//    @Provides
-//    @FragmentScope
-//    fun provideMovieCreditsInteractor(moviesApi: MoviesApi): MovieCreditsInteractor {
-//        return MovieCreditsInteractor(moviesApi)
-//    }
-
-//    @Provides
-//    @FragmentScope
-//    fun provideMovieCreditsPresenter(presenter: MovieCreditsContract.Presenter):
-//            MovieCreditsContract.Presenter{
-//        return presenter
-//    }
-
 
     @Provides
     @FragmentScope
