@@ -1,8 +1,8 @@
 package com.example.android.movies.api
 
-import com.example.android.movies.api.data.actor.PersonCredits
-import com.example.android.movies.api.data.actor.PersonInfo
-import com.example.android.movies.api.data.actor.PersonResults
+import com.example.android.movies.api.data.people.PersonCredits
+import com.example.android.movies.api.data.people.PersonInfo
+import com.example.android.movies.api.data.people.PersonResults
 import com.example.android.movies.api.data.movie.MovieCredits
 import com.example.android.movies.api.data.movie.MovieInfo
 import com.example.android.movies.api.data.movie.MovieResults
@@ -81,12 +81,12 @@ interface MoviesApi {
             @Query("page") pageNumber: String): Observable<MovieCredits>
 
     @GET("3/person/{person_id}")
-    fun gePersonInfo(
-            @Path(value = "id", encoded = true) actorId: String,
+    fun getPersonInfo(
+            @Path(value = "person_id", encoded = true) actorId: String,
             @Query("api_key") apiKey: String): Observable<PersonInfo>
 
     @GET("3/person/{person_id}/movie_credits")
-    fun getActorCredits(
+    fun getPersonCredits(
             @Path(value = "person_id", encoded = true) actorId: String,
             @Query("api_key") apiKey: String): Observable<PersonCredits>
 

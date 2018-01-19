@@ -33,7 +33,6 @@ class MovieCreditsFragment : Fragment(), MovieCreditsContract.View{
                 .build()
 
         component.inject(this)
-       // presenter.changeView(this)
         retainInstance = true
         return inflater!!.inflate(R.layout.movie_details_cast_fragment,container,false)
     }

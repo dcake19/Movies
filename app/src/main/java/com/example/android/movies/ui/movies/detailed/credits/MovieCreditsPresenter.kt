@@ -47,6 +47,14 @@ class MovieCreditsPresenter(val interactor: MovieCreditsInteractor): MovieCredit
         }
     }
 
+    override fun getCastId(position: Int): Int{
+        return movieCredits.cast.get(position).id
+    }
+
+    override fun getCrewId(position: Int): Int{
+        return movieCredits.crew.get(position).id
+    }
+
     override fun getCastName(position: Int): String {
         return movieCredits.cast.get(position).name
     }
@@ -59,7 +67,7 @@ class MovieCreditsPresenter(val interactor: MovieCreditsInteractor): MovieCredit
         return movieCredits.cast.get(position).profilePath?:""
     }
 
-    override fun getCrewtName(position: Int): String {
+    override fun getCrewName(position: Int): String {
         return movieCredits.crew.get(position).name
     }
 

@@ -1,4 +1,4 @@
-package com.example.android.movies.ui.movies.detailed.credits
+package com.example.android.movies.ui.movies
 
 object CreditsType {
     const val CAST = 1

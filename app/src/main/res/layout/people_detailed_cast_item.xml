@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_movies_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/image_poster"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        tools:background="@drawable/ic_launcher_background"/>
+
+    <TextView
+        android:id="@+id/text_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/image_poster"
+        tools:text="Name"/>
+
+    <TextView
+        android:id="@+id/text_character_or_job"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/image_poster"
+        android:layout_below="@id/text_title"
+        tools:text="Character"/>
+
+</RelativeLayout>

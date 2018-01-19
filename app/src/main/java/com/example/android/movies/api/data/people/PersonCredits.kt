@@ -1,11 +1,11 @@
-package com.example.android.movies.api.data.actor
+package com.example.android.movies.api.data.people
 
 import com.google.gson.annotations.SerializedName
 
 data class PersonCredits(
-        @SerializedName("cast") val cast: List<Cast?>?,
-        @SerializedName("crew") val crew: List<Crew?>?,
-        @SerializedName("id") val id: Int?
+        @SerializedName("cast") val cast: List<Cast>,
+        @SerializedName("crew") val crew: List<Crew>,
+        @SerializedName("id") val id: Int
 )
 
 data class Cast(

@@ -1,4 +1,4 @@
-package com.example.android.movies.api.data.actor
+package com.example.android.movies.api.data.people
 import com.google.gson.annotations.SerializedName
 
 

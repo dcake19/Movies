@@ -1,50 +1,52 @@
-package com.example.android.movies.ui.movies.detailed
+package com.example.android.movies.ui.people.detailed
 
 import android.content.Context
 import android.content.Intent
+import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.widget.DrawerLayout
 import com.example.android.movies.R
 import com.example.android.movies.di.App
-import com.example.android.movies.di.movies.detailed.DaggerMovieDetailedComponent
-import com.example.android.movies.di.movies.detailed.MovieDetailedComponent
-import com.example.android.movies.di.movies.detailed.MovieDetailedModule
+import com.example.android.movies.di.people.detailed.DaggerPeopleDetailedComponent
+import com.example.android.movies.di.people.detailed.PeopleDetailedComponent
+import com.example.android.movies.di.people.detailed.PeopleDetailedModule
 import com.example.android.movies.ui.BaseNavigationActivity
 import com.example.android.movies.ui.movies.CreditsType
-import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsFragment
-import com.example.android.movies.ui.movies.detailed.info.MoviesInfoFragment
-import kotlinx.android.synthetic.main.movie_details_activity.*
-import kotlinx.android.synthetic.main.movie_details_appbar.*
+import com.example.android.movies.ui.people.detailed.credits.PeopleCreditsFragment
+import com.example.android.movies.ui.people.detailed.info.PeopleInfoFragment
 
-class MovieDetailsActivity : BaseNavigationActivity() {
+import kotlinx.android.synthetic.main.people_detailed_activity.*
+import kotlinx.android.synthetic.main.people_detailed_appbar.*
 
-    lateinit var component: MovieDetailedComponent
+class PeopleDetailedActivity : BaseNavigationActivity() {
+
+    lateinit var component: PeopleDetailedComponent
 
     companion object {
-        const val MOVIE_ID = "movie_id"
-        const val MOVIE_TITLE = "movie_title"
+        const val PERSON_ID = "person_id"
+        const val PERSON_NAME = "person_name"
 
-        fun getIntent(context: Context, id:Int, title:String): Intent {
-            val intent = Intent(context,MovieDetailsActivity::class.java)
-            intent.putExtra(MOVIE_ID,id)
-            intent.putExtra(MOVIE_TITLE,title)
+        fun getIntent(context: Context, id:Int, name:String): Intent {
+            val intent = Intent(context,PeopleDetailedActivity::class.java)
+            intent.putExtra(PERSON_ID,id)
+            intent.putExtra(PERSON_NAME,name)
             return intent
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.movie_details_activity)
+        setContentView(R.layout.people_detailed_activity)
 
         val app : App = application as App
-        component = DaggerMovieDetailedComponent.builder()
+        component = DaggerPeopleDetailedComponent.builder()
                 .appComponent(app.component)
-                .movieDetailedModule(MovieDetailedModule())
+                .peopleDetailedModule(PeopleDetailedModule())
                 .build()
 
-        movies_details_toolbar.title = intent.getStringExtra(MOVIE_TITLE)
+        people_details_toolbar.title = intent.getStringExtra(PERSON_NAME)
 
         setupTabs()
         setFragment(0)
@@ -67,7 +69,6 @@ class MovieDetailsActivity : BaseNavigationActivity() {
     }
 
     private fun setFragment(position:Int){
-
         val ft = supportFragmentManager.beginTransaction()
 
         ft.setCustomAnimations(
@@ -75,24 +76,24 @@ class MovieDetailsActivity : BaseNavigationActivity() {
 
         for (f in supportFragmentManager.fragments) ft.hide(f)
 
-        val fragment:Fragment
+        val fragment: Fragment
 
         if (supportFragmentManager.findFragmentByTag(position.toString())!=null){
             fragment = supportFragmentManager.findFragmentByTag(position.toString())
             ft.show(fragment).commit()
         }else {
             val bundle = Bundle()
-            bundle.putInt(MOVIE_ID,intent.getIntExtra(MOVIE_ID,0))
+            bundle.putInt(PERSON_ID,intent.getIntExtra(PERSON_ID,0))
 
             when (position) {
-                0 -> fragment = MoviesInfoFragment()
+                0 -> fragment = PeopleInfoFragment()
                 1 -> {
-                    fragment = MovieCreditsFragment()
-                    bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CAST)
+                    fragment = PeopleCreditsFragment()
+                    bundle.putInt(PeopleCreditsFragment.CREDITS_TYPE, CreditsType.CAST)
                 }
                 2 -> {
-                    fragment = MovieCreditsFragment()
-                    bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CREW)
+                    fragment = PeopleCreditsFragment()
+                    bundle.putInt(PeopleCreditsFragment.CREDITS_TYPE, CreditsType.CREW)
                 }
                 else -> {return}
             }
@@ -104,7 +105,7 @@ class MovieDetailsActivity : BaseNavigationActivity() {
     }
 
     override fun getLayoutResourceId(): Int {
-        return R.layout.movie_details_activity
+        return R.layout.people_detailed_activity
     }
 
     override fun getViewId(): Int {
@@ -112,7 +113,6 @@ class MovieDetailsActivity : BaseNavigationActivity() {
     }
 
     override fun getDrawerLayout(): DrawerLayout {
-        return movie_details_drawer_layout
+        return people_details_drawer_layout
     }
-
 }
