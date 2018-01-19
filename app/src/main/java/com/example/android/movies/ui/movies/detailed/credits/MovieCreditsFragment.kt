@@ -29,11 +29,11 @@ class MovieCreditsFragment : Fragment(), MovieCreditsContract.View{
         val movieDetailed = activity as MovieDetailsActivity
         val component = DaggerMovieCreditsComponent.builder()
                 .movieDetailedComponent(movieDetailed.component)
-                .movieCreditsModule(MovieCreditsModule(arguments.getInt(CREDITS_TYPE)))
+                .movieCreditsModule(MovieCreditsModule(this,arguments.getInt(CREDITS_TYPE)))
                 .build()
 
         component.inject(this)
-        presenter.changeView(this)
+       // presenter.changeView(this)
         retainInstance = true
         return inflater!!.inflate(R.layout.movie_details_cast_fragment,container,false)
     }

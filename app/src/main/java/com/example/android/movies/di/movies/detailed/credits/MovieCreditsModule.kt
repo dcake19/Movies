@@ -11,12 +11,17 @@ import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsPresent
 import dagger.Module
 import dagger.Provides
 
-@Module class MovieCreditsModule(val creditsType:Int) {
+@Module class MovieCreditsModule(val view: MovieCreditsContract.View,val creditsType:Int) {
 
     @Provides
     @FragmentScope
     fun provideMovieCreditAdapter(presenter: MovieCreditsContract.Presenter): MovieCreditsAdapter {
+        addView(presenter)
         return MovieCreditsAdapter(presenter,creditsType)
+    }
+
+    private fun addView(presenter: MovieCreditsContract.Presenter){
+        presenter.changeView(view)
     }
 
 }

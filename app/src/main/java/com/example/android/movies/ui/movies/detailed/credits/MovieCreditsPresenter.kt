@@ -13,6 +13,7 @@ class MovieCreditsPresenter(val interactor: MovieCreditsInteractor): MovieCredit
     lateinit var view: MovieCreditsContract.View
     private lateinit var movieCredits:MovieCredits
     private var downloadComplete = false
+
     override fun changeView(view: MovieCreditsContract.View) {
         this.view = view
     }
@@ -45,8 +46,6 @@ class MovieCreditsPresenter(val interactor: MovieCreditsInteractor): MovieCredit
                     })
         }
     }
-
-
 
     override fun getCastName(position: Int): String {
         return movieCredits.cast.get(position).name
