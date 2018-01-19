@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.widget.DrawerLayout
+import android.util.Log
 import com.example.android.movies.R
 import com.example.android.movies.di.App
 import com.example.android.movies.di.DaggerAppComponent
@@ -60,42 +61,51 @@ class MovieDetailsActivity : BaseNavigationActivity() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 setFragment(tab.position)
             }
-
             override fun onTabReselected(tab: TabLayout.Tab?) {
-
             }
-
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-
             }
         })
     }
 
     private fun setFragment(position:Int){
-        val bundle = Bundle()
-        bundle.putInt(MOVIE_ID,intent.getIntExtra(MOVIE_ID,0))
+
+        val ft = supportFragmentManager.beginTransaction()
+
+        ft.setCustomAnimations(
+                R.anim.abc_fade_in, R.anim.abc_fade_out)
+
+        for (f in supportFragmentManager.fragments) ft.hide(f)
 
         val fragment:Fragment
 
-        when(position){
-            0 -> fragment = MoviesInfoFragment()
-            1 -> { fragment = MovieCreditsFragment()
-                bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CAST)
+        if (supportFragmentManager.findFragmentByTag(position.toString())!=null){
+            fragment = supportFragmentManager.findFragmentByTag(position.toString())
+            ft.show(fragment).commit()
+        }else {
+
+            val bundle = Bundle()
+            bundle.putInt(MOVIE_ID,intent.getIntExtra(MOVIE_ID,0))
+
+            when (position) {
+                0 -> fragment = MoviesInfoFragment()
+                1 -> {
+                    fragment = MovieCreditsFragment()
+                    bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CAST)
+                }
+                2 -> {
+                    fragment = MovieCreditsFragment()
+                    bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CREW)
+                }
+                else -> {
+                    return
+                }
             }
-            2 -> {
-                fragment = MovieCreditsFragment()
-                bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CREW)
-            }
-            else -> {return}
+            fragment.arguments = bundle
+            ft.add(R.id.frame_container,fragment,position.toString())
+            ft.addToBackStack(position.toString())
+            ft.commit()
         }
-
-        fragment.arguments = bundle
-
-        val ft = supportFragmentManager.beginTransaction()
-        ft.setCustomAnimations(
-                R.anim.abc_fade_in, R.anim.abc_fade_out)
-        ft.replace(R.id.frame_container,fragment)
-        ft.commit()
     }
 
     override fun getLayoutResourceId(): Int {

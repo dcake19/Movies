@@ -3,6 +3,7 @@ package com.example.android.movies.ui.movies.detailed.credits
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,13 +25,8 @@ class MovieCreditsFragment : Fragment(), MovieCreditsContract.View{
     @Inject lateinit var adapter: MovieCreditsAdapter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-       // val app : App = activity.application as App
+        Log.v("MovieCreditsFragment","onCreateView")
         val movieDetailed = activity as MovieDetailsActivity
-//        val component = DaggerMovieCreditsComponent.builder()
-//                .appComponent(app.component)
-//                .movieCreditsModule(MovieCreditsModule(this,arguments.getInt(CREDITS_TYPE)))
-//                .build()
         val component = DaggerMovieCreditsComponent.builder()
                 .movieDetailedComponent(movieDetailed.component)
                 .movieCreditsModule(MovieCreditsModule(arguments.getInt(CREDITS_TYPE)))
@@ -38,10 +34,12 @@ class MovieCreditsFragment : Fragment(), MovieCreditsContract.View{
 
         component.inject(this)
         presenter.changeView(this)
+        retainInstance = true
         return inflater!!.inflate(R.layout.movie_details_cast_fragment,container,false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        Log.v("MovieCreditsFragment","onViewCreated")
         presenter.downloadCredits(arguments.getInt(MovieDetailsActivity.MOVIE_ID))
         super.onViewCreated(view, savedInstanceState)
 
