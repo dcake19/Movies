@@ -7,7 +7,6 @@ import com.example.android.movies.ui.movies.home.MoviesHomeFragment
 import com.example.android.movies.ui.movies.list.MoviesListFragment
 import dagger.Component
 
-
 @FragmentScope
 @Component(modules = arrayOf(MoviesListModule::class),dependencies = arrayOf(AppComponent::class))
 interface MoviesListComponent {

@@ -3,10 +3,10 @@ import com.google.gson.annotations.SerializedName
 
 
 data class PersonResults(
-		@SerializedName("page") val page: Int?,
-		@SerializedName("total_results") val totalResults: Int?,
-		@SerializedName("total_pages") val totalPages: Int?,
-		@SerializedName("results") val results: List<Result?>?
+		@SerializedName("page") val page: Int,
+		@SerializedName("total_results") val totalResults: Int,
+		@SerializedName("total_pages") val totalPages: Int,
+		@SerializedName("results") val results: List<Result>
 )
 
 data class Result(
@@ -14,7 +14,7 @@ data class Result(
         @SerializedName("id") val id: Int?,
         @SerializedName("profile_path") val profilePath: String?,
         @SerializedName("name") val name: String?,
-        @SerializedName("known_for") val knownFor: List<KnownFor?>?,
+        @SerializedName("known_for") val knownFor: List<KnownFor>?,
         @SerializedName("adult") val adult: Boolean?
 )
 

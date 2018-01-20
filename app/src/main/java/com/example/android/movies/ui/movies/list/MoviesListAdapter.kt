@@ -10,7 +10,8 @@ import com.example.android.movies.ui.movies.MoviesContract
 import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
 import kotlinx.android.synthetic.main.movies_list_item.view.*
 
-class MoviesListAdapter(val presenter: MoviesContract.Presenter, var size:Int = 0) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MoviesListAdapter(val presenter: MoviesContract.Presenter, var size:Int = 0)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     fun update(size: Int) {
         this.size = size
