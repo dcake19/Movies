@@ -9,6 +9,8 @@ interface MoviesContract {
     interface Presenter{
         fun downloadMoviesData()
         fun downloadMoviesDataNextPage()
+        fun downloadDiscoverData(discoverQuery: DiscoverQuery)
+        fun downloadDiscoverDataNextPage()
         fun search(query:String)
         fun getMovieId(index:Int): Int
         fun getPosterPath(index:Int):String

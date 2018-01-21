@@ -16,6 +16,8 @@ class MoviesPresenter(val interactor: MoviesInteractor, val view: MoviesContract
 
     private lateinit var moviesResults:MovieResults
     private var query = ""
+    private var discover = DiscoverQuery()
+
     override fun downloadMoviesData() {
         downloadMoviesData(1)
     }
@@ -25,12 +27,22 @@ class MoviesPresenter(val interactor: MoviesInteractor, val view: MoviesContract
             downloadMoviesData(moviesResults.page+1)
     }
 
+    override fun downloadDiscoverData(discoverQuery: DiscoverQuery) {
+        discover = discoverQuery
+        downloadMoviesData()
+    }
+
+    override fun downloadDiscoverDataNextPage() {
+        if (moviesResults.page < moviesResults.totalPages)
+            downloadMoviesData(moviesResults.page+1)
+    }
+
     override fun search(query: String) {
         this.query = query
         downloadMoviesData(1)
     }
 
-    fun downloadMoviesData(page:Int) {
+    fun downloadMoviesData(page:Int=1) {
 
         val observable: Observable<MovieResults>
         when(type){
@@ -44,6 +56,11 @@ class MoviesPresenter(val interactor: MoviesInteractor, val view: MoviesContract
                 observable = interactor.getPopular(BuildConfig.TMDB_API_KEY,page.toString())
             MoviesDownloadTypes.SEARCH ->
                 observable = interactor.getSearchResults(BuildConfig.TMDB_API_KEY,query,page.toString())
+            MoviesDownloadTypes.DISCOVER ->
+                    observable = interactor.getDiscoverResults(BuildConfig.TMDB_API_KEY,discover.sortby,
+                            discover.withGenres,discover.withoutGenres, discover.minVoteAverage,
+                            discover.minVoteCount,discover.primaryReleaseYear,discover.minRuntime,
+                            discover.maxRuntime,page.toString())
             else -> {return}
         }
 

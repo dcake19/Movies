@@ -37,10 +37,12 @@
             android:name=".ui.people.detailed.PeopleDetailedActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".ui.people.list.PeopleListActivity"
+        <activity
+            android:name=".ui.people.list.PeopleListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".ui.movies.list.discover.MoviesDiscoverActivity"
                   android:theme="@style/AppTheme.NoActionBar">
-
-
         </activity>
     </application>
 

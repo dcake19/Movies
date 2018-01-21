@@ -11,6 +11,7 @@
     <string name="home">Home</string>
     <string name="people">Actors &amp; Crew</string>
     <string name="home_title">Movies App</string>
+    <string name="discover">Discover</string>
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
@@ -20,4 +21,18 @@
 
     <string name="title_cast">Cast</string>
     <string name="title_crew">Crew</string>
+
+    <string name="sort_by">Sort By:</string>
+    <string name="sort_by_vote_average">Vote Average</string>
+    <string name="sort_by_popularity">Popularity</string>
+    <string name="sort_by_first_air_date_desc">Release Date (Descending)</string>
+    <string name="sort_by_first_air_date_asc">Release Date (Ascending)</string>
+    <string name="sort_by_revenue">Revenue</string>
+
+    <!-- strings to make tmdb requests -->
+    <string name="sort_by_vote_average_request">vote_average.desc</string>
+    <string name="sort_by_popularity_request">popularity.desc</string>
+    <string name="sort_by_release_date_desc_request">release_date.desc</string>
+    <string name="sort_by_release_date_asc_request">release_date.asc</string>
+    <string name="sort_by_revenue_desc_request">revenue.desc</string>
 </resources>

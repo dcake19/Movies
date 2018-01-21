@@ -57,6 +57,33 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/navigation_discover"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_medium"
+                android:paddingBottom="@dimen/padding_medium"
+                android:paddingRight="@dimen/padding_medium"
+                android:paddingLeft="@dimen/padding_large"
+                android:background="@mipmap/ic_launcher"
+                android:id="@+id/image_discover"/>
+
+            <TextView
+                android:padding="@dimen/padding_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:gravity="center_vertical"
+                android:text="@string/discover"
+                android:textColor="@color/colorTextLight"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/navigation_now_playing"
             android:orientation="horizontal"
             android:layout_width="match_parent"

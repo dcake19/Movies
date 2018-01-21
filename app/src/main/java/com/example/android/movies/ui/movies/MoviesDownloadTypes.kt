@@ -6,4 +6,5 @@ object MoviesDownloadTypes{
     const val TOP_RATED = 3
     const val POPULAR = 4
     const val SEARCH = 5
+    const val DISCOVER = 6
 }

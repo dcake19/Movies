@@ -9,6 +9,7 @@ import com.example.android.movies.R
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.home.MoviesHomeActivity
 import com.example.android.movies.ui.movies.list.MoviesListActivity
+import com.example.android.movies.ui.movies.list.discover.MoviesDiscoverActivity
 import com.example.android.movies.ui.people.list.PeopleListActivity
 import kotlinx.android.synthetic.main.navigation_drawer.*
 
@@ -37,6 +38,10 @@ abstract class BaseNavigationActivity : AppCompatActivity(){
         }
         navigation_people_list.setOnClickListener {
             clickNavigationDrawer(R.id.navigation_people_list)
+        }
+
+        navigation_discover.setOnClickListener {
+            clickNavigationDrawer(R.id.navigation_discover)
         }
 
         navigation_drawer.setPadding(0, getStatusBarHeight(), 0, 0)
@@ -81,6 +86,8 @@ abstract class BaseNavigationActivity : AppCompatActivity(){
                 startActivity(MoviesListActivity.getIntent(this,MoviesDownloadTypes.POPULAR))
             R.id.navigation_people_list ->
                 startActivity(Intent(this,PeopleListActivity::class.java))
+            R.id.navigation_discover ->
+                startActivity(Intent(this,MoviesDiscoverActivity::class.java))
         }
         getDrawerLayout().closeDrawer(navigation_drawer)
     }

@@ -44,7 +44,7 @@ class MoviesListFragment : Fragment(), MoviesContract.View {
 
         if (type == MoviesDownloadTypes.SEARCH)
             presenter.search(arguments.getString(MoviesSearchActivity.SEARCH_QUERY,""))
-        else
+        else if(type != MoviesDownloadTypes.DISCOVER)
             presenter.downloadMoviesData()
 
         super.onViewCreated(view, savedInstanceState)
