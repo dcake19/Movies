@@ -14,7 +14,7 @@ class PeopleListActivity : NavigationIconActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.people_list_activity)
+
 
         if (savedInstanceState == null)
             setFragment()

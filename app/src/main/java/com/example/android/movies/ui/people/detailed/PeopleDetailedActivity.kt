@@ -38,7 +38,6 @@ class PeopleDetailedActivity : BaseNavigationActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.people_detailed_activity)
 
         val app : App = application as App
         component = DaggerPeopleDetailedComponent.builder()

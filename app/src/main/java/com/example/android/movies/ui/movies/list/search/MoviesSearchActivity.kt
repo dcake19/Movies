@@ -30,7 +30,6 @@ class MoviesSearchActivity: NavigationIconActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.movies_search_activity)
 
         setFragment(intent.getStringExtra(SEARCH_QUERY))
 
@@ -65,7 +64,7 @@ class MoviesSearchActivity: NavigationIconActivity() {
     }
 
     override fun getViewId(): Int {
-        return R.id.navigation_film_home
+        return -1
     }
 
     override fun getToolbar(): Toolbar {

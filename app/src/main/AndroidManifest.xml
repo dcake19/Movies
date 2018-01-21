@@ -15,7 +15,11 @@
         <activity
             android:name=".ui.movies.home.MoviesHomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".ui.movies.list.MoviesListActivity"
@@ -36,11 +40,7 @@
         <activity android:name=".ui.people.list.PeopleListActivity"
                   android:theme="@style/AppTheme.NoActionBar">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
     </application>
 

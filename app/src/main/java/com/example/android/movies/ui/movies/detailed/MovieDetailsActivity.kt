@@ -36,7 +36,7 @@ class MovieDetailsActivity : BaseNavigationActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.movie_details_activity)
+       // setContentView(R.layout.movie_details_activity)
 
         val app : App = application as App
         component = DaggerMovieDetailedComponent.builder()

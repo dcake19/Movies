@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,8 +13,7 @@
     android:dividerHeight="0dp"
     android:background="@color/colorPrimary"
     android:drawSelectorOnTop="true"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    >
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:orientation="vertical"
@@ -46,6 +46,7 @@
                 android:id="@+id/imageView"/>
 
             <TextView
+
                 android:padding="@dimen/padding_large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,6 +55,114 @@
                 android:text="@string/home"
                 android:textColor="@color/colorTextLight"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navigation_now_playing"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_medium"
+                android:paddingBottom="@dimen/padding_medium"
+                android:paddingRight="@dimen/padding_medium"
+                android:paddingLeft="@dimen/padding_large"
+                android:background="@mipmap/ic_launcher"
+                android:id="@+id/image_now_playing"/>
+
+            <TextView
+                android:padding="@dimen/padding_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:gravity="center_vertical"
+                android:text="@string/now_playing"
+                android:textColor="@color/colorTextLight"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/navigation_upcoming"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_medium"
+                android:paddingBottom="@dimen/padding_medium"
+                android:paddingRight="@dimen/padding_medium"
+                android:paddingLeft="@dimen/padding_large"
+                android:background="@mipmap/ic_launcher"
+                android:id="@+id/image_upcoming"/>
+
+            <TextView
+                android:padding="@dimen/padding_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:gravity="center_vertical"
+                android:text="@string/upcoming"
+                android:textColor="@color/colorTextLight"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navigation_top_rated"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_medium"
+                android:paddingBottom="@dimen/padding_medium"
+                android:paddingRight="@dimen/padding_medium"
+                android:paddingLeft="@dimen/padding_large"
+                android:background="@mipmap/ic_launcher"
+                android:id="@+id/image_top_rated"/>
+
+            <TextView
+                android:padding="@dimen/padding_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:gravity="center_vertical"
+                android:text="@string/top_rated"
+                android:textColor="@color/colorTextLight"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/navigation_popular"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_medium"
+                android:paddingBottom="@dimen/padding_medium"
+                android:paddingRight="@dimen/padding_medium"
+                android:paddingLeft="@dimen/padding_large"
+                android:background="@mipmap/ic_launcher"
+                android:id="@+id/image_popular"/>
+
+            <TextView
+                android:padding="@dimen/padding_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:gravity="center_vertical"
+                android:text="@string/popular"
+                android:textColor="@color/colorTextLight"/>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/navigation_people_list"
@@ -77,8 +186,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_small"
                 android:gravity="center_vertical"
-                android:text="@string/home"
+                android:text="@string/people"
                 android:textColor="@color/colorTextLight"/>
+
         </LinearLayout>
 
     </LinearLayout>

@@ -1,15 +1,21 @@
 package com.example.android.movies.ui.movies.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
 import android.widget.SearchView
 import android.support.v7.widget.Toolbar
+import android.util.Log
+import android.view.View
 import com.example.android.movies.R
 import com.example.android.movies.ui.NavigationIconActivity
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.list.search.MoviesSearchActivity
+import com.example.android.movies.ui.people.list.PeopleListActivity
+import kotlinx.android.synthetic.main.movie_details_activity.*
 import kotlinx.android.synthetic.main.movies_home_activity.*
 import kotlinx.android.synthetic.main.movies_home_appbar.*
+import kotlinx.android.synthetic.main.navigation_drawer.*
 
 class MoviesHomeActivity : NavigationIconActivity() {
 
@@ -19,7 +25,7 @@ class MoviesHomeActivity : NavigationIconActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.movies_home_activity)
+       // setContentView(R.layout.movies_home_activity)
 
         if (savedInstanceState == null) {
             setFragment(MoviesDownloadTypes.NOW_PLAYING)
@@ -27,6 +33,15 @@ class MoviesHomeActivity : NavigationIconActivity() {
             setFragment(MoviesDownloadTypes.TOP_RATED)
             setFragment(MoviesDownloadTypes.POPULAR)
         }
+
+        movies_home_drawer_layout.setOnFocusChangeListener(object : View.OnFocusChangeListener{
+            override fun onFocusChange(p0: View?, p1: Boolean) {
+                Log.v("drawer layout","Focus changed")
+            }
+
+        })
+        Log.v("MoviesHomeActivity","is focusable: " + movies_home_drawer_layout.isFocusable.toString())
+
 
         search.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
