@@ -6,6 +6,7 @@
         <item>@string/sort_by_vote_average</item>
         <item>@string/sort_by_first_air_date_asc</item>
         <item>@string/sort_by_first_air_date_desc</item>
+        <item>@string/sort_by_revenue</item>
     </string-array>
 
     <string-array name="sort_by_options_request">
