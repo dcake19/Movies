@@ -22,10 +22,107 @@
             tools:background="@drawable/ic_launcher_background"/>
 
         <TextView
+            android:id="@+id/text_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/image_poster"
+            tools:text="2006"/>
+
+        <TextView
+            android:id="@+id/text_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/text_year"
+            tools:text="Released"/>
+
+        <TextView
+            android:id="@+id/text_user_score"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:gravity="center"
+            android:layout_toRightOf="@id/image_poster"
+            android:layout_below="@id/text_year"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/user_score_circle"
+            android:textColor="@color/colorTextLight"
+            android:textSize="16sp"
+            tools:text="6.9"
+            />
+
+        <TextView
+            android:id="@+id/text_vote_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/text_user_score"
+            android:layout_below="@id/text_year"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_large"
+            android:textSize="@dimen/text_size_small"
+            tools:text="130 votes"/>
+
+        <TextView
+            android:id="@+id/text_budget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toRightOf="@id/image_poster"
+            android:layout_below="@id/text_user_score"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            tools:text="Budget: $32m"
+            />
+        <TextView
+            android:id="@+id/text_revenue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toRightOf="@id/image_poster"
+            android:layout_below="@id/text_budget"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            tools:text="Revenue: $50m"
+            />
+        <TextView
+            android:id="@+id/text_runtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_toRightOf="@id/image_poster"
+            android:layout_below="@id/text_revenue"
+            android:layout_gravity="center_vertical"
+
+            android:textSize="16sp"
+            tools:text="120 mins"
+            />
+
+        <TextView
+            android:id="@+id/text_genres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/image_poster"
+            tools:text="Genres: Crime, Drama"/>
+
+        <TextView
+            android:id="@+id/text_languages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_genres"
+            tools:text="Languages: English, German"/>
+<!--
+        <TextView
+            android:id="@+id/tagline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/image_poster"
+            tools:text="This is the tagline."/>
+-->
+        <TextView
             android:id="@+id/text_movie_overview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/image_poster"
+            android:layout_below="@id/text_languages"
             tools:text="Movie Overview goes here. This could be very long"/>
 
     </RelativeLayout>

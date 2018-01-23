@@ -70,7 +70,6 @@ object GenreUtil {
                     selected.append(getGenreId(i).toString())
                 }
             }
-
         }
         return selected.toString()
     }
@@ -87,7 +86,6 @@ object GenreUtil {
                     selected.append(getGenre(i,context))
                 }
             }
-
         }
         return selected.toString()
     }

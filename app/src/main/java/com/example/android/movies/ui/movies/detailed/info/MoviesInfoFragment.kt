@@ -1,5 +1,6 @@
 package com.example.android.movies.ui.movies.detailed.info
 
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -39,8 +40,25 @@ class MoviesInfoFragment : Fragment(), MoviesInfoContract.View{
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun display(title: String, overview: String, posterPath: String) {
+
+    override fun display(overview: String, posterPath: String, year: String,
+                         status: String, userScore: String, voteCount: String,
+                         budget: String, revenue: String, runtime: String,
+                         genres: String, languages: String,
+                         ratingBackgroundColor:Int,ratingTextColor:Int) {
         text_movie_overview.text = overview
         image_poster.loadImage(getString(R.string.image_start_url),posterPath)
+        text_budget.text = budget
+        text_year.text = year
+        text_status.text = status
+        text_user_score.text = userScore
+        text_vote_count.text = voteCount
+        text_revenue.text = revenue
+        text_genres.text = genres
+        text_runtime.text = runtime
+        text_languages.text = languages
+        val voteAverageCircle = text_user_score.background as GradientDrawable
+        voteAverageCircle.setColor(ratingBackgroundColor)
+        text_user_score.setTextColor(ratingTextColor)
     }
 }

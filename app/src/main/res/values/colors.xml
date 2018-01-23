@@ -6,4 +6,14 @@
 
     <color name="colorTextLight">#FFFFFF</color>
     <color name="colorTextDark">#000000</color>
+
+    <color name="colorWhite">#EEEEEE</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorUserScoreExcellent">#64DD17</color>
+    <color name="colorUserScoreVeryGood">#AEEA00</color>
+    <color name="colorUserScoreGood">#C6FF00</color>
+    <color name="colorUserScoreAverage">#FFEA00</color>
+    <color name="colorUserScoreBad">#FFAB00</color>
+    <color name="colorUserScoreVeryBad">#F44336</color>
+    <color name="colorUserScoreDreadful">#B71C1C</color>
 </resources>
