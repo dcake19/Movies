@@ -21,7 +21,7 @@ class MoviesInfoPresenter(val interactor: MoviesInfoInteractor,val view: MoviesI
 
     private fun saveMovieInfo(mi: MovieInfo){
         movieInfo = mi
-        view.display(mi.title,mi.overview,mi.posterPath)
+        view.display(mi.title,mi.overview?:"",mi.posterPath?:"")
     }
 
 }

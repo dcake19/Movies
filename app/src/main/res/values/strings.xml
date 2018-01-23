@@ -19,6 +19,7 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <string name="title_details">Details</string>
     <string name="title_cast">Cast</string>
     <string name="title_crew">Crew</string>
 
@@ -35,7 +36,6 @@
     <string name="sort_by_release_date_desc_request">release_date.desc</string>
     <string name="sort_by_release_date_asc_request">release_date.asc</string>
     <string name="sort_by_revenue_desc_request">revenue.desc</string>
-
 
     <string name="vote_average_min">Vote Average min:</string>
     <string name="vote_count_min">Vote Count min:</string>

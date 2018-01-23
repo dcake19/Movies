@@ -36,7 +36,6 @@ class MovieDetailsActivity : BaseNavigationActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.movie_details_activity)
 
         val app : App = application as App
         component = DaggerMovieDetailedComponent.builder()
@@ -51,9 +50,9 @@ class MovieDetailsActivity : BaseNavigationActivity() {
     }
 
     fun setupTabs(){
-        tabs.addTab(tabs.newTab().setText("one"),true)
-        tabs.addTab(tabs.newTab().setText("two"))
-        tabs.addTab(tabs.newTab().setText("three"))
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_details)),true)
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_cast)))
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_crew)))
 
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {

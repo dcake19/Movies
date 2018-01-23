@@ -32,18 +32,17 @@ class MovieCreditsAdapter(val presenter: MovieCreditsContract.Presenter,val cred
         if(creditsType== CreditsType.CAST){
             holder.setInfo(presenter.getCastName(position),
                     presenter.getCharacter(position),
-                    presenter.getCastPosterPath(position ))
+                    presenter.getCastPosterPath(position))
         }else{
-            holder.setInfo(presenter.getCrewName(position ),
-                    presenter.getJob(position ),
-                    presenter.getCrewPosterPath(position ))
+            holder.setInfo(presenter.getCrewName(position),
+                    presenter.getJob(position),
+                    presenter.getCrewPosterPath(position))
         }
     }
 
     override fun getItemCount(): Int {
-        if(creditsType== CreditsType.CAST && sizeCast >0) return sizeCast+1
-        else if(sizeCrew>0) return sizeCrew+1
-        else return 0
+        if(creditsType== CreditsType.CAST) return sizeCast
+        else return sizeCrew
     }
 
     inner class CreditsViewHolder(parent: ViewGroup?) : RecyclerView.ViewHolder(LayoutInflater.from(
