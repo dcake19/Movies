@@ -75,4 +75,8 @@
     <string name="mins"> mins</string>
     <string name="vote">vote</string>
     <string name="votes">votes</string>
+
+    <string name="born">Born:</string>
+    <string name="in">in</string>
+    <string name="known_for">Known for:</string>
 </resources>

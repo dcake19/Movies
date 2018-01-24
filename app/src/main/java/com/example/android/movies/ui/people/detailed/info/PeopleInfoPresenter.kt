@@ -1,7 +1,9 @@
 package com.example.android.movies.ui.people.detailed.info
 
 import com.example.android.movies.BuildConfig
+import com.example.android.movies.R
 import com.example.android.movies.api.data.people.PersonInfo
+import com.example.android.movies.util.DateUtil
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -39,7 +41,19 @@ class PeopleInfoPresenter(val interactor: PeopleInfoInteractor,val view: PeopleI
     }
 
     private fun display(){
-        view.display(personInfo.biography?:"",personInfo.profilePath?:"")
+        view.display(personInfo.biography?:"",
+                personInfo.profilePath?:"",
+                getBorn())
+    }
+
+    private fun getBorn():String{
+        if (personInfo.birthday!=null && personInfo.placeOfBirth!=null)
+            return view.getContext().getString(R.string.born) + " " +
+                    DateUtil.convertDateFormate(personInfo.birthday?:"") + " " +
+                    view.getContext().getString(R.string.`in`) + " " +
+                    personInfo.placeOfBirth
+
+        else return ""
     }
 
 }

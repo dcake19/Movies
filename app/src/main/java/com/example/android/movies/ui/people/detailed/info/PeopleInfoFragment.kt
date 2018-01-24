@@ -34,9 +34,10 @@ class PeopleInfoFragment: Fragment(), PeopleInfoContract.View{
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun display(biography: String, posterPath: String) {
+    override fun display(biography: String, posterPath: String,born:String) {
         text_people_biography.text = biography
         image_poster.loadImage(getString(R.string.image_start_url),posterPath)
+        text_born.text = born
     }
 
 }

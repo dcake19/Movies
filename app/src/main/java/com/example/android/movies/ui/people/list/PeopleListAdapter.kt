@@ -26,16 +26,19 @@ class PeopleListAdapter(val presenter: PeopleListContract.Presenter, var size:In
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         holder as PeopleViewHolder
-        holder.setData(presenter.getPosterPath(position))
+        holder.setData(presenter.getPosterPath(position),
+                presenter.getPersonName(position),
+                presenter.getPersonKnownFor(position))
     }
 
     inner class PeopleViewHolder(parent: ViewGroup?) : RecyclerView.ViewHolder(
             LayoutInflater.from(parent?.getContext())
                     .inflate(R.layout.people_list_item,parent,false)){
 
-        fun setData(posterPath:String) = with(itemView){
+        fun setData(posterPath:String,name:String,knownFor:String) = with(itemView){
             image_poster.loadImage(context.getString(R.string.image_start_url),posterPath)
-
+            text_name.text = name
+            text_known_for.text = knownFor
             layout_people_item.setOnClickListener {
                 context.startActivity(PeopleDetailedActivity.getIntent(context,
                         presenter.getPersonId(adapterPosition),

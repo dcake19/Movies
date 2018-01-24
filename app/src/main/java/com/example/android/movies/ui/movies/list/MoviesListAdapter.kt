@@ -1,5 +1,6 @@
 package com.example.android.movies.ui.movies.list
 
+import android.graphics.drawable.GradientDrawable
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,12 @@ class MoviesListAdapter(val presenter: MoviesContract.Presenter, var size:Int = 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         holder as MoviesViewHolder
         holder.setData(presenter.getTitle(position),
-                presenter.getPosterPath(position))
+                presenter.getPosterPath(position),
+                presenter.getYear(position),
+                presenter.getVoteAverage(position),
+                presenter.getVoteCount(position),
+                presenter.getRatingBackgroundColor(position),
+                presenter.getRatingTextColor(position))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
@@ -35,10 +41,18 @@ class MoviesListAdapter(val presenter: MoviesContract.Presenter, var size:Int = 
     inner class MoviesViewHolder(parent: ViewGroup?) : RecyclerView.ViewHolder(
             LayoutInflater.from(parent?.getContext()).inflate(R.layout.movies_list_item,parent,false)){
 
-        fun setData(title:String,posterPath:String) = with(itemView){
+        fun setData(title:String,posterPath:String,year:String,
+                    userScore: String, voteCount: String,
+                    ratingBackgroundColor:Int,ratingTextColor:Int) = with(itemView){
+
             text_movie_title.text = title
             image_poster.loadImage(context.getString(R.string.image_start_url),posterPath)
-
+            text_year.text = year
+            text_user_score.text = userScore
+            text_vote_count.text = voteCount
+            val voteAverageCircle = text_user_score.background as GradientDrawable
+            voteAverageCircle.setColor(ratingBackgroundColor)
+            text_user_score.setTextColor(ratingTextColor)
             layout_movies_item.setOnClickListener {
                 context.startActivity(
                         MovieDetailsActivity.getIntent(context,

@@ -1,7 +1,10 @@
 package com.example.android.movies.ui.people.list
 
+import android.util.Log
 import com.example.android.movies.BuildConfig
+import com.example.android.movies.R
 import com.example.android.movies.api.data.people.PersonResults
+import com.example.android.movies.util.TextUtil
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,7 +23,16 @@ class PeopleListPresenter(val interactor:PeopleListInteractor,val view:PeopleLis
     }
 
     private fun downloadPopularPeople(page:Int) {
-       download(interactor.getPopularPeople(BuildConfig.TMDB_API_KEY,page.toString()))
+       download(page,interactor.getPopularPeople(BuildConfig.TMDB_API_KEY,page.toString()))
+    }
+
+    override fun downloadPeopleNextPage() {
+        if (personResults.page < personResults.totalPages) {
+            if (query.equals(""))
+                downloadPopularPeople(personResults.page + 1)
+            else
+                searchPeople(personResults.page + 1)
+        }
     }
 
     override fun searchPeople(query: String) {
@@ -29,11 +41,11 @@ class PeopleListPresenter(val interactor:PeopleListInteractor,val view:PeopleLis
     }
 
     private fun searchPeople(page:Int){
-        download(interactor.getPersonSearchResults(
+        download(page,interactor.getPersonSearchResults(
                 BuildConfig.TMDB_API_KEY, query,page.toString()))
     }
 
-    private fun download(observable: Observable<PersonResults>){
+    private fun download(page:Int,observable: Observable<PersonResults>){
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<PersonResults> {
@@ -41,7 +53,11 @@ class PeopleListPresenter(val interactor:PeopleListInteractor,val view:PeopleLis
                     }
 
                     override fun onNext(pr: PersonResults) {
-                        personResults = pr
+                        if(page==1)personResults = pr
+                        else personResults = PersonResults(pr.page,
+                                pr.totalResults,pr.totalPages,
+                                personResults.results + pr.results)
+
                         view.display(personResults.results.size)
                     }
 
@@ -62,6 +78,13 @@ class PeopleListPresenter(val interactor:PeopleListInteractor,val view:PeopleLis
     }
 
     override fun getPersonName(position: Int): String {
+        Log.v("PeopleListPresenter","PersonName: " + personResults.results.get(position).name?:"")
         return personResults.results.get(position).name?:""
+    }
+
+    override fun getPersonKnownFor(position: Int): String {
+        return TextUtil.convertToCommaSeparatedString(
+                view.getContext().getString(R.string.known_for),
+                personResults.results[position].knownFor,{it->it?.title?:""})
     }
 }

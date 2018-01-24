@@ -19,4 +19,11 @@ object DateUtil {
 
         return arrayYears
     }
+
+    fun convertDateFormate(dateString: String):String{
+        val originalFormat = SimpleDateFormat("yyyy-MM-dd")
+        val targetFormat = SimpleDateFormat("MMMM dd, yyyy")
+        val date = originalFormat.parse(dateString)
+        return targetFormat.format(date)
+    }
 }

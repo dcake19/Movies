@@ -21,6 +21,13 @@
             tools:background="@drawable/ic_launcher_background"/>
 
         <TextView
+            android:id="@+id/text_born"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/image_poster"
+            tools:text="Born: 16 Oct 1982 in London"/>
+
+        <TextView
             android:id="@+id/text_people_biography"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -49,6 +49,10 @@ class PeopleCreditsPresenter(val interactor:PeopleCreditsInteractor): PeopleCred
         }
     }
 
+    override fun getCastMovieId(position: Int): Int {
+        return personCredits.cast.get(position).id
+    }
+
     override fun getCastMovieName(position: Int): String {
         return personCredits.cast.get(position).title?:""
     }
@@ -59,6 +63,10 @@ class PeopleCreditsPresenter(val interactor:PeopleCreditsInteractor): PeopleCred
 
     override fun getCastMoviePosterPath(position: Int): String {
         return personCredits.cast.get(position).posterPath?:""
+    }
+
+    override fun getCrewMovieId(position: Int): Int {
+        return personCredits.crew.get(position).id
     }
 
     override fun getCrewMovieName(position: Int): String {

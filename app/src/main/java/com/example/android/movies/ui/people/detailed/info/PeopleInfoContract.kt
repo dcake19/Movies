@@ -1,10 +1,13 @@
 package com.example.android.movies.ui.people.detailed.info
 
+import android.content.Context
+
 
 interface PeopleInfoContract {
 
     interface View{
-        fun display(biography:String,posterPath:String)
+        fun getContext():Context
+        fun display(biography:String,posterPath:String,born:String)
     }
 
     interface Presenter{

@@ -3,6 +3,7 @@ package com.example.android.movies.ui.movies.list
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.example.android.movies.di.movies.home.DaggerMoviesHomeComponent
 import com.example.android.movies.di.movies.home.MoviesHomeModule
 import com.example.android.movies.di.movies.list.DaggerMoviesListComponent
 import com.example.android.movies.di.movies.list.MoviesListModule
+import com.example.android.movies.ui.EndlessRecyclerViewScrollListener
 import com.example.android.movies.ui.movies.MoviesContract
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.home.MoviesHomeActivity
@@ -52,7 +54,17 @@ class MoviesListFragment : Fragment(), MoviesContract.View {
         recycler_movies.apply {
             val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
             layoutManager = linearLayout
+
         }
+
+        class EndlessListener(layout:LinearLayoutManager): EndlessRecyclerViewScrollListener(layout) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                presenter.downloadMoviesDataNextPage()
+            }
+        }
+
+        recycler_movies.addOnScrollListener(
+                EndlessListener(recycler_movies.layoutManager as LinearLayoutManager))
 
         if (recycler_movies.adapter == null)
             recycler_movies.adapter = adapter

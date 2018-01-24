@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.example.android.movies.R
 import com.example.android.movies.loadImage
 import com.example.android.movies.ui.movies.CreditsType
+import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
 import kotlinx.android.synthetic.main.people_detailed_cast_item.view.*
 
 
@@ -24,11 +25,13 @@ class PeopleCreditsAdapter(val presenter: PeopleCreditsContract.Presenter, val c
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         holder as CreditsViewHolder
         if (creditsType==CreditsType.CAST){
-            holder.setInfo(presenter.getCastMovieName(position),
+            holder.setInfo(presenter.getCastMovieId(position),
+                    presenter.getCastMovieName(position),
                     presenter.getCharacter(position),
                     presenter.getCastMoviePosterPath(position))
         }else{
-            holder.setInfo(presenter.getCrewMovieName(position),
+            holder.setInfo(presenter.getCrewMovieId(position),
+                    presenter.getCrewMovieName(position),
                     presenter.getJob(position),
                     presenter.getCrewMoviePosterPath(position))
         }
@@ -46,10 +49,13 @@ class PeopleCreditsAdapter(val presenter: PeopleCreditsContract.Presenter, val c
     inner class CreditsViewHolder(parent: ViewGroup?) : RecyclerView.ViewHolder(LayoutInflater.from(
             parent?.getContext()).inflate(R.layout.people_detailed_cast_item,parent,false)){
 
-        fun setInfo(title:String,characterOrJob:String,posterPath:String) = with(itemView){
+        fun setInfo(id:Int,title:String,characterOrJob:String,posterPath:String) = with(itemView){
             text_title.text = title
             text_character_or_job.text = characterOrJob
             image_poster.loadImage(context.getString(R.string.image_start_url),posterPath)
+            layout_cast_item.setOnClickListener {
+                context.startActivity(MovieDetailsActivity.getIntent(context,id,title))
+            }
         }
 
     }

@@ -1,14 +1,20 @@
 package com.example.android.movies.util
 
+import android.util.Log
+
 
 object TextUtil {
 
-    fun<T> convertToCommaSeparatedString(start:String,list: List<T>,itemString:(T)->String):String{
-        val sb = StringBuilder()
-        if (list.size>0) sb.append(start + " " + itemString(list[0]))
-        for (x in list.drop(1))
-            sb.append(", " + itemString(x))
-        return sb.toString()
+    fun<T> convertToCommaSeparatedString(start:String,list: List<T>?,itemString:(T)->String):String{
+        if (list!=null) {
+            val sb = StringBuilder()
+            if (list.isNotEmpty()) sb.append(start + " " + itemString(list[0]))
+            for (item in list.drop(1))
+                if(itemString(item)!="") sb.append(", " + itemString(item))
+            return sb.toString()
+        } else{
+            return ""
+        }
     }
 
     fun getYearFromDate(date:String):String{
