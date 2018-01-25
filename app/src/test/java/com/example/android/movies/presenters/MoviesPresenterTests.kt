@@ -45,7 +45,6 @@ class MoviesPresenterTests {
 
     @Before
     fun init(){
-
         MockitoAnnotations.initMocks(this)
         `when`(view!!.getContext()).thenReturn(context)
         `when`(context!!.getString(R.string.vote)).thenReturn("vote")
