@@ -1,6 +1,7 @@
 package com.example.android.movies.ui.people.detailed.credits
 
 import com.example.android.movies.BuildConfig
+import com.example.android.movies.RxSchedulerProvider
 import com.example.android.movies.api.data.people.PersonCredits
 import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsContract
 import com.example.android.movies.ui.people.detailed.credits.PeopleCreditsContract
@@ -10,7 +11,9 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
-class PeopleCreditsPresenter(val interactor:PeopleCreditsInteractor): PeopleCreditsContract.Presenter {
+class PeopleCreditsPresenter(val interactor:PeopleCreditsInteractor,
+                             val rxSchedulerProvider: RxSchedulerProvider)
+    : PeopleCreditsContract.Presenter {
 
     lateinit var view: PeopleCreditsContract.View
     private lateinit var personCredits:PersonCredits
@@ -26,8 +29,8 @@ class PeopleCreditsPresenter(val interactor:PeopleCreditsInteractor): PeopleCred
             view.display( personCredits.cast.size, personCredits.crew.size)
         else {
             val observable = interactor.getPersonCredits(id.toString(), BuildConfig.TMDB_API_KEY)
-            observable.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+            observable.subscribeOn(rxSchedulerProvider.subscribeOn())
+                    .observeOn(rxSchedulerProvider.observeOn())
                     .subscribe(object : Observer<PersonCredits> {
                         override fun onNext(t: PersonCredits) {
                             personCredits = t
@@ -54,11 +57,11 @@ class PeopleCreditsPresenter(val interactor:PeopleCreditsInteractor): PeopleCred
     }
 
     override fun getCastMovieName(position: Int): String {
-        return personCredits.cast.get(position).title?:""
+        return personCredits.cast.get(position).title
     }
 
     override fun getCharacter(position: Int): String {
-        return personCredits.cast.get(position).character?:""
+        return personCredits.cast.get(position).character
     }
 
     override fun getCastMoviePosterPath(position: Int): String {
@@ -70,11 +73,11 @@ class PeopleCreditsPresenter(val interactor:PeopleCreditsInteractor): PeopleCred
     }
 
     override fun getCrewMovieName(position: Int): String {
-        return personCredits.crew.get(position).title?:""
+        return personCredits.crew.get(position).title
     }
 
     override fun getJob(position: Int): String {
-        return personCredits.crew.get(position).job?:""
+        return personCredits.crew.get(position).job
     }
 
     override fun getCrewMoviePosterPath(position: Int): String {

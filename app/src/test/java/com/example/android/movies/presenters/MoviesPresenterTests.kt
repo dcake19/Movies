@@ -56,11 +56,9 @@ class MoviesPresenterTests {
             override fun subscribeOn(): Scheduler {
                 return Schedulers.trampoline()
             }
-
             override fun observeOn(): Scheduler {
                 return Schedulers.trampoline()
             }
-
         }
 
         presenter = MoviesPresenter(interactor,rxSchedulerProvider,view!!, MoviesDownloadTypes.NOW_PLAYING)

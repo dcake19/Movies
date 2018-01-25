@@ -3,6 +3,7 @@ package com.example.android.movies.ui.people.list
 import android.util.Log
 import com.example.android.movies.BuildConfig
 import com.example.android.movies.R
+import com.example.android.movies.RxSchedulerProvider
 import com.example.android.movies.api.data.people.PersonResults
 import com.example.android.movies.util.TextUtil
 import io.reactivex.Observable
@@ -12,7 +13,9 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 
-class PeopleListPresenter(val interactor:PeopleListInteractor,val view:PeopleListContract.View)
+class PeopleListPresenter(val interactor:PeopleListInteractor,
+                          val rxSchedulerProvider: RxSchedulerProvider,
+                          val view:PeopleListContract.View)
     : PeopleListContract.Presenter {
 
     private lateinit var personResults:PersonResults
@@ -46,8 +49,8 @@ class PeopleListPresenter(val interactor:PeopleListInteractor,val view:PeopleLis
     }
 
     private fun download(page:Int,observable: Observable<PersonResults>){
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        observable.subscribeOn(rxSchedulerProvider.subscribeOn())
+                .observeOn(rxSchedulerProvider.observeOn())
                 .subscribe(object : Observer<PersonResults> {
                     override fun onSubscribe(d: Disposable) {
                     }
@@ -78,7 +81,7 @@ class PeopleListPresenter(val interactor:PeopleListInteractor,val view:PeopleLis
     }
 
     override fun getPersonName(position: Int): String {
-        Log.v("PeopleListPresenter","PersonName: " + personResults.results.get(position).name?:"")
+        //Log.v("PeopleListPresenter","PersonName: " + personResults.results.get(position).name?:"")
         return personResults.results.get(position).name?:""
     }
 

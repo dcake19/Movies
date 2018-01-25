@@ -2,13 +2,16 @@ package com.example.android.movies.ui.movies.detailed.credits
 
 import android.util.Log
 import com.example.android.movies.BuildConfig
+import com.example.android.movies.RxSchedulerProvider
 import com.example.android.movies.api.data.movie.MovieCredits
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class MovieCreditsPresenter(val interactor: MovieCreditsInteractor): MovieCreditsContract.Presenter {
+class MovieCreditsPresenter(val interactor: MovieCreditsInteractor,
+                            val rxSchedulerProvider: RxSchedulerProvider)
+    : MovieCreditsContract.Presenter {
 
     lateinit var view: MovieCreditsContract.View
     private lateinit var movieCredits:MovieCredits
@@ -19,13 +22,12 @@ class MovieCreditsPresenter(val interactor: MovieCreditsInteractor): MovieCredit
     }
 
     override fun downloadCredits(id: Int) {
-        Log.v("presenter",hashCode().toString())
         if (downloadComplete)
             view.display( movieCredits.cast.size, movieCredits.crew.size)
         else {
             val observable = interactor.getMovieCredits(id.toString(), BuildConfig.TMDB_API_KEY, "1")
-            observable.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+            observable.subscribeOn(rxSchedulerProvider.subscribeOn())
+                    .observeOn(rxSchedulerProvider.observeOn())
                     .subscribe(object : Observer<MovieCredits> {
                         override fun onNext(t: MovieCredits) {
                             movieCredits = t
