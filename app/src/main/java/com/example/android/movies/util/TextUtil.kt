@@ -24,11 +24,15 @@ object TextUtil {
     }
 
     fun convertMoney(type:String,dollars:Int):String{
+        return convertMoney(type,dollars.toLong())
+    }
+
+    fun convertMoney(type:String,dollars:Long):String{
         val value:String
         if(dollars<1000) value = dollars.toString()
-        else if(dollars<1000000) value = dollars.toString().substring(0,dollars/1000) + "k"
-        else if(dollars<1000000000) value = (dollars/1000000 as Int).toString() + "m"
-        else  value = dollars.toString().substring(0,dollars/1000000000) + "bn"
+        else if(dollars<1000000) value =  Math.round(dollars.toDouble()/1000).toString() + "k"
+        else if(dollars<1000000000) value =  Math.round(dollars.toDouble()/1000000).toString() + "m"
+        else  value = Math.round(dollars.toDouble()/1000000000).toString() + "bn"
         return type + " $" + value
     }
 

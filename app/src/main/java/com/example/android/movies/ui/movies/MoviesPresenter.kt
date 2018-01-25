@@ -2,6 +2,7 @@ package com.example.android.movies.ui.movies
 
 import com.example.android.movies.BuildConfig
 import com.example.android.movies.R
+import com.example.android.movies.RxSchedulerProvider
 import com.example.android.movies.api.data.movie.MovieResults
 import com.example.android.movies.api.data.movie.Result
 import com.example.android.movies.ui.movies.MoviesContract
@@ -15,7 +16,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class MoviesPresenter(val interactor: MoviesInteractor, val view: MoviesContract.View, val type:Int)
+class MoviesPresenter(val interactor: MoviesInteractor,
+                      val rxSchedulerProvider: RxSchedulerProvider,
+                      val view: MoviesContract.View, val type:Int)
     : MoviesContract.Presenter {
 
 
@@ -36,11 +39,6 @@ class MoviesPresenter(val interactor: MoviesInteractor, val view: MoviesContract
         discover = discoverQuery
         downloadMoviesData()
     }
-
-//    override fun downloadDiscoverDataNextPage() {
-//        if (moviesResults.page < moviesResults.totalPages)
-//            downloadMoviesData(moviesResults.page+1)
-//    }
 
     override fun search(query: String) {
         this.query = query
@@ -69,8 +67,10 @@ class MoviesPresenter(val interactor: MoviesInteractor, val view: MoviesContract
             else -> {return}
         }
 
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+        observable.subscribeOn(rxSchedulerProvider.subscribeOn())
+                .observeOn(rxSchedulerProvider.observeOn())
                 .subscribe(object : Observer<MovieResults> {
                     override fun onSubscribe(d: Disposable) {
                     }
@@ -90,6 +90,7 @@ class MoviesPresenter(val interactor: MoviesInteractor, val view: MoviesContract
                     override fun onComplete() {
                     }
                 })
+
     }
 
     override fun getMovieId(index:Int): Int {
@@ -130,8 +131,8 @@ class MoviesPresenter(val interactor: MoviesInteractor, val view: MoviesContract
     private fun getVoteCountString(index:Int):String{
         if (moviesResults.results.get(index).voteCount == 1)
             return view.getContext().getString(R.string.vote)
-        else if (moviesResults.results.get(index).voteCount > 1)
+        else
             return view.getContext().getString(R.string.votes)
-        else return ""
+
     }
 }

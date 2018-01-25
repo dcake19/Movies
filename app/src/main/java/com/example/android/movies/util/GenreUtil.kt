@@ -6,7 +6,7 @@ import com.example.android.movies.R
 
 object GenreUtil {
 
-    fun getGenreId(index:Int):Int{
+    private fun getGenreId(index:Int):Int{
         when(index)
         {
             0 -> return 28
@@ -32,7 +32,7 @@ object GenreUtil {
         return -1
     }
 
-    fun getGenre(index: Int,context: Context):String{
+    private fun getGenre(index: Int,context: Context):String{
         when(index)
         {
             0 -> return context.getString(R.string.genre_action)
@@ -80,7 +80,7 @@ object GenreUtil {
         for(i in 0..18){
             if (genres[i]){
                 if (firstSelected)
-                    selected.append(","+ getGenre(i,context))
+                    selected.append(", "+ getGenre(i,context))
                 else{
                     firstSelected = true
                     selected.append(getGenre(i,context))
