@@ -40,7 +40,6 @@ class MoviesInfoFragment : Fragment(), MoviesInfoContract.View{
         super.onViewCreated(view, savedInstanceState)
     }
 
-
     override fun display(overview: String, posterPath: String, year: String,
                          status: String, userScore: String, voteCount: String,
                          budget: String, revenue: String, runtime: String,
