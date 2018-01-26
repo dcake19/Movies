@@ -83,7 +83,6 @@ class MoviesPresenterTests {
     }
 
     private fun checkPage1(){
-
         Assert.assertEquals(results.get(0).id,presenter.getMovieId(0))
         Assert.assertEquals(results.get(1).id,presenter.getMovieId(1))
         Assert.assertEquals(results.get(2).id,presenter.getMovieId(2))

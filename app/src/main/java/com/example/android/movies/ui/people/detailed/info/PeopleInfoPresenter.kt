@@ -44,7 +44,7 @@ class PeopleInfoPresenter(val interactor: PeopleInfoInteractor,
     }
 
     private fun display(){
-        view.display(personInfo.biography?:"",
+        view.display(personInfo.biography,
                 personInfo.profilePath?:"",
                 getBorn())
     }
@@ -53,7 +53,7 @@ class PeopleInfoPresenter(val interactor: PeopleInfoInteractor,
         if (personInfo.birthday!=null && personInfo.placeOfBirth!=null)
             return view.getContext().getString(R.string.born) + " " +
                     DateUtil.convertDateFormate(personInfo.birthday?:"") + " " +
-                    view.getContext().getString(R.string.`in`) + " " +
+                    view.getContext().getString(R.string._in) + " " +
                     personInfo.placeOfBirth
 
         else return ""

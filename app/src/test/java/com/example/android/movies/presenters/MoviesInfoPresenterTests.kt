@@ -103,7 +103,6 @@ class MoviesInfoPresenterTests {
     }
 
     fun getObservable(): Observable<MovieInfo> {
-
         return Observable.create(object : ObservableOnSubscribe<MovieInfo> {
             override fun subscribe(e: ObservableEmitter<MovieInfo>?) {
                 e!!.onNext(movieInfo)
