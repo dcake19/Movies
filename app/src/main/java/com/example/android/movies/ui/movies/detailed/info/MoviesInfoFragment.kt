@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.android.movies.R
-import com.example.android.movies.di.App
+import com.example.android.movies.App
 //import com.example.android.movies.di.movies.detailed.info.DaggerMoviesInfoComponent
-import com.example.android.movies.di.movies.detailed.info.MoviesInfoModule
 
 //import com.example.android.movies.di.movies.home.MoviesHomeModule
 import com.example.android.movies.loadImage
@@ -24,7 +23,7 @@ class MoviesInfoFragment : Fragment(), MoviesInfoContract.View{
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val app : App = activity.application as App
+        //val app : App = activity.application as App
 //        val component = DaggerMoviesInfoComponent.builder()
 //                .appComponent(app.component)
 //                .moviesInfoModule(MoviesInfoModule(this))

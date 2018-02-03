@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.android.movies.R
-import com.example.android.movies.di.App
 //import com.example.android.movies.di.people.detailed.info.DaggerPeopleInfoComponent
-import com.example.android.movies.di.people.detailed.info.PeopleInfoModule
 import com.example.android.movies.loadImage
 import com.example.android.movies.ui.people.detailed.PeopleDetailedActivity
 import kotlinx.android.synthetic.main.people_detailed_info_fragment.*

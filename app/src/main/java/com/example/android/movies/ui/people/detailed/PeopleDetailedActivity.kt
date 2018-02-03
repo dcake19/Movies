@@ -2,16 +2,13 @@ package com.example.android.movies.ui.people.detailed
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.app.Fragment
 import android.support.v4.widget.DrawerLayout
 import com.example.android.movies.R
-import com.example.android.movies.di.App
 //import com.example.android.movies.di.people.detailed.DaggerPeopleDetailedComponent
 import com.example.android.movies.di.people.detailed.PeopleDetailedComponent
-import com.example.android.movies.di.people.detailed.PeopleDetailedModule
 import com.example.android.movies.ui.BaseNavigationActivity
 import com.example.android.movies.ui.movies.CreditsType
 import com.example.android.movies.ui.people.detailed.credits.PeopleCreditsFragment

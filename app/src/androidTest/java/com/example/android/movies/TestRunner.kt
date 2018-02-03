@@ -1,7 +1,11 @@
 package com.example.android.movies
 
-/**
- * Created by Daniel on 03/02/2018.
- */
-class TestRunner {
+import android.app.Application
+import android.content.Context
+import android.support.test.runner.AndroidJUnitRunner
+
+class TestRunner : AndroidJUnitRunner(){
+    override fun newApplication(cl: ClassLoader?, className: String?, context: Context?): Application {
+        return super.newApplication(cl, TestApp::class.java.name, context)
+    }
 }

@@ -8,11 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.android.movies.R
-import com.example.android.movies.di.App
 //import com.example.android.movies.di.people.list.DaggerPeopleListComponent
-import com.example.android.movies.di.people.list.PeopleListModule
 import com.example.android.movies.ui.EndlessRecyclerViewScrollListener
-import kotlinx.android.synthetic.main.movies_home_fragment.*
 import kotlinx.android.synthetic.main.people_list_fragment.*
 import javax.inject.Inject
 

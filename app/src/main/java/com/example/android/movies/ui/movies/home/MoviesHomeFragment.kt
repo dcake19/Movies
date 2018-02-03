@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.android.movies.R
-import com.example.android.movies.di.App
 //import com.example.android.movies.di.movies.home.DaggerMoviesHomeComponent
 //import com.example.android.movies.di.movies.home.MoviesHomeModule
 import com.example.android.movies.ui.movies.MoviesContract

@@ -8,9 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.android.movies.R
-import com.example.android.movies.di.App
 //import com.example.android.movies.di.movies.detailed.credits.DaggerMovieCreditsComponent
-import com.example.android.movies.di.movies.detailed.credits.MovieCreditsModule
 import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
 import kotlinx.android.synthetic.main.movie_details_cast_fragment.*
 import javax.inject.Inject
