@@ -43,6 +43,9 @@ class GenreUtilTests {
         selected4[10] = true
         selected4[11] = true
         assertEquals("10751,14,27,10402",GenreUtil.getGenresIdList(selected4))
+
+        val selected5 = BooleanArray(19)
+        assertEquals("",GenreUtil.getGenresIdList(selected5))
     }
 
     @Test
@@ -75,6 +78,9 @@ class GenreUtilTests {
         selected4[17] = true
         selected4[18] = true
         assertEquals("TV Movie, Thriller, War, Western",GenreUtil.getGenreList(selected4,context!!))
+
+        val selected5 = BooleanArray(19)
+        assertEquals("",GenreUtil.getGenreList(selected5,context!!))
     }
 
     private fun mockMethods(){

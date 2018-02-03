@@ -5,11 +5,11 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
+import android.app.Fragment
 import android.support.v4.widget.DrawerLayout
 import com.example.android.movies.R
 import com.example.android.movies.di.App
-import com.example.android.movies.di.people.detailed.DaggerPeopleDetailedComponent
+//import com.example.android.movies.di.people.detailed.DaggerPeopleDetailedComponent
 import com.example.android.movies.di.people.detailed.PeopleDetailedComponent
 import com.example.android.movies.di.people.detailed.PeopleDetailedModule
 import com.example.android.movies.ui.BaseNavigationActivity
@@ -39,11 +39,11 @@ class PeopleDetailedActivity : BaseNavigationActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val app : App = application as App
-        component = DaggerPeopleDetailedComponent.builder()
-                .appComponent(app.component)
-                .peopleDetailedModule(PeopleDetailedModule())
-                .build()
+//        val app : App = application as App
+//        component = DaggerPeopleDetailedComponent.builder()
+//                .appComponent(app.component)
+//                .peopleDetailedModule(PeopleDetailedModule())
+//                .build()
 
         people_details_toolbar.title = intent.getStringExtra(PERSON_NAME)
 
@@ -68,17 +68,21 @@ class PeopleDetailedActivity : BaseNavigationActivity() {
     }
 
     private fun setFragment(position:Int){
-        val ft = supportFragmentManager.beginTransaction()
+        val ft = fragmentManager.beginTransaction()
 
-        ft.setCustomAnimations(
-                R.anim.abc_fade_in, R.anim.abc_fade_out)
+//        ft.setCustomAnimations(
+//                R.anim.abc_fade_in, R.anim.abc_fade_out)
 
-        for (f in supportFragmentManager.fragments) ft.hide(f)
+       // for (f in fragmentManager.fragments) ft.hide(f)
+        for(i in 0..2){
+            if (fragmentManager.findFragmentByTag(i.toString())!=null)
+                ft.hide(fragmentManager.findFragmentByTag(i.toString()))
+        }
 
         val fragment: Fragment
 
-        if (supportFragmentManager.findFragmentByTag(position.toString())!=null){
-            fragment = supportFragmentManager.findFragmentByTag(position.toString())
+        if (fragmentManager.findFragmentByTag(position.toString())!=null){
+            fragment = fragmentManager.findFragmentByTag(position.toString())
             ft.show(fragment).commit()
         }else {
             val bundle = Bundle()

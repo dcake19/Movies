@@ -13,33 +13,33 @@ import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-@Module
+//@Module
 class PeopleInfoModule(val view: PeopleInfoContract.View) {
 
-    @Provides
-    @FragmentScope
-    fun providePeopleInfoPresenter(interactor: PeopleInfoInteractor,
-                                   rxSchedulerProvider: RxSchedulerProvider)
-            : PeopleInfoContract.Presenter{
-        return PeopleInfoPresenter(interactor,rxSchedulerProvider,view)
-    }
-
-    @Provides
-    @FragmentScope
-    fun providePeopleInfoInteractor(moviesApi: MoviesApi): PeopleInfoInteractor{
-        return PeopleInfoInteractor(moviesApi)
-    }
-
-    @Provides
-    @FragmentScope
-    fun provideRxSchedulerProvider(): RxSchedulerProvider {
-        return object : RxSchedulerProvider {
-            override fun subscribeOn(): Scheduler {
-                return Schedulers.io()
-            }
-            override fun observeOn(): Scheduler {
-                return AndroidSchedulers.mainThread()
-            }
-        }
-    }
+//    @Provides
+//    @FragmentScope
+//    fun providePeopleInfoPresenter(interactor: PeopleInfoInteractor,
+//                                   rxSchedulerProvider: RxSchedulerProvider)
+//            : PeopleInfoContract.Presenter{
+//        return PeopleInfoPresenter(interactor,rxSchedulerProvider,view)
+//    }
+//
+//    @Provides
+//    @FragmentScope
+//    fun providePeopleInfoInteractor(moviesApi: MoviesApi): PeopleInfoInteractor{
+//        return PeopleInfoInteractor(moviesApi)
+//    }
+//
+//    @Provides
+//    @FragmentScope
+//    fun provideRxSchedulerProvider(): RxSchedulerProvider {
+//        return object : RxSchedulerProvider {
+//            override fun subscribeOn(): Scheduler {
+//                return Schedulers.io()
+//            }
+//            override fun observeOn(): Scheduler {
+//                return AndroidSchedulers.mainThread()
+//            }
+//        }
+//    }
 }

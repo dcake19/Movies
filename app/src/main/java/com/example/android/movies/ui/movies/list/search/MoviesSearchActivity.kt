@@ -1,5 +1,6 @@
 package com.example.android.movies.ui.movies.list.search
 
+import android.app.Fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,10 +12,15 @@ import com.example.android.movies.ui.NavigationIconActivity
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.list.MoviesListActivity
 import com.example.android.movies.ui.movies.list.MoviesListFragment
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasFragmentInjector
 import kotlinx.android.synthetic.main.movies_search_activity.*
 import kotlinx.android.synthetic.main.movies_search_appbar.*
+import javax.inject.Inject
 
-class MoviesSearchActivity: NavigationIconActivity() {
+class MoviesSearchActivity: NavigationIconActivity(), HasFragmentInjector {
 
     companion object {
         const val SEARCH_QUERY = "search_query"
@@ -26,9 +32,14 @@ class MoviesSearchActivity: NavigationIconActivity() {
         }
     }
 
+    @Inject
+    lateinit var fragmentDispatchingAndroidInjector:
+            DispatchingAndroidInjector<Fragment>
+
     lateinit var fragment:MoviesListFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         setFragment(intent.getStringExtra(SEARCH_QUERY))
@@ -52,9 +63,9 @@ class MoviesSearchActivity: NavigationIconActivity() {
         bundle.putInt(MoviesListActivity.DOWNLOAD_TYPE_KEY,MoviesDownloadTypes.SEARCH)
         bundle.putString(SEARCH_QUERY,query)
         fragment.arguments = bundle
-        val ft = supportFragmentManager.beginTransaction()
-        ft.setCustomAnimations(
-                R.anim.abc_fade_in, R.anim.abc_fade_out)
+        val ft = fragmentManager.beginTransaction()
+//        ft.setCustomAnimations(
+//                R.anim.abc_fade_in, R.anim.abc_fade_out)
         ft.replace(R.id.search_content,fragment)
         ft.commit()
     }
@@ -75,4 +86,6 @@ class MoviesSearchActivity: NavigationIconActivity() {
         return movies_search_drawer_layout
     }
 
+    override fun fragmentInjector(): AndroidInjector<Fragment>
+            = fragmentDispatchingAndroidInjector
 }

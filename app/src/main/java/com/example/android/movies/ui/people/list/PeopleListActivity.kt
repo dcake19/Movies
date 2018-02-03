@@ -15,16 +15,21 @@ class PeopleListActivity : NavigationIconActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         if (savedInstanceState == null)
             setFragment()
 
         search.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if(supportFragmentManager.fragments.size>0) {
-                    val fragment = supportFragmentManager.fragments.get(0) as PeopleListFragment
+                if(fragmentManager.findFragmentByTag(PeopleListFragment::class.java.canonicalName)!=null){
+                    val fragment = fragmentManager
+                            .findFragmentByTag(PeopleListFragment::class.java.canonicalName)
+                            as PeopleListFragment
                     fragment.presenter.searchPeople(query ?: "")
                 }
+//                if(fragmentManager.fragments.size>0) {
+//                    val fragment = fragmentManager.fragments.get(0) as PeopleListFragment
+//                    fragment.presenter.searchPeople(query ?: "")
+//                }
                 return true
             }
 
@@ -36,10 +41,11 @@ class PeopleListActivity : NavigationIconActivity() {
     }
 
     private fun setFragment(){
-        val ft = supportFragmentManager.beginTransaction()
-        ft.setCustomAnimations(
-                R.anim.abc_fade_in, R.anim.abc_fade_out)
-        ft.replace(R.id.people_list_content,PeopleListFragment())
+        val ft = fragmentManager.beginTransaction()
+//        ft.setCustomAnimations(
+//                R.anim.abc_fade_in, R.anim.abc_fade_out)
+        ft.replace(R.id.people_list_content,PeopleListFragment(),
+                PeopleListFragment::class.java.canonicalName)
         ft.commit()
     }
 

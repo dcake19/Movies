@@ -58,17 +58,29 @@ object GenreUtil {
         return ""
     }
 
+//    fun getGenresIdList(genres:BooleanArray):String{
+//        val selected = StringBuilder()
+//        var firstSelected = false
+//        for(i in 0..18){
+//            if (genres[i]){
+//                if (firstSelected)
+//                    selected.append(","+ getGenreId(i).toString())
+//                else{
+//                    firstSelected = true
+//                    selected.append(getGenreId(i).toString())
+//                }
+//            }
+//        }
+//        return selected.toString()
+//    }
+
     fun getGenresIdList(genres:BooleanArray):String{
         val selected = StringBuilder()
-        var firstSelected = false
-        for(i in 0..18){
-            if (genres[i]){
-                if (firstSelected)
-                    selected.append(","+ getGenreId(i).toString())
-                else{
-                    firstSelected = true
-                    selected.append(getGenreId(i).toString())
-                }
+        val first = genres.indexOf(true)
+        if (first>=0) {
+            selected.append(getGenreId(first).toString())
+            for (g in genres.mapIndexed({ i, b -> Pair(i, b) }).filter { it.second }.drop(1)) {
+                selected.append("," + getGenreId(g.first).toString())
             }
         }
         return selected.toString()
@@ -76,19 +88,32 @@ object GenreUtil {
 
     fun getGenreList(genres:BooleanArray,context: Context):String{
         val selected = StringBuilder()
-        var firstSelected = false
-        for(i in 0..18){
-            if (genres[i]){
-                if (firstSelected)
-                    selected.append(", "+ getGenre(i,context))
-                else{
-                    firstSelected = true
-                    selected.append(getGenre(i,context))
-                }
+        val first = genres.indexOf(true)
+        if (first>=0) {
+            selected.append(getGenre(first,context).toString())
+            for (g in genres.mapIndexed({ i, b -> Pair(i, b) }).filter { it.second }.drop(1)) {
+                selected.append(", " + getGenre(g.first,context).toString())
             }
         }
         return selected.toString()
+
     }
+
+//    fun getGenreList(genres:BooleanArray,context: Context):String{
+//        val selected = StringBuilder()
+//        var firstSelected = false
+//        for(i in 0..18){
+//            if (genres[i]){
+//                if (firstSelected)
+//                    selected.append(", "+ getGenre(i,context))
+//                else{
+//                    firstSelected = true
+//                    selected.append(getGenre(i,context))
+//                }
+//            }
+//        }
+//        return selected.toString()
+//    }
 
 }
 

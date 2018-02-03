@@ -7,8 +7,8 @@ import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsPresent
 
 import dagger.Component
 
-@ActivityScope
-@Component(modules = arrayOf(MovieDetailedModule::class),dependencies = arrayOf(AppComponent::class))
+//@ActivityScope
+//@Component(modules = arrayOf(MovieDetailedModule::class),dependencies = arrayOf(AppComponent::class))
 interface MovieDetailedComponent {
     fun getMovieCreditsPresenter(): MovieCreditsContract.Presenter
 }

@@ -14,41 +14,41 @@ import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-@Module
+//@Module
 class PeopleListModule(val view: PeopleListContract.View) {
 
-    @Provides
-    @FragmentScope
-    fun provideMoviesPresenter(interactor: PeopleListInteractor,
-                               rxSchedulerProvider: RxSchedulerProvider)
-            :PeopleListContract.Presenter{
-        return PeopleListPresenter(interactor,rxSchedulerProvider,view)
-    }
-
-    @Provides
-    @FragmentScope
-    fun provideMoviesInteractor(moviesApi: MoviesApi): PeopleListInteractor {
-        return PeopleListInteractor(moviesApi)
-    }
-
-    @Provides
-    @FragmentScope
-    fun provideRxSchedulerProvider(): RxSchedulerProvider {
-        return object : RxSchedulerProvider {
-            override fun subscribeOn(): Scheduler {
-                return Schedulers.io()
-            }
-            override fun observeOn(): Scheduler {
-                return AndroidSchedulers.mainThread()
-            }
-        }
-    }
-
-    @Provides
-    @FragmentScope
-    fun provideMoviesAdapter(presenter: PeopleListContract.Presenter): PeopleListAdapter {
-        return PeopleListAdapter(presenter)
-    }
+//    @Provides
+//    @FragmentScope
+//    fun provideMoviesPresenter(interactor: PeopleListInteractor,
+//                               rxSchedulerProvider: RxSchedulerProvider)
+//            :PeopleListContract.Presenter{
+//        return PeopleListPresenter(interactor,rxSchedulerProvider,view)
+//    }
+//
+//    @Provides
+//    @FragmentScope
+//    fun provideMoviesInteractor(moviesApi: MoviesApi): PeopleListInteractor {
+//        return PeopleListInteractor(moviesApi)
+//    }
+//
+//    @Provides
+//    @FragmentScope
+//    fun provideRxSchedulerProvider(): RxSchedulerProvider {
+//        return object : RxSchedulerProvider {
+//            override fun subscribeOn(): Scheduler {
+//                return Schedulers.io()
+//            }
+//            override fun observeOn(): Scheduler {
+//                return AndroidSchedulers.mainThread()
+//            }
+//        }
+//    }
+//
+//    @Provides
+//    @FragmentScope
+//    fun provideMoviesAdapter(presenter: PeopleListContract.Presenter): PeopleListAdapter {
+//        return PeopleListAdapter(presenter)
+//    }
 
 
 }

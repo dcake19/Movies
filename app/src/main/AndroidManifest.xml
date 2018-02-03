@@ -21,16 +21,23 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.movies.list.MoviesListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
         <activity
-            android:name=".ui.movies.detailed.MovieDetailsActivity"
+            android:name=".ui.movies.list.discover.MoviesDiscoverActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".ui.movies.list.search.MoviesSearchActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <!--
+        <activity
+            android:name=".ui.movies.detailed.MovieDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
@@ -41,9 +48,8 @@
             android:name=".ui.people.list.PeopleListActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".ui.movies.list.discover.MoviesDiscoverActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+
+        -->
     </application>
 
 </manifest>

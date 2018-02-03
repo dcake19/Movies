@@ -1,7 +1,7 @@
 package com.example.android.movies.ui.movies.detailed.credits
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.android.movies.R
 import com.example.android.movies.di.App
-import com.example.android.movies.di.movies.detailed.credits.DaggerMovieCreditsComponent
+//import com.example.android.movies.di.movies.detailed.credits.DaggerMovieCreditsComponent
 import com.example.android.movies.di.movies.detailed.credits.MovieCreditsModule
 import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
 import kotlinx.android.synthetic.main.movie_details_cast_fragment.*
@@ -27,12 +27,12 @@ class MovieCreditsFragment : Fragment(), MovieCreditsContract.View{
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.v("MovieCreditsFragment","onCreateView")
         val movieDetailed = activity as MovieDetailsActivity
-        val component = DaggerMovieCreditsComponent.builder()
-                .movieDetailedComponent(movieDetailed.component)
-                .movieCreditsModule(MovieCreditsModule(this,arguments.getInt(CREDITS_TYPE)))
-                .build()
-
-        component.inject(this)
+//        val component = DaggerMovieCreditsComponent.builder()
+//                .movieDetailedComponent(movieDetailed.component)
+//                .movieCreditsModule(MovieCreditsModule(this,arguments.getInt(CREDITS_TYPE)))
+//                .build()
+//
+//        component.inject(this)
         retainInstance = true
         return inflater!!.inflate(R.layout.movie_details_cast_fragment,container,false)
     }

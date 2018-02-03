@@ -15,16 +15,26 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class MoviesPresenter(val interactor: MoviesInteractor,
-                      val rxSchedulerProvider: RxSchedulerProvider,
-                      val view: MoviesContract.View, val type:Int)
-    : MoviesContract.Presenter {
+//class MoviesPresenter(val interactor: MoviesInteractor,
+//                      val rxSchedulerProvider: RxSchedulerProvider,
+//                      val view: MoviesContract.View, val type:Int)
+class MoviesPresenter @Inject constructor(
+        val interactor: MoviesInteractor,
+        val rxSchedulerProvider: RxSchedulerProvider) : MoviesContract.Presenter {
 
-
+    var type = 1
+    lateinit var view:MoviesContract.View
     private lateinit var moviesResults:MovieResults
     private var query = ""
     private var discover = DiscoverQuery()
+
+    override fun addView(view: MoviesContract.View,type:Int) {
+        this.type = type
+        this.view = view
+    }
+
 
     override fun downloadMoviesData() {
         downloadMoviesData(1)
@@ -66,7 +76,6 @@ class MoviesPresenter(val interactor: MoviesInteractor,
                             discover.maxRuntime,page.toString())
             else -> {return}
         }
-
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())
         observable.subscribeOn(rxSchedulerProvider.subscribeOn())

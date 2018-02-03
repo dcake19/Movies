@@ -10,6 +10,7 @@ interface MoviesContract {
     }
 
     interface Presenter{
+        fun addView(view:View,type:Int)
         fun downloadMoviesData()
         fun downloadMoviesDataNextPage()
         fun downloadDiscoverData(discoverQuery: DiscoverQuery)

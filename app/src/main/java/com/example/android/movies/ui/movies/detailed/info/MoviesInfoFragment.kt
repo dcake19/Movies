@@ -2,16 +2,16 @@ package com.example.android.movies.ui.movies.detailed.info
 
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.android.movies.R
 import com.example.android.movies.di.App
-import com.example.android.movies.di.movies.detailed.info.DaggerMoviesInfoComponent
+//import com.example.android.movies.di.movies.detailed.info.DaggerMoviesInfoComponent
 import com.example.android.movies.di.movies.detailed.info.MoviesInfoModule
 
-import com.example.android.movies.di.movies.home.MoviesHomeModule
+//import com.example.android.movies.di.movies.home.MoviesHomeModule
 import com.example.android.movies.loadImage
 import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
 import kotlinx.android.synthetic.main.movie_details_info_fragment.*
@@ -25,12 +25,12 @@ class MoviesInfoFragment : Fragment(), MoviesInfoContract.View{
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val app : App = activity.application as App
-        val component = DaggerMoviesInfoComponent.builder()
-                .appComponent(app.component)
-                .moviesInfoModule(MoviesInfoModule(this))
-                .build()
+//        val component = DaggerMoviesInfoComponent.builder()
+//                .appComponent(app.component)
+//                .moviesInfoModule(MoviesInfoModule(this))
+//                .build()
 
-        component.inject(this)
+        //component.inject(this)
 
         return inflater!!.inflate(R.layout.movie_details_info_fragment,container,false)
     }

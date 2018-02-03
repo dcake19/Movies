@@ -7,8 +7,8 @@ import com.example.android.movies.di.movies.detailed.MovieDetailedModule
 import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsFragment
 import dagger.Component
 
-@FragmentScope
-@Component(modules = arrayOf(MovieCreditsModule::class),dependencies = arrayOf(MovieDetailedComponent::class))
+//@FragmentScope
+//@Component(modules = arrayOf(MovieCreditsModule::class),dependencies = arrayOf(MovieDetailedComponent::class))
 interface MovieCreditsComponent {
     fun inject(fragment: MovieCreditsFragment)
 }

@@ -6,18 +6,18 @@ import com.example.android.movies.ui.people.detailed.credits.PeopleCreditsContra
 import dagger.Module
 import dagger.Provides
 
-@Module
+//@Module
 class PeopleCreditsModule (val view: PeopleCreditsContract.View, val creditsType:Int) {
 
-    @Provides
-    @FragmentScope
-    fun provideMovieCreditAdapter(presenter: PeopleCreditsContract.Presenter): PeopleCreditsAdapter {
-        addView(presenter)
-        return PeopleCreditsAdapter(presenter,creditsType)
-    }
-
-    private fun addView(presenter: PeopleCreditsContract.Presenter){
-        presenter.changeView(view)
-    }
+//    @Provides
+//    @FragmentScope
+//    fun provideMovieCreditAdapter(presenter: PeopleCreditsContract.Presenter): PeopleCreditsAdapter {
+//        addView(presenter)
+//        return PeopleCreditsAdapter(presenter,creditsType)
+//    }
+//
+//    private fun addView(presenter: PeopleCreditsContract.Presenter){
+//        presenter.changeView(view)
+//    }
 
 }

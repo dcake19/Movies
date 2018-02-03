@@ -1,13 +1,13 @@
 package com.example.android.movies.ui.people.detailed.credits
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.android.movies.R
-import com.example.android.movies.di.people.detailed.credits.DaggerPeopleCreditsComponent
+
 import com.example.android.movies.di.people.detailed.credits.PeopleCreditsModule
 import com.example.android.movies.ui.people.detailed.PeopleDetailedActivity
 import kotlinx.android.synthetic.main.people_detailed_cast_fragment.*
@@ -26,12 +26,12 @@ class PeopleCreditsFragment: Fragment(), PeopleCreditsContract.View {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val peopleDetailed = activity as PeopleDetailedActivity
-        DaggerPeopleCreditsComponent.builder()
-                .peopleDetailedComponent(peopleDetailed.component)
-                .peopleCreditsModule(PeopleCreditsModule(this,arguments.getInt(CREDITS_TYPE)))
-                .build()
-                .inject(this)
+//        val peopleDetailed = activity as PeopleDetailedActivity
+//        DaggerPeopleCreditsComponent.builder()
+//                .peopleDetailedComponent(peopleDetailed.component)
+//                .peopleCreditsModule(PeopleCreditsModule(this,arguments.getInt(CREDITS_TYPE)))
+//                .build()
+//                .inject(this)
 
         retainInstance = true
         return inflater!!.inflate(R.layout.people_detailed_cast_fragment,container,false)

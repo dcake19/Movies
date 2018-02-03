@@ -1,38 +1,48 @@
 package com.example.android.movies.ui.movies.home
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.app.Fragment
+import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.android.movies.R
 import com.example.android.movies.di.App
-import com.example.android.movies.di.movies.home.DaggerMoviesHomeComponent
-import com.example.android.movies.di.movies.home.MoviesHomeModule
+//import com.example.android.movies.di.movies.home.DaggerMoviesHomeComponent
+//import com.example.android.movies.di.movies.home.MoviesHomeModule
 import com.example.android.movies.ui.movies.MoviesContract
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.list.MoviesListActivity
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.movies_home_fragment.*
 import javax.inject.Inject
 
 class MoviesHomeFragment :Fragment(), MoviesContract.View {
 
     @Inject lateinit var presenter: MoviesContract.Presenter
-    @Inject lateinit var adapter: MoviesHomeAdapter
+   // @Inject
+    lateinit var adapter: MoviesHomeAdapter
+
+    override fun onAttach(context: Context?) {
+        AndroidInjection.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val type = arguments.getInt(MoviesHomeActivity.DOWNLOAD_TYPE_KEY)
+       // val type = arguments.getInt(MoviesHomeActivity.DOWNLOAD_TYPE_KEY)
 
-        val app : App = activity.application as App
+     //   val app : App = activity.application as App
 
-        val component = DaggerMoviesHomeComponent.builder()
-                .appComponent(app.component)
-                .moviesHomeModule(MoviesHomeModule(this, type))
-                .build()
+//        val component = DaggerMoviesHomeComponent.builder()
+//                .appComponent(app.component)
+//                .moviesHomeModule(MoviesHomeModule(this, type))
+//                .build()
+//
+//        component.inject(this)
 
-        component.inject(this)
-
+        presenter.addView(this,arguments.getInt(MoviesHomeActivity.DOWNLOAD_TYPE_KEY))
+        adapter = MoviesHomeAdapter(presenter)
         return inflater!!.inflate(R.layout.movies_home_fragment,container,false)
     }
 

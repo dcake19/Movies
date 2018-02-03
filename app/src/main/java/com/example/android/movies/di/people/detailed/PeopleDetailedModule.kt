@@ -12,34 +12,34 @@ import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-@Module
+//@Module
 class PeopleDetailedModule {
 
-    @Provides
-    @ActivityScope
-    fun providePeopleCreditsPresenter(interactor: PeopleCreditsInteractor,
-                                      rxSchedulerProvider: RxSchedulerProvider)
-            : PeopleCreditsContract.Presenter{
-        return PeopleCreditsPresenter(interactor,rxSchedulerProvider)
-    }
-
-    @Provides
-    @ActivityScope
-    fun provideMovieCreditsInteractor(moviesApi: MoviesApi): PeopleCreditsInteractor {
-        return PeopleCreditsInteractor(moviesApi)
-    }
-
-    @Provides
-    @ActivityScope
-    fun provideRxSchedulerProvider(): RxSchedulerProvider {
-        return object : RxSchedulerProvider {
-            override fun subscribeOn(): Scheduler {
-                return Schedulers.io()
-            }
-            override fun observeOn(): Scheduler {
-                return AndroidSchedulers.mainThread()
-            }
-        }
-    }
+//    @Provides
+//    @ActivityScope
+//    fun providePeopleCreditsPresenter(interactor: PeopleCreditsInteractor,
+//                                      rxSchedulerProvider: RxSchedulerProvider)
+//            : PeopleCreditsContract.Presenter{
+//        return PeopleCreditsPresenter(interactor,rxSchedulerProvider)
+//    }
+//
+//    @Provides
+//    @ActivityScope
+//    fun provideMovieCreditsInteractor(moviesApi: MoviesApi): PeopleCreditsInteractor {
+//        return PeopleCreditsInteractor(moviesApi)
+//    }
+//
+//    @Provides
+//    @ActivityScope
+//    fun provideRxSchedulerProvider(): RxSchedulerProvider {
+//        return object : RxSchedulerProvider {
+//            override fun subscribeOn(): Scheduler {
+//                return Schedulers.io()
+//            }
+//            override fun observeOn(): Scheduler {
+//                return AndroidSchedulers.mainThread()
+//            }
+//        }
+//    }
 
 }

@@ -3,6 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+project.ext {
+    daggerVersion = "2.13"
+}
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -23,6 +27,9 @@ android {
         //Enter tmdb api key here
         it.buildConfigField 'String', 'TMDB_API_KEY', "\"\""
     }
+//    kapt {
+//        generateStubs = true
+//    }
 }
 
 dependencies {
@@ -45,20 +52,30 @@ dependencies {
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
 
     //Dagger 2 dependencies
-    compile 'com.google.dagger:dagger:2.5'
-    kapt 'com.google.dagger:dagger-compiler:2.5'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+   // compile 'com.google.dagger:dagger:2.5'
+   // kapt 'com.google.dagger:dagger-compiler:2.5'
+    //provided 'org.glassfish:javax.annotation:10.0-b28'
 
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    // Dagger Core
+    compileOnly "com.google.dagger:dagger:$project.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$project.daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$project.daggerVersion"
+
+    // Dagger Android
+    implementation "com.google.dagger:dagger-android:$project.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$project.daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$project.daggerVersion"
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     // Butterknife
-    compile 'com.jakewharton:butterknife:8.0.1'
+ //   compile 'com.jakewharton:butterknife:8.0.1'
     //apt 'com.jakewharton:butterknife-compiler:8.0.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.0.1'
+  //  annotationProcessor 'com.jakewharton:butterknife-compiler:8.0.1'
 
     compile 'com.github.aakira:expandable-layout:1.6.0@aar'
-
-    androidTestCompile 'org.mockito:mockito-core:1.9.5'
+    androidTestCompile 'org.mockito:mockito-android:2.11.0'
+    //androidTestCompile 'org.mockito:mockito-core:2.8.9'
     testCompile "org.mockito:mockito-all:1.10.19"
     testCompile "org.powermock:powermock-module-junit4:1.6.2"
     testCompile "org.powermock:powermock-api-mockito:1.6.2"
