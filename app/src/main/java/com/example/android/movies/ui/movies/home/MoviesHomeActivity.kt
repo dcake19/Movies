@@ -74,7 +74,8 @@ class MoviesHomeActivity : NavigationIconActivity(), HasFragmentInjector {
         val ft = fragmentManager.beginTransaction()
 //        ft.setCustomAnimations(
 //                R.anim.abc_fade_in, R.anim.abc_fade_out)
-        ft.replace(getContent(type),fragment)
+        ft.replace(getContent(type),fragment,
+                MoviesHomeFragment::class.java.name + " " + type)
         ft.commit()
     }
 

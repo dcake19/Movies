@@ -58,7 +58,7 @@ class MoviesListActivity :BaseNavigationActivity(), HasFragmentInjector {
         val ft = fragmentManager.beginTransaction()
 //        ft.setCustomAnimations(
 //                R.anim.abc_fade_in, R.anim.abc_fade_out)
-        ft.replace(R.id.movies_list_content,fragment)
+        ft.replace(R.id.movies_list_content,fragment,MoviesListFragment::class.java.name)
         ft.commit()
     }
 

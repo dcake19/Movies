@@ -7,20 +7,23 @@ import android.support.test.runner.AndroidJUnit4
 import com.example.android.movies.TestApp
 import com.example.android.movies.ui.movies.list.MoviesListActivity
 import com.example.android.movies.ui.movies.list.MoviesListFragment
+
+import com.example.android.movies.ui.movies.list.search.MoviesSearchActivity
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class TestMoviesListActivity {
+class TestMoviesSearchActivity {
 
     @Rule
     @JvmField
     val actvityTestRule =
-            ActivityTestRule<MoviesListActivity>(
-                    MoviesListActivity::class.java,
+            ActivityTestRule<MoviesSearchActivity>(
+                    MoviesSearchActivity::class.java,
                     false,false)
+
 
     @Before
     fun init(){
@@ -30,11 +33,12 @@ class TestMoviesListActivity {
         component.inject(this)
     }
 
-
     @Test
     fun test() {
-        actvityTestRule.launchActivity(Intent())
-        val activity = actvityTestRule.activity as MoviesListActivity
+        val intent = Intent()
+        intent.putExtra(MoviesSearchActivity.SEARCH_QUERY,"search")
+        actvityTestRule.launchActivity(intent)
+        val activity = actvityTestRule.activity as MoviesSearchActivity
         val fragment = activity.fragmentManager
                 .findFragmentByTag(MoviesListFragment::class.java.name) as MoviesListFragment
 
@@ -44,4 +48,5 @@ class TestMoviesListActivity {
         Thread.sleep(5000)
 
     }
+
 }

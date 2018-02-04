@@ -13,12 +13,12 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class TestBuilderModule {
 
-//    @ContributesAndroidInjector(modules = arrayOf(TestMoviesModule::class))
-//    @FragmentScope
-//    abstract fun moviesHomeFragment(): MoviesHomeFragment
-//
-//    @ContributesAndroidInjector
-//    abstract fun moviesHomeActivity(): MoviesHomeActivity
+    @ContributesAndroidInjector(modules = arrayOf(TestMoviesModule::class))
+    @FragmentScope
+    abstract fun moviesHomeFragment(): MoviesHomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun moviesHomeActivity(): MoviesHomeActivity
 
     @ContributesAndroidInjector(modules = arrayOf(TestMoviesModule::class))
     @FragmentScope
@@ -27,9 +27,9 @@ abstract class TestBuilderModule {
     @ContributesAndroidInjector
     abstract fun moviesListActivity(): MoviesListActivity
 
-//    @ContributesAndroidInjector
-//    abstract fun moviesDiscoverActivity(): MoviesDiscoverActivity
-//
-//    @ContributesAndroidInjector
-//    abstract fun moviesSearchActivity(): MoviesSearchActivity
+    @ContributesAndroidInjector
+    abstract fun moviesDiscoverActivity(): MoviesDiscoverActivity
+
+    @ContributesAndroidInjector
+    abstract fun moviesSearchActivity(): MoviesSearchActivity
 }

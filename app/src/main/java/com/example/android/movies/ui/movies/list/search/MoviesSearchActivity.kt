@@ -66,7 +66,7 @@ class MoviesSearchActivity: NavigationIconActivity(), HasFragmentInjector {
         val ft = fragmentManager.beginTransaction()
 //        ft.setCustomAnimations(
 //                R.anim.abc_fade_in, R.anim.abc_fade_out)
-        ft.replace(R.id.search_content,fragment)
+        ft.replace(R.id.search_content,fragment,MoviesListFragment::class.java.name)
         ft.commit()
     }
 

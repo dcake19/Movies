@@ -1,5 +1,7 @@
 package com.example.android.movies.di
 
+import android.graphics.Color
+import com.example.android.movies.R
 import com.example.android.movies.ui.movies.MoviesContract
 import dagger.Module
 import dagger.Provides
@@ -24,7 +26,8 @@ class TestMoviesModule {
                     .thenReturn(i.toString() + " votes")
             val va = year[2] + "." + year[3]
             Mockito.`when`(presenter.getVoteAverage(i)).thenReturn(va)
-
+            Mockito.`when`(presenter.getRatingBackgroundColor(i)).thenReturn(Color.parseColor("#ffFFAB00"))
+            Mockito.`when`(presenter.getRatingTextColor(i)).thenReturn(Color.parseColor("#ff000000"))
         }
 
         return presenter

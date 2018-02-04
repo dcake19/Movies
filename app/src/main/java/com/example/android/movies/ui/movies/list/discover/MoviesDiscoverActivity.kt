@@ -109,7 +109,7 @@ class MoviesDiscoverActivity : NavigationIconActivity(),DiscoverGenres , HasFrag
 //        ft.setCustomAnimations(
 //                R.anim.abc_fade_in, R.anim.abc_fade_out)
         ft.replace(R.id.movies_discover_content,fragment,
-                MoviesListFragment::class.java.canonicalName)
+                MoviesListFragment::class.java.name)
         ft.commit()
     }
 
