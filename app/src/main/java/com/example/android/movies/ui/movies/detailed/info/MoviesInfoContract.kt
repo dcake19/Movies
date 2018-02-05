@@ -15,6 +15,7 @@ interface MoviesInfoContract {
     }
 
     interface Presenter{
+        fun addView(view:View)
         fun downloadMovieInfo(id:Int)
     }
 }

@@ -1,5 +1,6 @@
 package com.example.android.movies.ui.movies.detailed.info
 
+import android.view.View
 import com.example.android.movies.BuildConfig
 import com.example.android.movies.R
 import com.example.android.movies.RxSchedulerProvider
@@ -9,14 +10,20 @@ import com.example.android.movies.util.TextUtil
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 
-class MoviesInfoPresenter(val interactor: MoviesInfoInteractor,
-                          val rxSchedulerProvider: RxSchedulerProvider,
-                          val view: MoviesInfoContract.View)
+class MoviesInfoPresenter @Inject constructor(val interactor: MoviesInfoInteractor,
+                          val rxSchedulerProvider: RxSchedulerProvider)
+                         // val view: MoviesInfoContract.View)
     : MoviesInfoContract.Presenter {
 
     private lateinit var movieInfo:MovieInfo
+    lateinit var view:MoviesInfoContract.View
+
+    override fun addView(view: MoviesInfoContract.View) {
+        this.view = view
+    }
 
     override fun downloadMovieInfo(id: Int) {
         val observable = interactor.getMovieInfo(id.toString(),BuildConfig.TMDB_API_KEY)

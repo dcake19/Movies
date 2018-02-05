@@ -2,6 +2,7 @@ package com.example.android.movies.ui.people.list
 
 import android.os.Bundle
 import android.app.Fragment
+import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import com.example.android.movies.R
 //import com.example.android.movies.di.people.list.DaggerPeopleListComponent
 import com.example.android.movies.ui.EndlessRecyclerViewScrollListener
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.people_list_fragment.*
 import javax.inject.Inject
 
@@ -17,7 +19,13 @@ import javax.inject.Inject
 class PeopleListFragment: Fragment(), PeopleListContract.View {
 
     @Inject lateinit var presenter: PeopleListContract.Presenter
-    @Inject lateinit var adapter: PeopleListAdapter
+   // @Inject
+    lateinit var adapter: PeopleListAdapter
+
+    override fun onAttach(context: Context?) {
+        AndroidInjection.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -26,7 +34,8 @@ class PeopleListFragment: Fragment(), PeopleListContract.View {
 //                .appComponent(app.component)
 //                .peopleListModule(PeopleListModule(this))
 //                .build().inject(this)
-
+        presenter.addView(this)
+        adapter = PeopleListAdapter(presenter)
         return inflater!!.inflate(R.layout.people_list_fragment,container,false)
     }
 

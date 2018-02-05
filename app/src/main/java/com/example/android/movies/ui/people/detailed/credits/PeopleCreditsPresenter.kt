@@ -9,10 +9,11 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 
-class PeopleCreditsPresenter(val interactor:PeopleCreditsInteractor,
-                             val rxSchedulerProvider: RxSchedulerProvider)
+class PeopleCreditsPresenter @Inject constructor(val interactor:PeopleCreditsInteractor,
+                                                 val rxSchedulerProvider: RxSchedulerProvider)
     : PeopleCreditsContract.Presenter {
 
     lateinit var view: PeopleCreditsContract.View

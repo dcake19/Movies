@@ -11,15 +11,21 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-
-class PeopleListPresenter(val interactor:PeopleListInteractor,
-                          val rxSchedulerProvider: RxSchedulerProvider,
-                          val view:PeopleListContract.View)
+class PeopleListPresenter @Inject constructor(
+        val interactor:PeopleListInteractor,
+        val rxSchedulerProvider: RxSchedulerProvider)
+                         // val view:PeopleListContract.View)
     : PeopleListContract.Presenter {
 
+    lateinit var view:PeopleListContract.View
     private lateinit var personResults:PersonResults
     private var query = ""
+
+    override fun addView(view: PeopleListContract.View) {
+        this.view = view
+    }
 
     override fun downloadPopularPeople() {
        downloadPopularPeople(1)

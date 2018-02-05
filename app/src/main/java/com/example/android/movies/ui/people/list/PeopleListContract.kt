@@ -11,6 +11,7 @@ interface PeopleListContract {
     }
 
     interface Presenter{
+        fun addView(view:View)
         fun downloadPopularPeople()
         fun searchPeople(query:String)
         fun downloadPeopleNextPage()

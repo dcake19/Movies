@@ -5,20 +5,26 @@ import com.example.android.movies.api.MoviesApi
 import com.example.android.movies.di.ActivityScope
 import com.example.android.movies.di.FragmentScope
 import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsContract
+import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsFragment
 import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsInteractor
 import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsPresenter
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.android.ContributesAndroidInjector
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+@Module
+abstract class MovieDetailedModule {
 
-//@Module
-class MovieDetailedModule {
+    @FragmentScope
+    @ContributesAndroidInjector
+    abstract fun creditsFragment():MovieCreditsFragment
 
-    //@Binds abstract fun bindPresenter(presenter: MovieCreditsPresenter):
+    @ActivityScope
+    @Binds abstract fun bindPresenter(presenter: MovieCreditsPresenter): MovieCreditsContract.Presenter
 
 
 //    @Provides

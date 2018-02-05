@@ -6,14 +6,18 @@ import com.example.android.movies.di.FragmentScope
 import com.example.android.movies.ui.movies.detailed.info.MoviesInfoContract
 import com.example.android.movies.ui.movies.detailed.info.MoviesInfoInteractor
 import com.example.android.movies.ui.movies.detailed.info.MoviesInfoPresenter
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-//@Module
-class MoviesInfoModule(val view: MoviesInfoContract.View){
+@Module
+abstract class MoviesInfoModule{//val view: MoviesInfoContract.View){
+
+    @Binds
+    abstract fun bindPresenter(moviesInfoPresenter: MoviesInfoPresenter):MoviesInfoContract.Presenter
 
 //    @Provides
 //    @FragmentScope

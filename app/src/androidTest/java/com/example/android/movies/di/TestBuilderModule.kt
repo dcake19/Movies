@@ -7,6 +7,8 @@ import com.example.android.movies.ui.movies.list.MoviesListActivity
 import com.example.android.movies.ui.movies.list.MoviesListFragment
 import com.example.android.movies.ui.movies.list.discover.MoviesDiscoverActivity
 import com.example.android.movies.ui.movies.list.search.MoviesSearchActivity
+import com.example.android.movies.ui.people.list.PeopleListActivity
+import com.example.android.movies.ui.people.list.PeopleListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -32,4 +34,11 @@ abstract class TestBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun moviesSearchActivity(): MoviesSearchActivity
+
+    @ContributesAndroidInjector(modules = arrayOf(TestPeopleListModule::class))
+    @FragmentScope
+    abstract fun peopleListFragment(): PeopleListFragment
+
+    @ContributesAndroidInjector
+    abstract fun peopleListActivity(): PeopleListActivity
 }

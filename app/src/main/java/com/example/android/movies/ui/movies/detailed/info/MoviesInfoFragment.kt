@@ -3,6 +3,7 @@ package com.example.android.movies.ui.movies.detailed.info
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.app.Fragment
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,13 +14,20 @@ import com.example.android.movies.App
 //import com.example.android.movies.di.movies.home.MoviesHomeModule
 import com.example.android.movies.loadImage
 import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.movie_details_info_fragment.*
 import javax.inject.Inject
 
 
 class MoviesInfoFragment : Fragment(), MoviesInfoContract.View{
 
-    @Inject lateinit var presenter: MoviesInfoContract.Presenter
+    @Inject
+    lateinit var presenter: MoviesInfoContract.Presenter
+
+    override fun onAttach(context: Context?) {
+        AndroidInjection.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -30,7 +38,7 @@ class MoviesInfoFragment : Fragment(), MoviesInfoContract.View{
 //                .build()
 
         //component.inject(this)
-
+        presenter.addView(this)
         return inflater!!.inflate(R.layout.movie_details_info_fragment,container,false)
     }
 

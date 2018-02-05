@@ -13,13 +13,18 @@ import com.example.android.movies.ui.BaseNavigationActivity
 import com.example.android.movies.ui.movies.CreditsType
 import com.example.android.movies.ui.people.detailed.credits.PeopleCreditsFragment
 import com.example.android.movies.ui.people.detailed.info.PeopleInfoFragment
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasFragmentInjector
 
 import kotlinx.android.synthetic.main.people_detailed_activity.*
 import kotlinx.android.synthetic.main.people_detailed_appbar.*
+import javax.inject.Inject
 
-class PeopleDetailedActivity : BaseNavigationActivity() {
+class PeopleDetailedActivity : BaseNavigationActivity()  , HasFragmentInjector {
 
-    lateinit var component: PeopleDetailedComponent
+    //lateinit var component: PeopleDetailedComponent
 
     companion object {
         const val PERSON_ID = "person_id"
@@ -33,7 +38,12 @@ class PeopleDetailedActivity : BaseNavigationActivity() {
         }
     }
 
+    @Inject
+    lateinit var fragmentDispatchingAndroidInjector:
+            DispatchingAndroidInjector<Fragment>
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
 //        val app : App = application as App
@@ -115,4 +125,9 @@ class PeopleDetailedActivity : BaseNavigationActivity() {
     override fun getDrawerLayout(): DrawerLayout {
         return people_details_drawer_layout
     }
+
+
+    override fun fragmentInjector(): AndroidInjector<Fragment>
+            = fragmentDispatchingAndroidInjector
+
 }

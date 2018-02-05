@@ -1,5 +1,6 @@
 package com.example.android.movies.ui.people.detailed.info
 
+import android.view.View
 import com.example.android.movies.BuildConfig
 import com.example.android.movies.R
 import com.example.android.movies.RxSchedulerProvider
@@ -9,14 +10,20 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 
-class PeopleInfoPresenter(val interactor: PeopleInfoInteractor,
-                          val rxSchedulerProvider: RxSchedulerProvider,
-                          val view: PeopleInfoContract.View)
+class PeopleInfoPresenter @Inject constructor(val interactor: PeopleInfoInteractor,
+                                             val rxSchedulerProvider: RxSchedulerProvider)
+                                             //val view: PeopleInfoContract.View)
     : PeopleInfoContract.Presenter {
 
+    private lateinit var view: PeopleInfoContract.View
     private lateinit var personInfo:PersonInfo
+
+    override fun addView(view: PeopleInfoContract.View) {
+        this.view = view
+    }
 
     override fun downloadPersonInfo(id: Int) {
 

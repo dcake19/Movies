@@ -8,9 +8,10 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class MovieCreditsPresenter(val interactor: MovieCreditsInteractor,
-                            val rxSchedulerProvider: RxSchedulerProvider)
+class MovieCreditsPresenter @Inject constructor(val interactor: MovieCreditsInteractor,
+                                                val rxSchedulerProvider: RxSchedulerProvider)
     : MovieCreditsContract.Presenter {
 
     lateinit var view: MovieCreditsContract.View
@@ -19,6 +20,7 @@ class MovieCreditsPresenter(val interactor: MovieCreditsInteractor,
 
     override fun changeView(view: MovieCreditsContract.View) {
         this.view = view
+        Log.v("MovieCreditsPresenter",hashCode().toString())
     }
 
     override fun downloadCredits(id: Int) {
@@ -30,6 +32,7 @@ class MovieCreditsPresenter(val interactor: MovieCreditsInteractor,
                     .observeOn(rxSchedulerProvider.observeOn())
                     .subscribe(object : Observer<MovieCredits> {
                         override fun onNext(t: MovieCredits) {
+                            downloadComplete = true
                             movieCredits = t
                             view.display(movieCredits.cast.size, movieCredits.crew.size)
                         }
@@ -39,7 +42,7 @@ class MovieCreditsPresenter(val interactor: MovieCreditsInteractor,
                         }
 
                         override fun onComplete() {
-                            downloadComplete = true
+
                         }
 
                         override fun onSubscribe(d: Disposable?) {

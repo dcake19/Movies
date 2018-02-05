@@ -1,5 +1,6 @@
 package com.example.android.movies.ui.people.list
 
+import android.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
@@ -7,12 +8,22 @@ import android.support.v7.widget.Toolbar
 import android.widget.SearchView
 import com.example.android.movies.R
 import com.example.android.movies.ui.NavigationIconActivity
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasFragmentInjector
 import kotlinx.android.synthetic.main.people_list_activity.*
 import kotlinx.android.synthetic.main.people_list_appbar.*
+import javax.inject.Inject
 
-class PeopleListActivity : NavigationIconActivity() {
+class PeopleListActivity : NavigationIconActivity(), HasFragmentInjector {
+
+    @Inject
+    lateinit var fragmentDispatchingAndroidInjector:
+            DispatchingAndroidInjector<Fragment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         if (savedInstanceState == null)
@@ -20,9 +31,9 @@ class PeopleListActivity : NavigationIconActivity() {
 
         search.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if(fragmentManager.findFragmentByTag(PeopleListFragment::class.java.canonicalName)!=null){
+                if(fragmentManager.findFragmentByTag(PeopleListFragment::class.java.name)!=null){
                     val fragment = fragmentManager
-                            .findFragmentByTag(PeopleListFragment::class.java.canonicalName)
+                            .findFragmentByTag(PeopleListFragment::class.java.name)
                             as PeopleListFragment
                     fragment.presenter.searchPeople(query ?: "")
                 }
@@ -45,7 +56,7 @@ class PeopleListActivity : NavigationIconActivity() {
 //        ft.setCustomAnimations(
 //                R.anim.abc_fade_in, R.anim.abc_fade_out)
         ft.replace(R.id.people_list_content,PeopleListFragment(),
-                PeopleListFragment::class.java.canonicalName)
+                PeopleListFragment::class.java.name)
         ft.commit()
     }
 
@@ -65,4 +76,7 @@ class PeopleListActivity : NavigationIconActivity() {
     override fun getDrawerLayout(): DrawerLayout {
         return people_list_drawer_layout
     }
+
+    override fun fragmentInjector(): AndroidInjector<Fragment>
+            = fragmentDispatchingAndroidInjector
 }
