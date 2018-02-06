@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import com.example.android.movies.R
 import com.example.android.movies.di.ActivityScope
 
-import com.example.android.movies.di.people.detailed.credits.PeopleCreditsModule
 import com.example.android.movies.ui.people.detailed.PeopleDetailedActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.people_detailed_cast_fragment.*

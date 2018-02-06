@@ -8,7 +8,6 @@ import android.app.Fragment
 import android.support.v4.widget.DrawerLayout
 import com.example.android.movies.R
 //import com.example.android.movies.di.movies.detailed.DaggerMovieDetailedComponent
-import com.example.android.movies.di.movies.detailed.MovieDetailedComponent
 import com.example.android.movies.ui.BaseNavigationActivity
 import com.example.android.movies.ui.movies.CreditsType
 import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsFragment

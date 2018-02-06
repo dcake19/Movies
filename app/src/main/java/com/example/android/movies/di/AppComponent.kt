@@ -5,12 +5,6 @@ import dagger.Component
 import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
-//@Singleton
-//@Component(modules = arrayOf(MoviesApiModule::class))
-//interface AppComponent {
-//    fun getMoviesApi(): MoviesApi
-//}
-
 @Singleton
 @Component(modules = arrayOf(
         AndroidInjectionModule::class,

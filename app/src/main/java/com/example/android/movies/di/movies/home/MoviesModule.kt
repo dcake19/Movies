@@ -16,42 +16,8 @@ import io.reactivex.schedulers.Schedulers
 
 @Module
 abstract class MoviesModule {
-//abstract class MoviesHomeModule(val view: MoviesContract.View, val type:Int) {
-    //
+
     @Binds
     abstract fun bindPresenter(presenter:MoviesPresenter):MoviesContract.Presenter
-
-//    @Provides
-//    @FragmentScope
-//    fun provideMoviesPresenter(interactor: MoviesInteractor,rxSchedulerProvider: RxSchedulerProvider): MoviesContract.Presenter{
-//        return MoviesPresenter(interactor, rxSchedulerProvider,view, type)
-//    }
-
-//    @Provides
-//    @FragmentScope
-//    fun provideMoviesInteractor(moviesApi: MoviesApi): MoviesInteractor {
-//        return MoviesInteractor(moviesApi)
-//    }
-
-//    @Provides
-//    @FragmentScope
-//    fun provideRxSchedulerProvider(): RxSchedulerProvider {
-//        return object : RxSchedulerProvider{
-//            override fun subscribeOn(): Scheduler {
-//                return Schedulers.io()
-//            }
-//            override fun observeOn(): Scheduler {
-//                return AndroidSchedulers.mainThread()
-//            }
-//
-//        }
-//    }
-
-//    @Provides
-//    @FragmentScope
-//    fun provideMoviesAdapter(presenter: MoviesContract.Presenter): MoviesHomeAdapter {
-//        return MoviesHomeAdapter(presenter)
-//    }
-
 
 }

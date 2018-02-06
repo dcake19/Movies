@@ -21,38 +21,4 @@ abstract class PeopleListModule() {
     @Binds
     abstract fun bindPresenter(presenter: PeopleListPresenter):PeopleListContract.Presenter
 
-//    @Provides
-//    @FragmentScope
-//    fun provideMoviesPresenter(interactor: PeopleListInteractor,
-//                               rxSchedulerProvider: RxSchedulerProvider)
-//            :PeopleListContract.Presenter{
-//        return PeopleListPresenter(interactor,rxSchedulerProvider,view)
-//    }
-//
-//    @Provides
-//    @FragmentScope
-//    fun provideMoviesInteractor(moviesApi: MoviesApi): PeopleListInteractor {
-//        return PeopleListInteractor(moviesApi)
-//    }
-//
-//    @Provides
-//    @FragmentScope
-//    fun provideRxSchedulerProvider(): RxSchedulerProvider {
-//        return object : RxSchedulerProvider {
-//            override fun subscribeOn(): Scheduler {
-//                return Schedulers.io()
-//            }
-//            override fun observeOn(): Scheduler {
-//                return AndroidSchedulers.mainThread()
-//            }
-//        }
-//    }
-//
-//    @Provides
-//    @FragmentScope
-//    fun provideMoviesAdapter(presenter: PeopleListContract.Presenter): PeopleListAdapter {
-//        return PeopleListAdapter(presenter)
-//    }
-
-
 }

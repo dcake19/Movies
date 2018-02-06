@@ -26,31 +26,4 @@ abstract class PeopleDetailedModule {
     @ActivityScope
     @Binds abstract fun bindPresenter(presenter: PeopleCreditsPresenter): PeopleCreditsContract.Presenter
 
-//    @Provides
-//    @ActivityScope
-//    fun providePeopleCreditsPresenter(interactor: PeopleCreditsInteractor,
-//                                      rxSchedulerProvider: RxSchedulerProvider)
-//            : PeopleCreditsContract.Presenter{
-//        return PeopleCreditsPresenter(interactor,rxSchedulerProvider)
-//    }
-//
-//    @Provides
-//    @ActivityScope
-//    fun provideMovieCreditsInteractor(moviesApi: MoviesApi): PeopleCreditsInteractor {
-//        return PeopleCreditsInteractor(moviesApi)
-//    }
-//
-//    @Provides
-//    @ActivityScope
-//    fun provideRxSchedulerProvider(): RxSchedulerProvider {
-//        return object : RxSchedulerProvider {
-//            override fun subscribeOn(): Scheduler {
-//                return Schedulers.io()
-//            }
-//            override fun observeOn(): Scheduler {
-//                return AndroidSchedulers.mainThread()
-//            }
-//        }
-//    }
-
 }

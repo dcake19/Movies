@@ -26,32 +26,4 @@ abstract class MovieDetailedModule {
     @ActivityScope
     @Binds abstract fun bindPresenter(presenter: MovieCreditsPresenter): MovieCreditsContract.Presenter
 
-
-//    @Provides
-//    @ActivityScope
-//    fun provideMovieCreditsPresenter(interactor: MovieCreditsInteractor,
-//                                     rxSchedulerProvider: RxSchedulerProvider)
-//            : MovieCreditsContract.Presenter{
-//        return MovieCreditsPresenter(interactor,rxSchedulerProvider)
-//    }
-//
-//    @Provides
-//    @ActivityScope
-//    fun provideMovieCreditsInteractor(moviesApi: MoviesApi): MovieCreditsInteractor {
-//        return MovieCreditsInteractor(moviesApi)
-//    }
-//
-//    @Provides
-//    @ActivityScope
-//    fun provideRxSchedulerProvider(): RxSchedulerProvider {
-//        return object : RxSchedulerProvider {
-//            override fun subscribeOn(): Scheduler {
-//                return Schedulers.io()
-//            }
-//            override fun observeOn(): Scheduler {
-//                return AndroidSchedulers.mainThread()
-//            }
-//        }
-//    }
-
 }

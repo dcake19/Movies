@@ -20,30 +20,4 @@ abstract class PeopleInfoModule(val view: PeopleInfoContract.View) {
     @Binds
     abstract fun bindPresenter(moviesInfoPresenter: PeopleInfoPresenter):PeopleInfoContract.Presenter
 
-//    @Provides
-//    @FragmentScope
-//    fun providePeopleInfoPresenter(interactor: PeopleInfoInteractor,
-//                                   rxSchedulerProvider: RxSchedulerProvider)
-//            : PeopleInfoContract.Presenter{
-//        return PeopleInfoPresenter(interactor,rxSchedulerProvider,view)
-//    }
-//
-//    @Provides
-//    @FragmentScope
-//    fun providePeopleInfoInteractor(moviesApi: MoviesApi): PeopleInfoInteractor{
-//        return PeopleInfoInteractor(moviesApi)
-//    }
-//
-//    @Provides
-//    @FragmentScope
-//    fun provideRxSchedulerProvider(): RxSchedulerProvider {
-//        return object : RxSchedulerProvider {
-//            override fun subscribeOn(): Scheduler {
-//                return Schedulers.io()
-//            }
-//            override fun observeOn(): Scheduler {
-//                return AndroidSchedulers.mainThread()
-//            }
-//        }
-//    }
 }
