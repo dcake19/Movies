@@ -60,7 +60,7 @@ class MoviesHomeFragment :Fragment(), MoviesContract.View {
         if (recycler_movies.adapter == null)
             recycler_movies.adapter = adapter
 
-        button_see_all.setOnClickListener{
+        text_see_all.setOnClickListener{
             startActivity(MoviesListActivity.getIntent(context,type))}
 
     }

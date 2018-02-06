@@ -9,10 +9,6 @@ fun ImageView.loadImage(startUrl:String, imageUrl: String) {
     if (TextUtils.isEmpty(imageUrl)) {
         Picasso.with(context).load(R.mipmap.ic_launcher).into(this)
     } else {
-        Picasso.with(context).load(startUrl+ imageUrl).into(this)
+        Picasso.with(context).load(startUrl + imageUrl).into(this)
     }
 }
-
-
-//val Fragment.app: App
-//    get() = activity.application as App

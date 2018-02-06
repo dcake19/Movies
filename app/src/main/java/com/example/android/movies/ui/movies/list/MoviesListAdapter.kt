@@ -1,6 +1,8 @@
 package com.example.android.movies.ui.movies.list
 
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.GradientDrawable
+import android.support.v7.graphics.Palette
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,7 @@ import com.example.android.movies.R
 import com.example.android.movies.loadImage
 import com.example.android.movies.ui.movies.MoviesContract
 import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
+import com.example.android.movies.util.ColorUtil
 import kotlinx.android.synthetic.main.movies_list_item.view.*
 
 class MoviesListAdapter(val presenter: MoviesContract.Presenter, var size:Int = 0)
@@ -54,10 +57,20 @@ class MoviesListAdapter(val presenter: MoviesContract.Presenter, var size:Int = 
             voteAverageCircle.setColor(ratingBackgroundColor)
             text_user_score.setTextColor(ratingTextColor)
             layout_movies_item.setOnClickListener {
-                context.startActivity(
-                        MovieDetailsActivity.getIntent(context,
-                                presenter.getMovieId(adapterPosition),
-                                presenter.getTitle(adapterPosition)))
+
+                Palette.from((image_poster.drawable as BitmapDrawable).bitmap).generate { palette ->
+                    context.startActivity(
+                            MovieDetailsActivity.getIntent(context,
+                                    presenter.getMovieId(adapterPosition),
+                                    presenter.getTitle(adapterPosition),
+                                    ColorUtil.getDarkColor(palette),
+                                    ColorUtil.getLightColor(palette)))
+                }
+//
+//                context.startActivity(
+//                        MovieDetailsActivity.getIntent(context,
+//                                presenter.getMovieId(adapterPosition),
+//                                presenter.getTitle(adapterPosition)))
             }
         }
 

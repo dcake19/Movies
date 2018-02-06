@@ -1,7 +1,9 @@
 package com.example.android.movies.util
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v4.content.ContextCompat
+import android.support.v7.graphics.Palette
 import com.example.android.movies.R
 
 
@@ -37,6 +39,28 @@ object ColorUtil {
             color = R.color.colorWhite
 
         return ContextCompat.getColor(context, color)
+    }
+
+    fun getLightColor(palette: Palette):Int{
+        val psLightMuted = palette.lightMutedSwatch?:Palette.Swatch(Color.YELLOW,1)
+        val psLightVibrant = palette.lightVibrantSwatch?:Palette.Swatch(Color.YELLOW,1)
+        val colorLight:Int
+        if(psLightVibrant.population > 1)
+            colorLight = psLightVibrant.rgb
+        else
+            colorLight = psLightMuted.rgb
+        return colorLight
+    }
+
+    fun getDarkColor(palette: Palette):Int{
+        val psDarkMuted = palette.darkMutedSwatch?:Palette.Swatch(Color.BLACK,1)
+        val psDarkVibrant = palette.darkVibrantSwatch?:Palette.Swatch(Color.BLACK,1)
+        val colorDark:Int
+        if(psDarkMuted.population >= psDarkVibrant.population)
+            colorDark = psDarkMuted.rgb
+        else
+            colorDark = psDarkVibrant.rgb
+        return colorDark
     }
 
 }

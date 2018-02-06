@@ -27,11 +27,23 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
     companion object {
         const val MOVIE_ID = "movie_id"
         const val MOVIE_TITLE = "movie_title"
+        const val MOVIE_BACKGROUND_COLOR = "movie_background_color"
+        const val MOVIE_INDICATOR_COLOR = "movie_indicator_color"
 
+        fun getIntent(context: Context, id:Int, title:String,
+                      backgroundColor:Int, indicatorColor:Int): Intent {
+            val intent = Intent(context,MovieDetailsActivity::class.java)
+            intent.putExtra(MOVIE_ID,id)
+            intent.putExtra(MOVIE_TITLE,title)
+            intent.putExtra(MOVIE_BACKGROUND_COLOR,backgroundColor)
+            intent.putExtra(MOVIE_INDICATOR_COLOR,indicatorColor)
+            return intent
+        }
         fun getIntent(context: Context, id:Int, title:String): Intent {
             val intent = Intent(context,MovieDetailsActivity::class.java)
             intent.putExtra(MOVIE_ID,id)
             intent.putExtra(MOVIE_TITLE,title)
+
             return intent
         }
     }
@@ -44,14 +56,10 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
-//        val app : App = application as App
-//        component = DaggerMovieDetailedComponent.builder()
-//                .appComponent(app.component)
-//                .movieDetailedModule(MovieDetailedModule())
-//                .build()
-
         movies_details_toolbar.title = intent.getStringExtra(MOVIE_TITLE)
-
+        movies_details_toolbar.setBackgroundColor(intent.getIntExtra(MOVIE_BACKGROUND_COLOR,0))
+        tabs.setBackgroundColor(intent.getIntExtra(MOVIE_BACKGROUND_COLOR,0))
+        tabs.setSelectedTabIndicatorColor(intent.getIntExtra(MOVIE_INDICATOR_COLOR,0))
         setupTabs()
         setFragment(0)
     }
@@ -73,7 +81,6 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
     }
 
     private fun setFragment(position:Int){
-
         val ft = fragmentManager.beginTransaction()
 //        ft.setCustomAnimations(
 //                R.anim.abc_fade_in, R.anim.abc_fade_out)
