@@ -1,5 +1,6 @@
 package com.example.android.movies.ui.movies.list
 
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.GradientDrawable
 import android.support.v7.graphics.Palette
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.android.movies.R
 import com.example.android.movies.loadImage
+import com.example.android.movies.loadImageAndSetBackgroundColor
 import com.example.android.movies.ui.movies.MoviesContract
 import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
 import com.example.android.movies.util.ColorUtil
@@ -49,28 +51,38 @@ class MoviesListAdapter(val presenter: MoviesContract.Presenter, var size:Int = 
                     ratingBackgroundColor:Int,ratingTextColor:Int) = with(itemView){
 
             text_movie_title.text = title
-            image_poster.loadImage(context.getString(R.string.image_start_url),posterPath)
+            image_poster.loadImageAndSetBackgroundColor(context.getString(R.string.image_start_url),posterPath,layout_movies_item)
+
+//            Palette.from((image_poster.drawable as BitmapDrawable).bitmap).generate {
+//                palette -> layout_movies_item.setBackgroundColor(ColorUtil.getDarkColor(palette))
+//            }
+
             text_year.text = year
             text_user_score.text = userScore
             text_vote_count.text = voteCount
             val voteAverageCircle = text_user_score.background as GradientDrawable
             voteAverageCircle.setColor(ratingBackgroundColor)
             text_user_score.setTextColor(ratingTextColor)
-            layout_movies_item.setOnClickListener {
 
-                Palette.from((image_poster.drawable as BitmapDrawable).bitmap).generate { palette ->
+            layout_movies_item.setOnClickListener {
+                if (image_poster.drawable==null){
                     context.startActivity(
                             MovieDetailsActivity.getIntent(context,
                                     presenter.getMovieId(adapterPosition),
                                     presenter.getTitle(adapterPosition),
-                                    ColorUtil.getDarkColor(palette),
-                                    ColorUtil.getLightColor(palette)))
+                                    Color.BLACK,
+                                    Color.YELLOW))
+                }else {
+                    Palette.from((image_poster.drawable as BitmapDrawable).bitmap).generate { palette ->
+                        context.startActivity(
+                                MovieDetailsActivity.getIntent(context,
+                                        presenter.getMovieId(adapterPosition),
+                                        presenter.getTitle(adapterPosition),
+                                        ColorUtil.getDarkColor(palette),
+                                        ColorUtil.getLightColor(palette)))
+                    }
                 }
 //
-//                context.startActivity(
-//                        MovieDetailsActivity.getIntent(context,
-//                                presenter.getMovieId(adapterPosition),
-//                                presenter.getTitle(adapterPosition)))
             }
         }
 

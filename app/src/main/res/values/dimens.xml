@@ -17,4 +17,7 @@
 
     <dimen name="btn_square_side">48dp</dimen>
     <dimen name="btn_square_margin">2dp</dimen>
+
+    <dimen name="card_elevation">24dp</dimen>
+    <dimen name="card_corner_radius">4dp</dimen>
 </resources>
