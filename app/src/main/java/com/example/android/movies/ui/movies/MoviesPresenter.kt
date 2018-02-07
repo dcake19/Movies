@@ -128,6 +128,8 @@ class MoviesPresenter @Inject constructor(
     }
 
     override fun getVoteAverage(index: Int): String {
+        if (moviesResults.results.get(index).voteAverage>=10)
+            return "10"
         return moviesResults.results.get(index).voteAverage.toString()
     }
 

@@ -34,11 +34,12 @@ class MoviesInfoPresenter @Inject constructor(val interactor: MoviesInfoInteract
 
     private fun saveMovieInfo(mi: MovieInfo){
         movieInfo = mi
+        var voteAverage:String
+
         view.display(movieInfo.overview?:"",
                 movieInfo.posterPath?:"",
                 TextUtil.getYearFromDate(movieInfo.releaseDate),
-                movieInfo.status,
-                movieInfo.voteAverage.toString(),
+                movieInfo.status, getVoteAverageString(),
                 movieInfo.voteCount.toString() + " " + getVoteCountString(),
                 TextUtil.convertMoney(view.getContext().getString(R.string.budget),movieInfo.budget),
                 TextUtil.convertMoney(view.getContext().getString(R.string.revenue),movieInfo.revenue),
@@ -51,6 +52,12 @@ class MoviesInfoPresenter @Inject constructor(val interactor: MoviesInfoInteract
                 //0,0)
                 ColorUtil.getRatingBackgroundColor(view.getContext(),movieInfo.voteAverage),
                 ColorUtil.getTextColor(view.getContext(),movieInfo.voteAverage))
+    }
+
+    private fun getVoteAverageString():String{
+        if (movieInfo.voteAverage>=10)
+            return "10"
+        return movieInfo.voteAverage.toString()
     }
 
     private fun getVoteCountString():String{
