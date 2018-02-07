@@ -70,8 +70,8 @@ class MoviesListAdapter(val presenter: MoviesContract.Presenter, var size:Int = 
                             MovieDetailsActivity.getIntent(context,
                                     presenter.getMovieId(adapterPosition),
                                     presenter.getTitle(adapterPosition),
-                                    Color.BLACK,
-                                    Color.YELLOW))
+                                    Color.BLACK, Color.YELLOW,
+                                    presenter.getBackdropPath(adapterPosition)))
                 }else {
                     Palette.from((image_poster.drawable as BitmapDrawable).bitmap).generate { palette ->
                         context.startActivity(
@@ -79,10 +79,11 @@ class MoviesListAdapter(val presenter: MoviesContract.Presenter, var size:Int = 
                                         presenter.getMovieId(adapterPosition),
                                         presenter.getTitle(adapterPosition),
                                         ColorUtil.getDarkColor(palette),
-                                        ColorUtil.getLightColor(palette)))
+                                        ColorUtil.getLightColor(palette),
+                                        presenter.getBackdropPath(adapterPosition)))
                     }
                 }
-//
+
             }
         }
 

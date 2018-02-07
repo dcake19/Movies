@@ -17,6 +17,7 @@ interface MoviesContract {
         fun search(query:String)
         fun getMovieId(index:Int): Int
         fun getPosterPath(index:Int):String
+        fun getBackdropPath(index:Int):String
         fun getTitle(index: Int): String
         fun getYear(index: Int): String
         fun getVoteCount(index: Int): String

@@ -45,12 +45,6 @@ class PeopleDetailedActivity : BaseNavigationActivity()  , HasFragmentInjector {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
-//        val app : App = application as App
-//        component = DaggerPeopleDetailedComponent.builder()
-//                .appComponent(app.component)
-//                .peopleDetailedModule(PeopleDetailedModule())
-//                .build()
-
         people_details_toolbar.title = intent.getStringExtra(PERSON_NAME)
 
         setupTabs()
@@ -111,6 +105,11 @@ class PeopleDetailedActivity : BaseNavigationActivity()  , HasFragmentInjector {
             ft.addToBackStack(position.toString())
             ft.commit()
         }
+    }
+
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
     }
 
     override fun getLayoutResourceId(): Int {

@@ -51,7 +51,8 @@ class MoviesHomeAdapter(val presenter: MoviesContract.Presenter, var size:Int = 
                                     presenter.getMovieId(adapterPosition),
                                     presenter.getTitle(adapterPosition),
                                     ColorUtil.getDarkColor(palette),
-                                    ColorUtil.getLightColor(palette)))
+                                    ColorUtil.getLightColor(palette),
+                                    presenter.getBackdropPath(adapterPosition)))
                 }
 
 

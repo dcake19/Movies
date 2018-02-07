@@ -110,6 +110,10 @@ class MoviesPresenter @Inject constructor(
         return moviesResults.results.get(index).posterPath?:""
     }
 
+    override fun getBackdropPath(index: Int): String {
+        return moviesResults.results.get(index).backdropPath?:""
+    }
+
     override fun getTitle(index: Int): String {
         return moviesResults.results.get(index).originalTitle
     }

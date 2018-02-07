@@ -63,4 +63,14 @@ object ColorUtil {
         return colorDark
     }
 
+    fun getLighterShade(color:Int):Int{
+        val hsv = FloatArray(3)
+       // var hsv = floatArrayOf()
+        var retColor = color
+        Color.colorToHSV(color, hsv)
+        hsv[2] *= 1.35f
+        retColor = Color.HSVToColor(hsv)
+        return retColor
+    }
+
 }

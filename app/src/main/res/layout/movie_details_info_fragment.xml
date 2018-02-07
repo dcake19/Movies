@@ -9,43 +9,51 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fff"
-        xmlns:tools="http://schemas.android.com/tools">
+        android:layout_height="wrap_content"
+        tools:background="#454545">
 
         <ImageView
             android:id="@+id/image_poster"
             android:layout_width="100dp"
             android:layout_height="125dp"
+            android:layout_margin="@dimen/padding_medium"
             tools:background="@drawable/ic_launcher_background"/>
 
         <TextView
             android:id="@+id/text_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_medium"
             android:layout_toRightOf="@id/image_poster"
+            android:padding="@dimen/padding_small"
+            android:textColor="@color/colorTextLight"
+            android:textSize="@dimen/text_size_small"
             tools:text="2006"/>
 
         <TextView
             android:id="@+id/text_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_medium"
             android:layout_toRightOf="@id/text_year"
+            android:padding="@dimen/padding_small"
+            android:textColor="@color/colorTextLight"
+            android:textSize="@dimen/text_size_small"
             tools:text="Released"/>
 
         <TextView
             android:id="@+id/text_user_score"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:gravity="center"
-            android:layout_toRightOf="@id/image_poster"
             android:layout_below="@id/text_year"
             android:layout_gravity="center_vertical"
+            android:layout_toRightOf="@id/image_poster"
             android:background="@drawable/user_score_circle"
+            android:gravity="center"
             android:textColor="@color/colorTextLight"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_small"
+            android:padding="@dimen/padding_small"
             tools:text="6.9"
             />
 
@@ -53,46 +61,57 @@
             android:id="@+id/text_vote_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/text_user_score"
             android:layout_below="@id/text_year"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_vertical"
+            android:layout_toRightOf="@+id/text_user_score"
             android:paddingLeft="@dimen/padding_large"
+            android:textColor="@color/colorTextLight"
             android:textSize="@dimen/text_size_small"
+            android:padding="@dimen/padding_small"
             tools:text="130 votes"/>
 
         <TextView
             android:id="@+id/text_budget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_toRightOf="@id/image_poster"
             android:layout_below="@id/text_user_score"
             android:layout_gravity="center_vertical"
-            android:textSize="16sp"
+            android:layout_toRightOf="@id/image_poster"
+            android:gravity="center"
+            android:textColor="@color/colorTextLight"
+            android:textSize="@dimen/text_size_small"
+            android:padding="@dimen/padding_small"
             tools:text="Budget: $32m"
             />
+
         <TextView
             android:id="@+id/text_revenue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_toRightOf="@id/image_poster"
             android:layout_below="@id/text_budget"
             android:layout_gravity="center_vertical"
-            android:textSize="16sp"
+            android:layout_toRightOf="@id/image_poster"
+            android:gravity="center"
+            android:textColor="@color/colorTextLight"
+            android:textSize="@dimen/text_size_small"
+            android:padding="@dimen/padding_small"
             tools:text="Revenue: $50m"
             />
+
         <TextView
             android:id="@+id/text_runtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_toRightOf="@id/image_poster"
-            android:layout_below="@id/text_revenue"
             android:layout_gravity="center_vertical"
-
-            android:textSize="16sp"
+            android:layout_below="@+id/image_poster"
+            android:gravity="center"
+            android:textColor="@color/colorTextLight"
+            android:textSize="@dimen/text_size_small"
+            android:paddingTop="@dimen/padding_medium"
+            android:paddingBottom="@dimen/padding_medium"
+            android:paddingLeft="@dimen/padding_large"
+            android:paddingRight="@dimen/padding_large"
             tools:text="120 mins"
             />
 
@@ -100,8 +119,15 @@
             android:id="@+id/text_genres"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/text_runtime"
+            android:paddingTop="@dimen/padding_medium"
+            android:paddingBottom="@dimen/padding_medium"
+            android:paddingLeft="@dimen/padding_large"
+            android:paddingRight="@dimen/padding_large"
+            android:textColor="@color/colorTextLight"
+            android:textSize="@dimen/text_size_small"
 
-            android:layout_below="@id/image_poster"
             tools:text="Genres: Crime, Drama"/>
 
         <TextView
@@ -109,8 +135,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/text_genres"
+            android:paddingTop="@dimen/padding_medium"
+            android:paddingBottom="@dimen/padding_medium"
+            android:paddingLeft="@dimen/padding_large"
+            android:paddingRight="@dimen/padding_large"
+            android:textColor="@color/colorTextLight"
+            android:textSize="@dimen/text_size_small"
             tools:text="Languages: English, German"/>
-<!--
+        <!--
         <TextView
             android:id="@+id/tagline"
             android:layout_width="wrap_content"
@@ -118,12 +150,21 @@
             android:layout_toRightOf="@id/image_poster"
             tools:text="This is the tagline."/>
 -->
+
+
         <TextView
             android:id="@+id/text_movie_overview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/text_languages"
+            android:paddingTop="@dimen/padding_medium"
+            android:paddingBottom="@dimen/padding_medium"
+            android:paddingLeft="@dimen/padding_large"
+            android:paddingRight="@dimen/padding_large"
+            android:textColor="@color/colorTextLight"
+            android:textSize="@dimen/text_size_small"
             tools:text="Movie Overview goes here. This could be very long"/>
+
 
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>
