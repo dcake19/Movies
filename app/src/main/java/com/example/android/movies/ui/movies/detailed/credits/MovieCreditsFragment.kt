@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.app.Fragment
 import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ class MovieCreditsFragment : Fragment(), MovieCreditsContract.View{
 
     companion object {
         const val CREDITS_TYPE = "credits_type"
+
     }
 
     @Inject lateinit var presenter: MovieCreditsContract.Presenter
@@ -34,17 +36,11 @@ class MovieCreditsFragment : Fragment(), MovieCreditsContract.View{
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.v("MovieCreditsFragment","onCreateView")
-      //  val movieDetailed = activity as MovieDetailsActivity
-//        val component = DaggerMovieCreditsComponent.builder()
-//                .movieDetailedComponent(movieDetailed.component)
-//                .movieCreditsModule(MovieCreditsModule(this,arguments.getInt(CREDITS_TYPE)))
-//                .build()
-//
-//        component.inject(this)
         retainInstance = true
 
         presenter.changeView(this)
-        adapter = MovieCreditsAdapter(presenter,arguments.getInt(CREDITS_TYPE))
+        adapter = MovieCreditsAdapter(presenter,arguments.getInt(CREDITS_TYPE),
+                arguments.getInt(MovieDetailsActivity.MOVIE_INDICATOR_COLOR))
         return inflater!!.inflate(R.layout.movie_details_cast_fragment,container,false)
     }
 
@@ -54,8 +50,10 @@ class MovieCreditsFragment : Fragment(), MovieCreditsContract.View{
         super.onViewCreated(view, savedInstanceState)
 
         recycler_credits.apply {
-            val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-            layoutManager = linearLayout
+           // val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+           // layoutManager = linearLayout
+            layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+            isNestedScrollingEnabled = false
         }
 
         if (recycler_credits.adapter == null)

@@ -11,8 +11,8 @@ import kotlinx.android.synthetic.main.movie_details_cast_item.view.*
 import kotlinx.android.synthetic.main.movie_details_cast_title.view.*
 
 
-class MovieCreditsAdapter(val presenter: MovieCreditsContract.Presenter,val creditsType:Int)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class MovieCreditsAdapter(val presenter: MovieCreditsContract.Presenter,val creditsType:Int,
+                          val color:Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     var sizeCast:Int = 0
     var sizeCrew:Int = 0
@@ -51,6 +51,7 @@ class MovieCreditsAdapter(val presenter: MovieCreditsContract.Presenter,val cred
         fun setInfo(name:String,characterOrJob:String,posterPath:String) = with(itemView){
             image_poster.loadImage(context.getString(R.string.image_start_url),posterPath)
             text_name.text = name
+            text_name.setTextColor(color)
             text_character_or_job.text = characterOrJob
 
             layout_movies_item.setOnClickListener {

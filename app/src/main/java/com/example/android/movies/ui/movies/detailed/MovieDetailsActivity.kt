@@ -53,6 +53,8 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
             intent.putExtra(MOVIE_TITLE,title)
             return intent
         }
+
+
     }
 
     @Inject
@@ -64,7 +66,7 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
         super.onCreate(savedInstanceState)
 
         //movies_details_toolbar.title = intent.getStringExtra(MOVIE_TITLE)
-        image_backdrop.loadImage(getString(R.string.image_start_url),intent.getStringExtra(MOVIE_BACKDROP_PATH))
+        image_backdrop.loadImage(getString(R.string.image_start_url780),intent.getStringExtra(MOVIE_BACKDROP_PATH))
         text_title.text = intent.getStringExtra(MOVIE_TITLE)
         //movies_details_toolbar.setBackgroundColor(intent.getIntExtra(MOVIE_BACKGROUND_COLOR,0))
         tabs.setBackgroundColor(intent.getIntExtra(MOVIE_BACKGROUND_COLOR,0))
@@ -115,10 +117,12 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
                 1 -> {
                     fragment = MovieCreditsFragment()
                     bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CAST)
+                    bundle.putInt(MOVIE_INDICATOR_COLOR,intent.getIntExtra(MOVIE_INDICATOR_COLOR,0))
                 }
                 2 -> {
                     fragment = MovieCreditsFragment()
                     bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CREW)
+                    bundle.putInt(MOVIE_INDICATOR_COLOR,intent.getIntExtra(MOVIE_INDICATOR_COLOR,0))
                 }
                 else -> {return}
             }

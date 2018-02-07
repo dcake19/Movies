@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_movies_item"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_gravity="center_horizontal"
+    tools:background="#454545"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image_poster"
-        android:layout_width="60dp"
-        android:layout_height="80dp"
-        tools:background="@drawable/ic_launcher_background"/>
+        android:layout_width="@dimen/circle_image_diameter"
+        android:layout_height="@dimen/circle_image_diameter"
+        android:layout_marginTop="@dimen/padding_small"
+        android:layout_marginLeft="@dimen/padding_large"
+        android:layout_marginRight="@dimen/padding_large"
+        android:layout_gravity="center_horizontal"
+        tools:src="@mipmap/ic_launcher"
+        />
 
     <TextView
         android:id="@+id/text_name"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/name_max_width"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/image_poster"
+        android:textColor="@color/colorAccent"
+        android:padding="@dimen/padding_small"
+        android:gravity="center"
         tools:text="Name"/>
 
     <TextView
         android:id="@+id/text_character_or_job"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/name_max_width"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/image_poster"
-        android:layout_below="@id/text_name"
+        android:textColor="@color/colorTextLight"
+        android:gravity="center"
+        android:paddingRight="@dimen/padding_small"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingBottom="@dimen/padding_small"
         tools:text="Character"/>
 
-</RelativeLayout>
+</LinearLayout>
