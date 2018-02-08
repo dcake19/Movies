@@ -6,13 +6,14 @@
     android:id="@+id/nested_scroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorItemBackgroundDark"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/padding_medium"
-        android:background="@color/colorItemBackgroundDark"
+
         xmlns:tools="http://schemas.android.com/tools">
 
         <ImageView
