@@ -21,6 +21,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="title_details">Details</string>
+    <string name="title_bio">Bio</string>
     <string name="title_cast">Cast</string>
     <string name="title_crew">Crew</string>
 
@@ -68,16 +69,16 @@
     <string name="genre_war">War</string>
     <string name="genre_western">Western</string>
 
-    <string name="genres">Genre(s):</string>
-    <string name="languages">Language(s):</string>
-    <string name="budget">Budget:</string>
-    <string name="revenue">Revenue:</string>
-    <string name="runtime">Runtime: </string>
+    <string name="genres">Genre(s):\u0020</string>
+    <string name="languages">Language(s):\u0020</string>
+    <string name="budget">Budget:\u0020</string>
+    <string name="revenue">Revenue:\u0020</string>
+    <string name="runtime">Runtime:\u0020</string>
     <string name="mins"> mins</string>
     <string name="vote">vote</string>
     <string name="votes">votes</string>
 
-    <string name="born">Born:</string>
+    <string name="born">Born:\u0020</string>
     <string name="_in">in</string>
-    <string name="known_for">Known for:</string>
+    <string name="known_for">Known for:\u0020</string>
 </resources>

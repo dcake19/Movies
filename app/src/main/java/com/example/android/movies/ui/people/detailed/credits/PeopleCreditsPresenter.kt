@@ -85,4 +85,11 @@ class PeopleCreditsPresenter @Inject constructor(val interactor:PeopleCreditsInt
         return personCredits.crew.get(position).posterPath?:""
     }
 
+    override fun getCastMovieBackdropPath(position: Int): String {
+        return personCredits.cast[position].backdropPath?:""
+    }
+
+    override fun getCrewMovieBackdropPath(position: Int): String {
+        return personCredits.crew[position].backdropPath?:""
+    }
 }

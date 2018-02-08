@@ -15,9 +15,11 @@ interface PeopleCreditsContract{
         fun getCastMovieName(position:Int):String
         fun getCharacter(position:Int):String
         fun getCastMoviePosterPath(position:Int):String
+        fun getCastMovieBackdropPath(position: Int):String
         fun getCrewMovieId(position:Int):Int
         fun getCrewMovieName(position:Int):String
         fun getJob(position:Int):String
         fun getCrewMoviePosterPath(position:Int):String
+        fun getCrewMovieBackdropPath(position: Int):String
     }
 }

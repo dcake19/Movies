@@ -11,13 +11,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff"
+        android:padding="@dimen/padding_medium"
+        android:background="@color/colorItemBackgroundDark"
         xmlns:tools="http://schemas.android.com/tools">
 
         <ImageView
             android:id="@+id/image_poster"
-            android:layout_width="100dp"
-            android:layout_height="125dp"
+            android:layout_width="@dimen/list_image_width"
+            android:layout_height="@dimen/list_image_height"
+            android:layout_margin="@dimen/padding_medium"
             tools:background="@drawable/ic_launcher_background"/>
 
         <TextView
@@ -25,6 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/image_poster"
+            android:padding="@dimen/padding_medium"
+            android:textColor="@color/colorTextLight"
+            android:textSize="@dimen/text_size_small"
             tools:text="Born: 16 Oct 1982 in London"/>
 
         <TextView
@@ -32,6 +37,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/image_poster"
+            android:padding="@dimen/padding_small"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/colorTextLight"
             tools:text="Person biography goes here. This could be very long"/>
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

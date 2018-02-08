@@ -16,7 +16,6 @@ import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasFragmentInjector
-
 import kotlinx.android.synthetic.main.people_detailed_activity.*
 import kotlinx.android.synthetic.main.people_detailed_appbar.*
 import javax.inject.Inject
@@ -52,10 +51,10 @@ class PeopleDetailedActivity : BaseNavigationActivity()  , HasFragmentInjector {
     }
 
     fun setupTabs(){
-        tabs.addTab(tabs.newTab().setText("one"),true)
-        tabs.addTab(tabs.newTab().setText("two"))
-        tabs.addTab(tabs.newTab().setText("three"))
-
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_bio)),true)
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_cast)))
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_crew)))
+        tabs.setSelectedTabIndicatorHeight((4*resources.displayMetrics.density).toInt())
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 setFragment(tab.position)
@@ -109,7 +108,7 @@ class PeopleDetailedActivity : BaseNavigationActivity()  , HasFragmentInjector {
 
     override fun onBackPressed() {
         finish()
-        super.onBackPressed()
+      //  super.onBackPressed()
     }
 
     override fun getLayoutResourceId(): Int {

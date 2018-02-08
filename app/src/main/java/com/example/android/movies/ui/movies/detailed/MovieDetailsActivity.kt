@@ -135,7 +135,7 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
 
     override fun onBackPressed() {
         finish()
-        super.onBackPressed()
+       // super.onBackPressed()
     }
 
     override fun getLayoutResourceId(): Int {

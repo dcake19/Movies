@@ -82,7 +82,7 @@ class MoviesCreditPresenterTests {
         assertEquals("character 1",presenter.getCharacter(0))
         assertEquals("character 2",presenter.getCharacter(1))
         assertEquals("character 3",presenter.getCharacter(2))
-        assertEquals("job 1",presenter.getJob(0))
+        assertEquals("job 1, job 3",presenter.getJob(0))
         assertEquals("job 2",presenter.getJob(1))
 
         assertEquals("profilePath1",presenter.getCastPosterPath(0))
@@ -104,6 +104,8 @@ class MoviesCreditPresenterTests {
                 4,"job 1","name 4","profilePath4"))
         crew.add(Crew("202","department 2",null,
                 5,"job 2","name 5",null))
+        crew.add(Crew("203","department 1",null,
+                4,"job 3","name 4","profilePath4"))
     }
 
 

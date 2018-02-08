@@ -75,7 +75,8 @@ class MoviesInfoPresenterTests {
         Mockito.`when`(api!!.getMovieInfo("1",BuildConfig.TMDB_API_KEY))
                 .thenReturn(getObservable())
 
-        presenter = MoviesInfoPresenter(MoviesInfoInteractor(api!!),rxSchedulerProvider,view!!)
+        presenter = MoviesInfoPresenter(MoviesInfoInteractor(api!!),rxSchedulerProvider)
+        presenter.addView(view!!)
     }
 
     @Test
@@ -114,12 +115,12 @@ class MoviesInfoPresenterTests {
         `when`(view!!.getContext()).thenReturn(context)
         `when`(context!!.getString(R.string.vote)).thenReturn("vote")
         `when`(context!!.getString(R.string.votes)).thenReturn("votes")
-        `when`(context!!.getString(R.string.budget)).thenReturn("Budget:")
-        `when`(context!!.getString(R.string.revenue)).thenReturn("Revenue:")
-        `when`(context!!.getString(R.string.runtime)).thenReturn("Runtime:")
+        `when`(context!!.getString(R.string.budget)).thenReturn("Budget: ")
+        `when`(context!!.getString(R.string.revenue)).thenReturn("Revenue: ")
+        `when`(context!!.getString(R.string.runtime)).thenReturn("Runtime: ")
         `when`(context!!.getString(R.string.mins)).thenReturn("mins")
-        `when`(context!!.getString(R.string.genres)).thenReturn("Genre(s):")
-        `when`(context!!.getString(R.string.languages)).thenReturn("Language(s):")
+        `when`(context!!.getString(R.string.genres)).thenReturn("Genre(s): ")
+        `when`(context!!.getString(R.string.languages)).thenReturn("Language(s): ")
 
     }
 }

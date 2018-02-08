@@ -57,7 +57,8 @@ class PeopleInfoPresenterTests {
         Mockito.`when`(api!!.getPersonInfo("1", BuildConfig.TMDB_API_KEY))
                 .thenReturn(getObservable())
 
-        presenter = PeopleInfoPresenter(PeopleInfoInteractor(api!!),rxSchedulerProvider,view!!)
+        presenter = PeopleInfoPresenter(PeopleInfoInteractor(api!!),rxSchedulerProvider)
+        presenter.addView(view!!)
     }
 
     @Test

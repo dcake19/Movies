@@ -34,6 +34,7 @@ fun ImageView.loadImageAndSetBackgroundColor(startUrl:String, imageUrl: String,l
             override fun onError() {
             }
         }
+
         Picasso.with(context).load(startUrl + imageUrl).into(this,callback)
     }
 }

@@ -61,7 +61,8 @@ class MoviesPresenterTests {
             }
         }
 
-        presenter = MoviesPresenter(interactor,rxSchedulerProvider,view!!, MoviesDownloadTypes.NOW_PLAYING)
+        presenter = MoviesPresenter(interactor,rxSchedulerProvider)
+        presenter.addView(view!!, MoviesDownloadTypes.NOW_PLAYING)
         Mockito.`when`(api.getNowPlayingResults(BuildConfig.TMDB_API_KEY,"1"))
                 .thenReturn(getObservable())
         Mockito.`when`(api!!.getNowPlayingResults(BuildConfig.TMDB_API_KEY,"2"))

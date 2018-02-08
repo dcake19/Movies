@@ -54,14 +54,15 @@ class PeopleListPresenterTests {
             }
         }
 
-        presenter = PeopleListPresenter(interactor,rxSchedulerProvider,view!!)
+        presenter = PeopleListPresenter(interactor,rxSchedulerProvider)
+        presenter.addView(view!!)
 
         Mockito.`when`(api.getPopularPeople(BuildConfig.TMDB_API_KEY,"1"))
                 .thenReturn(getObservablePage1())
         Mockito.`when`(api.getPopularPeople(BuildConfig.TMDB_API_KEY,"2"))
                 .thenReturn(getObservablePage2())
         Mockito.`when`(view!!.getContext()).thenReturn(context)
-        Mockito.`when`(context!!.getString(R.string.known_for)).thenReturn("Known for:")
+        Mockito.`when`(context!!.getString(R.string.known_for)).thenReturn("Known for: ")
     }
 
     @Test
