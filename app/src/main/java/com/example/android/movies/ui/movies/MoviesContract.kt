@@ -11,10 +11,11 @@ interface MoviesContract {
 
     interface Presenter{
         fun addView(view:View,type:Int)
-        fun downloadMoviesData()
+        fun downloadMoviesData(page:Int=1)
         fun downloadMoviesDataNextPage()
-        fun downloadDiscoverData(discoverQuery: DiscoverQuery)
-        fun search(query:String)
+        fun downloadDiscoverData(discoverQuery: DiscoverQuery,page:Int=1)
+        fun search(query:String,page:Int=1)
+        fun downloadRelatedMovies(id:Int,page:Int=1)
         fun getMovieId(index:Int): Int
         fun getPosterPath(index:Int):String
         fun getBackdropPath(index:Int):String

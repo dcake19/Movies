@@ -12,6 +12,7 @@ import com.example.android.movies.R
 import com.example.android.movies.ui.EndlessRecyclerViewScrollListener
 import com.example.android.movies.ui.movies.MoviesContract
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
+import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
 import com.example.android.movies.ui.movies.home.MoviesHomeActivity
 import com.example.android.movies.ui.movies.list.search.MoviesSearchActivity
 import dagger.android.AndroidInjection
@@ -30,16 +31,6 @@ class MoviesListFragment : Fragment(), MoviesContract.View {
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //val type = arguments.getInt(MoviesHomeActivity.DOWNLOAD_TYPE_KEY)
-
-    //    val app : App = activity.application as App
-
-//        val component = DaggerMoviesListComponent.builder()
-//                .appComponent(app.component)
-//                .moviesListModule(MoviesListModule(this, type))
-//                .build()
-//
-//        component.inject(this)
         presenter.addView(this, arguments.getInt(MoviesHomeActivity.DOWNLOAD_TYPE_KEY))
         adapter = MoviesListAdapter(presenter)
         return inflater!!.inflate(R.layout.movies_list_fragment,container,false)
@@ -50,6 +41,8 @@ class MoviesListFragment : Fragment(), MoviesContract.View {
 
         if (type == MoviesDownloadTypes.SEARCH)
             presenter.search(arguments.getString(MoviesSearchActivity.SEARCH_QUERY,""))
+        else if(type == MoviesDownloadTypes.RECOMMENDATIONS || type == MoviesDownloadTypes.SIMILAR)
+            presenter.downloadRelatedMovies(arguments.getInt(MovieDetailsActivity.MOVIE_ID))
         else if(type != MoviesDownloadTypes.DISCOVER)
             presenter.downloadMoviesData()
 
@@ -58,7 +51,7 @@ class MoviesListFragment : Fragment(), MoviesContract.View {
         recycler_movies.apply {
             val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
             layoutManager = linearLayout
-
+            isNestedScrollingEnabled = false
         }
 
         class EndlessListener(layout:LinearLayoutManager): EndlessRecyclerViewScrollListener(layout) {

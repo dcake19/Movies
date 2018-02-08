@@ -7,15 +7,18 @@ import com.example.android.movies.ui.movies.home.MoviesHomeAdapter
 import com.example.android.movies.ui.movies.MoviesContract
 import com.example.android.movies.ui.movies.MoviesInteractor
 import com.example.android.movies.ui.movies.MoviesPresenter
+import com.example.android.movies.ui.movies.home.MoviesHomeFragment
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.android.ContributesAndroidInjector
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 @Module
 abstract class MoviesModule {
+
 
     @Binds
     abstract fun bindPresenter(presenter:MoviesPresenter):MoviesContract.Presenter

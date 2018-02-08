@@ -11,8 +11,11 @@ import com.example.android.movies.loadImage
 //import com.example.android.movies.di.movies.detailed.DaggerMovieDetailedComponent
 import com.example.android.movies.ui.BaseNavigationActivity
 import com.example.android.movies.ui.movies.CreditsType
+import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsFragment
 import com.example.android.movies.ui.movies.detailed.info.MoviesInfoFragment
+import com.example.android.movies.ui.movies.list.MoviesListActivity
+import com.example.android.movies.ui.movies.list.MoviesListFragment
 import com.example.android.movies.util.ColorUtil
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -54,7 +57,6 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
             return intent
         }
 
-
     }
 
     @Inject
@@ -80,6 +82,7 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
         tabs.addTab(tabs.newTab().setText(getString(R.string.title_details)),true)
         tabs.addTab(tabs.newTab().setText(getString(R.string.title_cast)))
         tabs.addTab(tabs.newTab().setText(getString(R.string.title_crew)))
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_recommendations)))
         tabs.setSelectedTabIndicatorHeight((4*resources.displayMetrics.density).toInt())
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -98,7 +101,7 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
 //                R.anim.abc_fade_in, R.anim.abc_fade_out)
        // fragmentManager.fragments
         //for (f in fragmentManager.fragments) ft.hide(f)
-        for(i in 0..2){
+        for(i in 0..3){
             if (fragmentManager.findFragmentByTag(i.toString())!=null)
                 ft.hide(fragmentManager.findFragmentByTag(i.toString()))
         }
@@ -123,6 +126,10 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
                     fragment = MovieCreditsFragment()
                     bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CREW)
                     bundle.putInt(MOVIE_INDICATOR_COLOR,intent.getIntExtra(MOVIE_INDICATOR_COLOR,0))
+                }
+                3 ->{
+                    fragment = MoviesListFragment()
+                    bundle.putInt(MoviesListActivity.DOWNLOAD_TYPE_KEY,MoviesDownloadTypes.RECOMMENDATIONS)
                 }
                 else -> {return}
             }
