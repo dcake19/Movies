@@ -29,194 +29,82 @@
             android:gravity="center"
             android:textColor="@color/colorTextLight"/>
 
-        <LinearLayout
-            android:id="@+id/navigation_film_home"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/padding_medium"
-                android:paddingBottom="@dimen/padding_medium"
-                android:paddingRight="@dimen/padding_medium"
-                android:paddingLeft="@dimen/padding_large"
-                android:background="@mipmap/ic_launcher"
-                android:id="@+id/imageView"/>
 
             <TextView
-
+                android:id="@+id/navigation_film_home"
                 android:padding="@dimen/padding_large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_medium"
                 android:gravity="center_vertical"
                 android:text="@string/home"
                 android:textColor="@color/colorTextLight"/>
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/navigation_discover"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/padding_medium"
-                android:paddingBottom="@dimen/padding_medium"
-                android:paddingRight="@dimen/padding_medium"
-                android:paddingLeft="@dimen/padding_large"
-                android:background="@mipmap/ic_launcher"
-                android:id="@+id/image_discover"/>
 
             <TextView
+                android:id="@+id/navigation_discover"
                 android:padding="@dimen/padding_large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_medium"
                 android:gravity="center_vertical"
                 android:text="@string/discover"
                 android:textColor="@color/colorTextLight"/>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/navigation_now_playing"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/padding_medium"
-                android:paddingBottom="@dimen/padding_medium"
-                android:paddingRight="@dimen/padding_medium"
-                android:paddingLeft="@dimen/padding_large"
-                android:background="@mipmap/ic_launcher"
-                android:id="@+id/image_now_playing"/>
-
             <TextView
+                android:id="@+id/navigation_now_playing"
                 android:padding="@dimen/padding_large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_medium"
                 android:gravity="center_vertical"
                 android:text="@string/now_playing"
                 android:textColor="@color/colorTextLight"/>
 
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/navigation_upcoming"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/padding_medium"
-                android:paddingBottom="@dimen/padding_medium"
-                android:paddingRight="@dimen/padding_medium"
-                android:paddingLeft="@dimen/padding_large"
-                android:background="@mipmap/ic_launcher"
-                android:id="@+id/image_upcoming"/>
 
             <TextView
+                android:id="@+id/navigation_upcoming"
                 android:padding="@dimen/padding_large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_medium"
                 android:gravity="center_vertical"
                 android:text="@string/upcoming"
                 android:textColor="@color/colorTextLight"/>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/navigation_top_rated"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/padding_medium"
-                android:paddingBottom="@dimen/padding_medium"
-                android:paddingRight="@dimen/padding_medium"
-                android:paddingLeft="@dimen/padding_large"
-                android:background="@mipmap/ic_launcher"
-                android:id="@+id/image_top_rated"/>
 
             <TextView
+                android:id="@+id/navigation_top_rated"
                 android:padding="@dimen/padding_large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_medium"
                 android:gravity="center_vertical"
                 android:text="@string/top_rated"
                 android:textColor="@color/colorTextLight"/>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/navigation_popular"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/padding_medium"
-                android:paddingBottom="@dimen/padding_medium"
-                android:paddingRight="@dimen/padding_medium"
-                android:paddingLeft="@dimen/padding_large"
-                android:background="@mipmap/ic_launcher"
-                android:id="@+id/image_popular"/>
 
             <TextView
+                android:id="@+id/navigation_popular"
                 android:padding="@dimen/padding_large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_medium"
                 android:gravity="center_vertical"
                 android:text="@string/popular"
                 android:textColor="@color/colorTextLight"/>
 
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/navigation_people_list"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/padding_medium"
-                android:paddingBottom="@dimen/padding_medium"
-                android:paddingRight="@dimen/padding_medium"
-                android:paddingLeft="@dimen/padding_large"
-                android:background="@mipmap/ic_launcher"
-                android:id="@+id/image_people"/>
-
             <TextView
+                android:id="@+id/navigation_people_list"
                 android:padding="@dimen/padding_large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_small"
+                android:textSize="@dimen/text_size_medium"
                 android:gravity="center_vertical"
                 android:text="@string/people"
                 android:textColor="@color/colorTextLight"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 
