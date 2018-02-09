@@ -14,8 +14,9 @@ import com.example.android.movies.ui.movies.CreditsType
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsFragment
 import com.example.android.movies.ui.movies.detailed.info.MoviesInfoFragment
+import com.example.android.movies.ui.movies.detailed.related.MoviesRelatedFragment
+import com.example.android.movies.ui.movies.detailed.videos.MovieDetailsVideosFragment
 import com.example.android.movies.ui.movies.list.MoviesListActivity
-import com.example.android.movies.ui.movies.list.BaseMoviesListFragment
 import com.example.android.movies.util.ColorUtil
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -80,6 +81,7 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
 
     fun setupTabs(){
         tabs.addTab(tabs.newTab().setText(getString(R.string.title_details)),true)
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_videos)))
         tabs.addTab(tabs.newTab().setText(getString(R.string.title_cast)))
         tabs.addTab(tabs.newTab().setText(getString(R.string.title_crew)))
         tabs.addTab(tabs.newTab().setText(getString(R.string.title_recommendations)))
@@ -102,7 +104,7 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
 //                R.anim.abc_fade_in, R.anim.abc_fade_out)
        // fragmentManager.fragments
         //for (f in fragmentManager.fragments) ft.hide(f)
-        for(i in 0..4){
+        for(i in 0..5){
             if (fragmentManager.findFragmentByTag(i.toString())!=null)
                 ft.hide(fragmentManager.findFragmentByTag(i.toString()))
         }
@@ -118,23 +120,24 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
 
             when (position) {
                 0 -> fragment = MoviesInfoFragment()
-                1 -> {
+                1 -> fragment = MovieDetailsVideosFragment()
+                2 -> {
                     fragment = MovieCreditsFragment()
                     bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CAST)
                     bundle.putInt(MOVIE_INDICATOR_COLOR,intent.getIntExtra(MOVIE_INDICATOR_COLOR,0))
                 }
-                2 -> {
+                3 -> {
                     fragment = MovieCreditsFragment()
                     bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CREW)
                     bundle.putInt(MOVIE_INDICATOR_COLOR,intent.getIntExtra(MOVIE_INDICATOR_COLOR,0))
                 }
-                3 ->{
+                4 ->{
                     //fragment = BaseMoviesListFragment()
                     fragment = MoviesRelatedFragment()
                     bundle.putInt(MoviesListActivity.DOWNLOAD_TYPE_KEY,MoviesDownloadTypes.RECOMMENDATIONS)
                     bundle.putInt(MOVIE_BACKGROUND_COLOR,intent.getIntExtra(MOVIE_BACKGROUND_COLOR,0))
                 }
-                4 ->{
+                5 ->{
                     //fragment = BaseMoviesListFragment()
                     fragment = MoviesRelatedFragment()
                     bundle.putInt(MoviesListActivity.DOWNLOAD_TYPE_KEY,MoviesDownloadTypes.SIMILAR)

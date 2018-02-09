@@ -7,10 +7,8 @@ import android.support.v7.widget.Toolbar
 import android.widget.ArrayAdapter
 import com.example.android.movies.R
 import com.example.android.movies.ui.NavigationIconActivity
-import com.example.android.movies.ui.movies.DiscoverQuery
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.list.MoviesListActivity
-import com.example.android.movies.ui.movies.list.BaseMoviesListFragment
 import com.example.android.movies.util.DateUtil
 import com.example.android.movies.util.GenreUtil
 import dagger.android.AndroidInjection

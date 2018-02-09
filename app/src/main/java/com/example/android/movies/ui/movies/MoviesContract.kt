@@ -1,6 +1,7 @@
 package com.example.android.movies.ui.movies
 
 import android.content.Context
+import com.example.android.movies.ui.movies.list.discover.DiscoverQuery
 
 interface MoviesContract {
 
@@ -13,7 +14,7 @@ interface MoviesContract {
         fun addView(view:View,type:Int)
         fun downloadMoviesData(page:Int=1)
         fun downloadMoviesDataNextPage()
-        fun downloadDiscoverData(discoverQuery: DiscoverQuery,page:Int=1)
+        fun downloadDiscoverData(discoverQuery: DiscoverQuery, page:Int=1)
         fun search(query:String,page:Int=1)
         fun downloadRelatedMovies(id:Int,page:Int=1)
         fun getMovieId(index:Int): Int

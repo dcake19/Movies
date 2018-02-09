@@ -1,6 +1,8 @@
-package com.example.android.movies.ui.movies
+package com.example.android.movies.ui.movies.list
 
 import com.example.android.movies.RxSchedulerProvider
+import com.example.android.movies.ui.movies.MoviesInteractor
+import com.example.android.movies.ui.movies.MoviesPresenter
 import javax.inject.Inject
 
 

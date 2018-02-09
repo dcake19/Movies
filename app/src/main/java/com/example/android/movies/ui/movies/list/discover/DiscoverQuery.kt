@@ -1,4 +1,4 @@
-package com.example.android.movies.ui.movies
+package com.example.android.movies.ui.movies.list.discover
 
 
 data class DiscoverQuery(var sortby:String = "",

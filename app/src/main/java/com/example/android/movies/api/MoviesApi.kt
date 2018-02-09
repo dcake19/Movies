@@ -6,6 +6,7 @@ import com.example.android.movies.api.data.people.PersonResults
 import com.example.android.movies.api.data.movie.MovieCredits
 import com.example.android.movies.api.data.movie.MovieInfo
 import com.example.android.movies.api.data.movie.MovieResults
+import com.example.android.movies.api.data.movie.MovieVideos
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -64,6 +65,11 @@ interface MoviesApi {
             // api key in gradle file
             @Query("api_key") apiKey: String,
             @Query("page") pageNumber: String): Observable<MovieResults>
+
+    @GET("/3/movie/{id}/videos")
+    fun getVideos(
+            @Path(value = "id", encoded = true) movieId: String,
+            @Query("api_key") apiKey: String):Observable<MovieVideos>
 
     @GET("/3/movie/{id}/recommendations")
     fun getRecommendations(

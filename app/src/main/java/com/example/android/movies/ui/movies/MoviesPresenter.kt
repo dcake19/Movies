@@ -5,18 +5,12 @@ import com.example.android.movies.BuildConfig
 import com.example.android.movies.R
 import com.example.android.movies.RxSchedulerProvider
 import com.example.android.movies.api.data.movie.MovieResults
-import com.example.android.movies.api.data.movie.Result
-import com.example.android.movies.ui.movies.MoviesContract
-import com.example.android.movies.ui.movies.MoviesDownloadTypes
-import com.example.android.movies.ui.movies.MoviesInteractor
+import com.example.android.movies.ui.movies.list.discover.DiscoverQuery
 import com.example.android.movies.util.ColorUtil
 import com.example.android.movies.util.TextUtil
 import io.reactivex.Observable
 import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
 //class MoviesPresenter(val interactor: MoviesInteractor,
 //                      val rxSchedulerProvider: RxSchedulerProvider,
@@ -60,7 +54,7 @@ abstract class MoviesPresenter (val interactor: MoviesInteractor,
            // downloadMoviesData(moviesResults.page+1)
   //  }
 
-    override fun downloadDiscoverData(discoverQuery: DiscoverQuery,page:Int) {
+    override fun downloadDiscoverData(discoverQuery: DiscoverQuery, page:Int) {
         //discover = discoverQuery
         downloadMoviesData(interactor.getDiscoverResults(BuildConfig.TMDB_API_KEY,discoverQuery.sortby,
                 discoverQuery.withGenres,discoverQuery.withoutGenres, discoverQuery.minVoteAverage,
@@ -125,17 +119,19 @@ abstract class MoviesPresenter (val interactor: MoviesInteractor,
                     override fun onNext(mr: MovieResults) {
                         Log.v("Results",page.toString())
                         if (page==1) moviesResults = mr
-                        else moviesResults = MovieResults(
-                                mr.page,mr.totalResults,mr.totalPages,
-                                moviesResults.results + mr.results)
+                        else {
+                            moviesResults = MovieResults(
+                                    mr.page, mr.totalResults, mr.totalPages,
+                                    moviesResults.results + mr.results)
+                        }
 
-                        view.update(moviesResults.results.size)
                     }
 
                     override fun onError(e: Throwable) {
                     }
 
                     override fun onComplete() {
+                        view.update(moviesResults.results.size)
                     }
                 })
     }

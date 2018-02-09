@@ -1,4 +1,4 @@
-package com.example.android.movies.ui.movies.detailed
+package com.example.android.movies.ui.movies.list.search
 
 import com.example.android.movies.RxSchedulerProvider
 import com.example.android.movies.ui.movies.MoviesInteractor
@@ -6,19 +6,19 @@ import com.example.android.movies.ui.movies.MoviesPresenter
 import javax.inject.Inject
 
 
-class MoviesRelatedMoviesPresenter @Inject constructor(
+class MoviesSearchPresenter@Inject constructor(
         interactor: MoviesInteractor, rxSchedulerProvider: RxSchedulerProvider)
     : MoviesPresenter(interactor,rxSchedulerProvider) {
 
-    private var id :Int =0
+    private var searchQuery = ""
 
     override fun downloadMoviesDataNextPage() {
         if (moviesResults.page < moviesResults.totalPages)
-            downloadRelatedMovies(id,moviesResults.page + 1)
+            search(searchQuery,moviesResults.page+1)
     }
 
-    override fun downloadRelatedMovies(id: Int, page: Int) {
-        if (page==1) this.id = id
-        super.downloadRelatedMovies(id, page)
+    override fun search(query: String, page: Int) {
+        if (page==1) searchQuery = query
+        super.search(query, page)
     }
 }

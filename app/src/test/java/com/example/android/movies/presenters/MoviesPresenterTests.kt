@@ -7,10 +7,8 @@ import com.example.android.movies.RxSchedulerProvider
 import com.example.android.movies.api.MoviesApi
 import com.example.android.movies.api.data.movie.MovieResults
 import com.example.android.movies.api.data.movie.Result
-import com.example.android.movies.ui.movies.MoviesContract
-import com.example.android.movies.ui.movies.MoviesDownloadTypes
-import com.example.android.movies.ui.movies.MoviesInteractor
-import com.example.android.movies.ui.movies.MoviesPresenter
+import com.example.android.movies.ui.movies.*
+import com.example.android.movies.ui.movies.list.MoviesListPresenter
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -21,7 +19,6 @@ import io.reactivex.ObservableOnSubscribe
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 import org.junit.Assert
-import org.mockito.Matchers.any
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.verify
@@ -61,7 +58,7 @@ class MoviesPresenterTests {
             }
         }
 
-        presenter = MoviesPresenter(interactor,rxSchedulerProvider)
+        presenter = MoviesListPresenter(interactor, rxSchedulerProvider)
         presenter.addView(view!!, MoviesDownloadTypes.NOW_PLAYING)
         Mockito.`when`(api.getNowPlayingResults(BuildConfig.TMDB_API_KEY,"1"))
                 .thenReturn(getObservable())

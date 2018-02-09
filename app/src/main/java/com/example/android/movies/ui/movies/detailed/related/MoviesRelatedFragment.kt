@@ -1,7 +1,8 @@
-package com.example.android.movies.ui.movies.detailed
+package com.example.android.movies.ui.movies.detailed.related
 
 import android.os.Bundle
 import android.view.View
+import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
 import com.example.android.movies.ui.movies.list.BaseMoviesListFragment
 import com.example.android.movies.util.ColorUtil
 import kotlinx.android.synthetic.main.movies_list_fragment.*
