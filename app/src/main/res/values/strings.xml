@@ -24,7 +24,7 @@
     <string name="title_bio">Bio</string>
     <string name="title_cast">Cast</string>
     <string name="title_crew">Crew</string>
-    <string name="title_recommendations">Recommendations</string>
+    <string name="title_recommendations">Recommended</string>
     <string name="title_similar">Similar</string>
 
     <string name="sort_by">Sort By:</string>

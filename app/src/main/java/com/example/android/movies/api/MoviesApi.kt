@@ -71,6 +71,12 @@ interface MoviesApi {
             @Query("api_key") apiKey: String,
             @Query("page") pageNumber: String): Observable<MovieResults>
 
+    @GET("/3/movie/{id}/similar")
+    fun getSimilar(
+            @Path(value = "id", encoded = true) movieId: String,
+            @Query("api_key") apiKey: String,
+            @Query("page") pageNumber: String): Observable<MovieResults>
+
     // detailed movie info
     @GET("/3/movie/{id}")
     fun getMovieInfo(

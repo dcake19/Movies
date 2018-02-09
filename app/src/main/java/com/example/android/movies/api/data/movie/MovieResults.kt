@@ -22,5 +22,5 @@ data class Result(
 		@SerializedName("backdrop_path") val backdropPath: String?,
 		@SerializedName("adult") val adult: Boolean,
 		@SerializedName("overview") val overview: String,
-		@SerializedName("release_date") val releaseDate: String
+		@SerializedName("release_date") val releaseDate: String?
 )

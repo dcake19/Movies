@@ -78,8 +78,8 @@ abstract class MoviesPresenter (val interactor: MoviesInteractor,
         when(type){
             MoviesDownloadTypes.RECOMMENDATIONS ->
                 observable = interactor.getRecommendations(id.toString(),BuildConfig.TMDB_API_KEY,page.toString())
-            //MoviesDownloadTypes.SIMILAR ->
-                //observable = interactor.getUpcomingResults(BuildConfig.TMDB_API_KEY,page.toString())
+            MoviesDownloadTypes.SIMILAR ->
+                observable = interactor.getSimilar(id.toString(),BuildConfig.TMDB_API_KEY,page.toString())
             else -> {return}
         }
         downloadMoviesData(observable,page)
@@ -155,7 +155,7 @@ abstract class MoviesPresenter (val interactor: MoviesInteractor,
     }
 
     override fun getYear(index: Int): String {
-        return TextUtil.getYearFromDate(moviesResults.results.get(index).releaseDate)
+        return TextUtil.getYearFromDate(moviesResults.results.get(index).releaseDate?:"")
     }
 
     override fun getVoteCount(index: Int): String {

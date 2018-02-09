@@ -54,14 +54,14 @@ class MoviesListFragment : Fragment(), MoviesContract.View {
             isNestedScrollingEnabled = false
         }
 
-        class EndlessListener(layout:LinearLayoutManager): EndlessRecyclerViewScrollListener(layout) {
-            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                presenter.downloadMoviesDataNextPage()
-            }
-        }
+//        class EndlessListener(layout:LinearLayoutManager): EndlessRecyclerViewScrollListener(layout) {
+//            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+//                presenter.downloadMoviesDataNextPage()
+//            }
+//        }
 
-        recycler_movies.addOnScrollListener(
-                EndlessListener(recycler_movies.layoutManager as LinearLayoutManager))
+        //recycler_movies.addOnScrollListener(
+         //       EndlessListener(recycler_movies.layoutManager as LinearLayoutManager))
 
         if (recycler_movies.adapter == null)
             recycler_movies.adapter = adapter

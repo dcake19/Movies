@@ -82,7 +82,8 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
         tabs.addTab(tabs.newTab().setText(getString(R.string.title_details)),true)
         tabs.addTab(tabs.newTab().setText(getString(R.string.title_cast)))
         tabs.addTab(tabs.newTab().setText(getString(R.string.title_crew)))
-        tabs.addTab(tabs.newTab().setText(getString(R.string.title_recommendations)))
+        //tabs.addTab(tabs.newTab().setText(getString(R.string.title_recommendations)))
+        //tabs.addTab(tabs.newTab().setText(getString(R.string.title_similar)))
         tabs.setSelectedTabIndicatorHeight((4*resources.displayMetrics.density).toInt())
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -127,10 +128,14 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
                     bundle.putInt(MovieCreditsFragment.CREDITS_TYPE, CreditsType.CREW)
                     bundle.putInt(MOVIE_INDICATOR_COLOR,intent.getIntExtra(MOVIE_INDICATOR_COLOR,0))
                 }
-                3 ->{
-                    fragment = MoviesListFragment()
-                    bundle.putInt(MoviesListActivity.DOWNLOAD_TYPE_KEY,MoviesDownloadTypes.RECOMMENDATIONS)
-                }
+//                3 ->{
+//                    fragment = MoviesListFragment()
+//                    bundle.putInt(MoviesListActivity.DOWNLOAD_TYPE_KEY,MoviesDownloadTypes.RECOMMENDATIONS)
+//                }
+//                4 ->{
+//                    fragment = MoviesListFragment()
+//                    bundle.putInt(MoviesListActivity.DOWNLOAD_TYPE_KEY,MoviesDownloadTypes.SIMILAR)
+//                }
                 else -> {return}
             }
             fragment.arguments = bundle
