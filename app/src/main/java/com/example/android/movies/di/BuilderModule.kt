@@ -1,10 +1,8 @@
 package com.example.android.movies.di
 
 import com.example.android.movies.di.movies.detailed.MovieDetailedModule
-import com.example.android.movies.di.movies.detailed.MovieRelatedMoviesModule
 import com.example.android.movies.di.movies.detailed.info.MoviesInfoModule
 import com.example.android.movies.di.movies.home.MoviesHomeModule
-import com.example.android.movies.di.movies.home.MoviesModule
 import com.example.android.movies.di.movies.list.MoviesDiscoverModule
 import com.example.android.movies.di.movies.list.MoviesListModule
 import com.example.android.movies.di.movies.list.MoviesSearchModule
@@ -12,12 +10,9 @@ import com.example.android.movies.di.people.detailed.PeopleDetailedModule
 import com.example.android.movies.di.people.detailed.info.PeopleInfoModule
 import com.example.android.movies.di.people.list.PeopleListModule
 import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
-import com.example.android.movies.ui.movies.detailed.credits.MovieCreditsFragment
 import com.example.android.movies.ui.movies.detailed.info.MoviesInfoFragment
 import com.example.android.movies.ui.movies.home.MoviesHomeActivity
-import com.example.android.movies.ui.movies.home.MoviesHomeFragment
 import com.example.android.movies.ui.movies.list.MoviesListActivity
-import com.example.android.movies.ui.movies.list.MoviesListFragment
 import com.example.android.movies.ui.movies.list.discover.MoviesDiscoverActivity
 import com.example.android.movies.ui.movies.list.search.MoviesSearchActivity
 import com.example.android.movies.ui.people.detailed.PeopleDetailedActivity
@@ -41,7 +36,7 @@ abstract class BuilderModule {
 
 //    @ContributesAndroidInjector(modules = arrayOf(MoviesModule::class))
 //    @FragmentScope
-//    abstract fun moviesListFragment(): MoviesListFragment
+//    abstract fun moviesListFragment(): BaseMoviesListFragment
 
     @ContributesAndroidInjector(modules = arrayOf(MoviesListModule::class))
     abstract fun moviesListActivity(): MoviesListActivity
@@ -56,7 +51,7 @@ abstract class BuilderModule {
 
 //    @ContributesAndroidInjector(modules = arrayOf(MovieRelatedMoviesModule::class))
 //    @FragmentScope
-//    abstract fun moviesListFragment(): MoviesListFragment
+//    abstract fun moviesListFragment(): BaseMoviesListFragment
 
     @ContributesAndroidInjector(modules = arrayOf(MoviesInfoModule::class))
     abstract fun moviesInfoFragment(): MoviesInfoFragment

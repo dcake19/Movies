@@ -3,15 +3,12 @@ package com.example.android.movies.ui.movies.list
 import android.app.Fragment
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
 import com.example.android.movies.R
 import com.example.android.movies.ui.BaseNavigationActivity
-import com.example.android.movies.ui.NavigationIconActivity
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.home.MoviesHomeActivity
-import com.example.android.movies.ui.movies.home.MoviesHomeFragment
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -51,6 +48,7 @@ class MoviesListActivity :BaseNavigationActivity(), HasFragmentInjector {
     }
 
     private fun setFragment(type:Int){
+        //val fragment = BaseMoviesListFragment()
         val fragment = MoviesListFragment()
         val bundle = Bundle()
         bundle.putInt(MoviesHomeActivity.DOWNLOAD_TYPE_KEY,type)
@@ -58,7 +56,8 @@ class MoviesListActivity :BaseNavigationActivity(), HasFragmentInjector {
         val ft = fragmentManager.beginTransaction()
 //        ft.setCustomAnimations(
 //                R.anim.abc_fade_in, R.anim.abc_fade_out)
-        ft.replace(R.id.movies_list_content,fragment,MoviesListFragment::class.java.name)
+        //ft.replace(R.id.movies_list_content,fragment, BaseMoviesListFragment::class.java.name)
+        ft.replace(R.id.movies_list_content,fragment, MoviesListFragment::class.java.name)
         ft.commit()
     }
 

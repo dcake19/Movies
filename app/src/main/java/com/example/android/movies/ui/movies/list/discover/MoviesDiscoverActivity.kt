@@ -1,7 +1,6 @@
 package com.example.android.movies.ui.movies.list.discover
 
 import android.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
@@ -11,8 +10,7 @@ import com.example.android.movies.ui.NavigationIconActivity
 import com.example.android.movies.ui.movies.DiscoverQuery
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.list.MoviesListActivity
-import com.example.android.movies.ui.movies.list.MoviesListFragment
-import com.example.android.movies.ui.movies.list.search.MoviesSearchActivity
+import com.example.android.movies.ui.movies.list.BaseMoviesListFragment
 import com.example.android.movies.util.DateUtil
 import com.example.android.movies.util.GenreUtil
 import dagger.android.AndroidInjection
@@ -43,10 +41,10 @@ class MoviesDiscoverActivity : NavigationIconActivity(),DiscoverGenres , HasFrag
         setYearsSpinners()
 
         btn_find.setOnClickListener {
-            if(fragmentManager.findFragmentByTag(MoviesListFragment::class.java.canonicalName)!=null) {
+            if(fragmentManager.findFragmentByTag(DiscoverFragment::class.java.canonicalName)!=null) {
                 val fragment = fragmentManager
-                        .findFragmentByTag(MoviesListFragment::class.java.canonicalName)
-                        as MoviesListFragment
+                        .findFragmentByTag(DiscoverFragment::class.java.canonicalName)
+                        as DiscoverFragment
                 fragment.presenter.downloadDiscoverData(
                         DiscoverQuery(getSortByString(spinner_sort_by.selectedItemPosition),
                                 GenreUtil.getGenresIdList(includeGenres),
@@ -57,9 +55,10 @@ class MoviesDiscoverActivity : NavigationIconActivity(),DiscoverGenres , HasFrag
                                 edit_text_runtime_min.text.toString(),
                                 edit_text_runtime_max.text.toString()))
             }
-
-//            if(fragmentManager.fragments.size>0) run {
-//                val fragment = fragmentManager.fragments.get(0) as MoviesListFragment
+//            if(fragmentManager.findFragmentByTag(BaseMoviesListFragment::class.java.canonicalName)!=null) {
+//                val fragment = fragmentManager
+//                        .findFragmentByTag(BaseMoviesListFragment::class.java.canonicalName)
+//                        as BaseMoviesListFragment
 //                fragment.presenter.downloadDiscoverData(
 //                        DiscoverQuery(getSortByString(spinner_sort_by.selectedItemPosition),
 //                                GenreUtil.getGenresIdList(includeGenres),
@@ -70,6 +69,7 @@ class MoviesDiscoverActivity : NavigationIconActivity(),DiscoverGenres , HasFrag
 //                                edit_text_runtime_min.text.toString(),
 //                                edit_text_runtime_max.text.toString()))
 //            }
+
         }
 
         btn_expand.setOnClickListener {
@@ -101,15 +101,17 @@ class MoviesDiscoverActivity : NavigationIconActivity(),DiscoverGenres , HasFrag
     }
 
     private fun setFragment(){
-        val fragment = MoviesListFragment()
+        //val fragment = BaseMoviesListFragment()
+        val fragment = DiscoverFragment()
         val bundle = Bundle()
         bundle.putInt(MoviesListActivity.DOWNLOAD_TYPE_KEY, MoviesDownloadTypes.DISCOVER)
         fragment.arguments = bundle
         val ft = fragmentManager.beginTransaction()
 //        ft.setCustomAnimations(
 //                R.anim.abc_fade_in, R.anim.abc_fade_out)
-        ft.replace(R.id.movies_discover_content,fragment,
-                MoviesListFragment::class.java.name)
+//        ft.replace(R.id.movies_discover_content,fragment,
+//        BaseMoviesListFragment::class.java.name)
+        ft.replace(R.id.movies_discover_content,fragment, DiscoverFragment::class.java.name)
         ft.commit()
     }
 

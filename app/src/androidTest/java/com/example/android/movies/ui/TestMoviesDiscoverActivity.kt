@@ -5,9 +5,8 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.example.android.movies.TestApp
-import com.example.android.movies.ui.movies.list.MoviesListFragment
+import com.example.android.movies.ui.movies.list.BaseMoviesListFragment
 import com.example.android.movies.ui.movies.list.discover.MoviesDiscoverActivity
-import com.example.android.movies.ui.movies.list.search.MoviesSearchActivity
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -37,7 +36,7 @@ class TestMoviesDiscoverActivity {
         actvityTestRule.launchActivity(Intent())
         val activity = actvityTestRule.activity as MoviesDiscoverActivity
         val fragment = activity.fragmentManager
-                .findFragmentByTag(MoviesListFragment::class.java.name) as MoviesListFragment
+                .findFragmentByTag(BaseMoviesListFragment::class.java.name) as BaseMoviesListFragment
 
         InstrumentationRegistry.getInstrumentation().runOnMainSync {
             fragment.update(20)

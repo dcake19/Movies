@@ -1,5 +1,6 @@
 package com.example.android.movies.ui.movies
 
+import android.util.Log
 import com.example.android.movies.BuildConfig
 import com.example.android.movies.R
 import com.example.android.movies.RxSchedulerProvider
@@ -64,13 +65,13 @@ abstract class MoviesPresenter (val interactor: MoviesInteractor,
         downloadMoviesData(interactor.getDiscoverResults(BuildConfig.TMDB_API_KEY,discoverQuery.sortby,
                 discoverQuery.withGenres,discoverQuery.withoutGenres, discoverQuery.minVoteAverage,
                 discoverQuery.minVoteCount,discoverQuery.primaryReleaseYear,discoverQuery.minRuntime,
-                discoverQuery.maxRuntime,"1"))
+                discoverQuery.maxRuntime,page.toString()),page)
     }
 
     override fun search(query: String,page:Int) {
         //this.query = query
        // downloadMoviesData(1)
-        downloadMoviesData(interactor.getSearchResults(BuildConfig.TMDB_API_KEY,query,"1"))
+        downloadMoviesData(interactor.getSearchResults(BuildConfig.TMDB_API_KEY,query,page.toString()),page)
     }
 
     override fun downloadRelatedMovies(id: Int, page: Int) {
@@ -122,6 +123,7 @@ abstract class MoviesPresenter (val interactor: MoviesInteractor,
                     }
 
                     override fun onNext(mr: MovieResults) {
+                        Log.v("Results",page.toString())
                         if (page==1) moviesResults = mr
                         else moviesResults = MovieResults(
                                 mr.page,mr.totalResults,mr.totalPages,

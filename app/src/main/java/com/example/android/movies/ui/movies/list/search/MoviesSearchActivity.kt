@@ -11,7 +11,7 @@ import com.example.android.movies.R
 import com.example.android.movies.ui.NavigationIconActivity
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.list.MoviesListActivity
-import com.example.android.movies.ui.movies.list.MoviesListFragment
+import com.example.android.movies.ui.movies.list.BaseMoviesListFragment
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -36,7 +36,8 @@ class MoviesSearchActivity: NavigationIconActivity(), HasFragmentInjector {
     lateinit var fragmentDispatchingAndroidInjector:
             DispatchingAndroidInjector<Fragment>
 
-    lateinit var fragment:MoviesListFragment
+   // lateinit var fragment: BaseMoviesListFragment
+    lateinit var fragment: SearchFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -58,7 +59,8 @@ class MoviesSearchActivity: NavigationIconActivity(), HasFragmentInjector {
     }
 
     private fun setFragment(query: String){
-        fragment = MoviesListFragment()
+       //fragment = BaseMoviesListFragment()
+        fragment = SearchFragment()
         val bundle = Bundle()
         bundle.putInt(MoviesListActivity.DOWNLOAD_TYPE_KEY,MoviesDownloadTypes.SEARCH)
         bundle.putString(SEARCH_QUERY,query)
@@ -66,7 +68,8 @@ class MoviesSearchActivity: NavigationIconActivity(), HasFragmentInjector {
         val ft = fragmentManager.beginTransaction()
 //        ft.setCustomAnimations(
 //                R.anim.abc_fade_in, R.anim.abc_fade_out)
-        ft.replace(R.id.search_content,fragment,MoviesListFragment::class.java.name)
+//        ft.replace(R.id.search_content,fragment, BaseMoviesListFragment::class.java.name)
+        ft.replace(R.id.search_content,fragment, SearchFragment::class.java.name)
         ft.commit()
     }
 
