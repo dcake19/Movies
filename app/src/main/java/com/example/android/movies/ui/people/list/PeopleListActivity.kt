@@ -3,6 +3,7 @@ package com.example.android.movies.ui.people.list
 import android.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import android.widget.SearchView
@@ -18,6 +19,8 @@ import javax.inject.Inject
 
 class PeopleListActivity : NavigationIconActivity(), HasFragmentInjector {
 
+    private val OUTSTATE_SEARCH_TERM = "search_term"
+
     @Inject
     lateinit var fragmentDispatchingAndroidInjector:
             DispatchingAndroidInjector<Fragment>
@@ -28,6 +31,8 @@ class PeopleListActivity : NavigationIconActivity(), HasFragmentInjector {
 
         if (savedInstanceState == null)
             setFragment()
+        else
+            loadState(savedInstanceState)
 
         search.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -37,10 +42,6 @@ class PeopleListActivity : NavigationIconActivity(), HasFragmentInjector {
                             as PeopleListFragment
                     fragment.presenter.searchPeople(query ?: "")
                 }
-//                if(fragmentManager.fragments.size>0) {
-//                    val fragment = fragmentManager.fragments.get(0) as PeopleListFragment
-//                    fragment.presenter.searchPeople(query ?: "")
-//                }
                 return true
             }
 
@@ -60,6 +61,24 @@ class PeopleListActivity : NavigationIconActivity(), HasFragmentInjector {
         ft.commit()
     }
 
+
+    private fun loadState(savedInstanceState: Bundle){
+        search.setQuery(savedInstanceState.getString(OUTSTATE_SEARCH_TERM)?:"",false)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        saveState(outState?:Bundle())
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        saveState(outState?:Bundle())
+    }
+
+    private fun saveState(outState: Bundle){
+        outState.putString(OUTSTATE_SEARCH_TERM,search.query.toString())
+    }
 
     override fun getLayoutResourceId(): Int {
         return R.layout.people_list_activity

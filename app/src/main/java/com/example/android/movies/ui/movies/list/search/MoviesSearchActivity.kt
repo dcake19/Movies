@@ -4,6 +4,7 @@ import android.app.Fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import android.widget.SearchView
@@ -31,6 +32,8 @@ class MoviesSearchActivity: NavigationIconActivity(), HasFragmentInjector {
         }
     }
 
+    private val OUTSTATE_SEARCH_TERM = "search_term"
+
     @Inject
     lateinit var fragmentDispatchingAndroidInjector:
             DispatchingAndroidInjector<Fragment>
@@ -44,6 +47,8 @@ class MoviesSearchActivity: NavigationIconActivity(), HasFragmentInjector {
 
         if (savedInstanceState == null)
             setFragment(intent.getStringExtra(SEARCH_QUERY))
+        else
+            loadState(savedInstanceState)
 
         search.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -73,6 +78,24 @@ class MoviesSearchActivity: NavigationIconActivity(), HasFragmentInjector {
 //        ft.replace(R.id.search_content,fragment, BaseMoviesListFragment::class.java.name)
         ft.replace(R.id.search_content,fragment, SearchFragment::class.java.name)
         ft.commit()
+    }
+
+    private fun loadState(savedInstanceState: Bundle){
+        search.setQuery(savedInstanceState.getString(OUTSTATE_SEARCH_TERM)?:"",false)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        saveState(outState?:Bundle())
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        saveState(outState?:Bundle())
+    }
+
+    private fun saveState(outState: Bundle){
+        outState.putString(OUTSTATE_SEARCH_TERM,search.query.toString())
     }
 
     override fun getLayoutResourceId(): Int {

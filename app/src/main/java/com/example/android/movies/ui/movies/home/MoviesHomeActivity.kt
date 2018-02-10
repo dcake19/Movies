@@ -3,6 +3,7 @@ package com.example.android.movies.ui.movies.home
 import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.v4.widget.DrawerLayout
 import android.widget.SearchView
 import android.support.v7.widget.Toolbar
@@ -29,6 +30,8 @@ class MoviesHomeActivity : NavigationIconActivity(), HasFragmentInjector {
         const val DOWNLOAD_TYPE_KEY = "download_key"
     }
 
+    private val OUTSTATE_SEARCH_TERM = "search_term"
+
     @Inject
     lateinit var fragmentDispatchingAndroidInjector:
             DispatchingAndroidInjector<Fragment>
@@ -36,23 +39,21 @@ class MoviesHomeActivity : NavigationIconActivity(), HasFragmentInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-       // setContentView(R.layout.movies_home_activity)
-
-
 
         if (savedInstanceState == null) {
             setFragment(MoviesDownloadTypes.NOW_PLAYING)
             setFragment(MoviesDownloadTypes.UPCOMING)
             setFragment(MoviesDownloadTypes.TOP_RATED)
             setFragment(MoviesDownloadTypes.POPULAR)
-        }
+        }else
+            loadState(savedInstanceState)
 
-        movies_home_drawer_layout.setOnFocusChangeListener(object : View.OnFocusChangeListener{
-            override fun onFocusChange(p0: View?, p1: Boolean) {
-                //Log.v("drawer layout","Focus changed")
-            }
-
-        })
+//        movies_home_drawer_layout.setOnFocusChangeListener(object : View.OnFocusChangeListener{
+//            override fun onFocusChange(p0: View?, p1: Boolean) {
+//                //Log.v("drawer layout","Focus changed")
+//            }
+//
+//        })
         //Log.v("MoviesHomeActivity","is focusable: " + movies_home_drawer_layout.isFocusable.toString())
 
         search.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
@@ -79,6 +80,24 @@ class MoviesHomeActivity : NavigationIconActivity(), HasFragmentInjector {
         ft.replace(getContent(type),fragment,
                 MoviesHomeFragment::class.java.name + " " + type)
         ft.commit()
+    }
+
+    private fun loadState(savedInstanceState: Bundle){
+        search.setQuery(savedInstanceState.getString(OUTSTATE_SEARCH_TERM)?:"",false)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        saveState(outState?:Bundle())
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        saveState(outState?:Bundle())
+    }
+
+    private fun saveState(outState: Bundle){
+        outState.putString(OUTSTATE_SEARCH_TERM,search.query.toString())
     }
 
     private fun getContent(type:Int): Int{
