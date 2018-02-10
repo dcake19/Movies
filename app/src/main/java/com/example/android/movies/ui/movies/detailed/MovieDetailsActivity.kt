@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.app.Fragment
+import android.os.PersistableBundle
 import android.support.v4.widget.DrawerLayout
 import com.example.android.movies.R
 import com.example.android.movies.loadImage
@@ -24,6 +25,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasFragmentInjector
 import kotlinx.android.synthetic.main.movie_details_activity.*
 import kotlinx.android.synthetic.main.movie_details_appbar.*
+import timber.log.Timber
 //import kotlinx.android.synthetic.main.movie_details_appbar.*
 //import kotlinx.android.synthetic.main.movie_details_appbar_display.*
 
@@ -32,7 +34,6 @@ import javax.inject.Inject
 class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
 
    // lateinit var component: MovieDetailedComponent
-
     companion object {
         const val MOVIE_ID = "movie_id"
         const val MOVIE_TITLE = "movie_title"
@@ -60,6 +61,8 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
 
     }
 
+    private val OUTSTATE_TAB_SELECTED = "tab_selected"
+
     @Inject
     lateinit var fragmentDispatchingAndroidInjector:
             DispatchingAndroidInjector<Fragment>
@@ -75,17 +78,21 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
         tabs.setBackgroundColor(intent.getIntExtra(MOVIE_BACKGROUND_COLOR,0))
         tabs.setSelectedTabIndicatorColor(intent.getIntExtra(MOVIE_INDICATOR_COLOR,0))
         nested_scroll.setBackgroundColor(ColorUtil.getLighterShade(intent.getIntExtra(MOVIE_BACKGROUND_COLOR,0)))
-        setupTabs()
-        setFragment(0)
+
+       // if(savedInstanceState==null)
+        setupTabs(savedInstanceState?.getInt(OUTSTATE_TAB_SELECTED,0)?:0)
+
+        if(savedInstanceState==null)
+            setFragment(0)
     }
 
-    fun setupTabs(){
-        tabs.addTab(tabs.newTab().setText(getString(R.string.title_details)),true)
-        tabs.addTab(tabs.newTab().setText(getString(R.string.title_videos)))
-        tabs.addTab(tabs.newTab().setText(getString(R.string.title_cast)))
-        tabs.addTab(tabs.newTab().setText(getString(R.string.title_crew)))
-        tabs.addTab(tabs.newTab().setText(getString(R.string.title_recommendations)))
-        tabs.addTab(tabs.newTab().setText(getString(R.string.title_similar)))
+    fun setupTabs(selected:Int){
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_details)),selected==0)
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_videos)),selected==1)
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_cast)),selected==2)
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_crew)),selected==3)
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_recommendations)),selected==4)
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_similar)),selected==5)
         tabs.setSelectedTabIndicatorHeight((4*resources.displayMetrics.density).toInt())
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -150,6 +157,18 @@ class MovieDetailsActivity : BaseNavigationActivity() , HasFragmentInjector {
             ft.addToBackStack(position.toString())
             ft.commit()
         }
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        //Timber.v("selected tab: " + tabs.selectedTabPosition)
+        outState!!.putInt(OUTSTATE_TAB_SELECTED,tabs.selectedTabPosition)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState!!.putInt(OUTSTATE_TAB_SELECTED,tabs.selectedTabPosition)
     }
 
     override fun onBackPressed() {

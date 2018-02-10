@@ -19,35 +19,42 @@ class MovieVideosPresenter @Inject constructor(
 
     lateinit var view: MovieVideosContract.View
     private lateinit var videos: List<VideoResult>
+    private var subscribed = false
+    private var complete = false
 
     override fun addView(view: MovieVideosContract.View) {
         this.view = view
     }
 
     override fun downloadVideoLinks(id: Int) {
-        val observable = interactor.getVideos(id.toString(), BuildConfig.TMDB_API_KEY)
+        if (complete)
+            view.display(videos.size)
+        else if(!subscribed) {
+            val observable = interactor.getVideos(id.toString(), BuildConfig.TMDB_API_KEY)
 
-        observable.subscribeOn(rxSchedulerProvider.subscribeOn())
-                .observeOn(rxSchedulerProvider.observeOn())
-                .map { it -> it.results.filter { it.site.equals("YouTube") } }
-                .subscribe(object : Observer<List<VideoResult>> {
-                    override fun onNext(t: List<VideoResult>) {
-                        videos = t
-                        view.display(t.size)
-                    }
+            observable.subscribeOn(rxSchedulerProvider.subscribeOn())
+                    .observeOn(rxSchedulerProvider.observeOn())
+                    .map { it -> it.results.filter { it.site.equals("YouTube") } }
+                    .subscribe(object : Observer<List<VideoResult>> {
+                        override fun onNext(t: List<VideoResult>) {
+                            videos = t
+                            view.display(t.size)
+                        }
 
-                    override fun onError(e: Throwable?) {
+                        override fun onError(e: Throwable?) {
+                            subscribed = false
+                        }
 
-                    }
+                        override fun onSubscribe(d: Disposable?) {
+                            subscribed = true
+                        }
 
-                    override fun onComplete() {
+                        override fun onComplete() {
+                            complete = true
+                        }
 
-                    }
-
-                    override fun onSubscribe(d: Disposable?) {
-
-                    }
-                })
+                    })
+        }
     }
 
     override fun getVideoTitle(position: Int): String {

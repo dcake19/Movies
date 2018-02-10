@@ -20,14 +20,19 @@ class MovieDetailsVideosFragment : Fragment(),MovieVideosContract.View {
     lateinit var adapter: MovieVideosAdapter
 
     override fun onAttach(context: Context?) {
-        AndroidInjection.inject(this)
+
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
         retainInstance = true
-
         presenter.addView(this)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         adapter = MovieVideosAdapter(presenter)
 
         return inflater!!.inflate(R.layout.movie_details_videos_fragment,container,false)

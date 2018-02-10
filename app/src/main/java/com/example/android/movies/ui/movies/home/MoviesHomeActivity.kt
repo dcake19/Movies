@@ -38,6 +38,8 @@ class MoviesHomeActivity : NavigationIconActivity(), HasFragmentInjector {
         super.onCreate(savedInstanceState)
        // setContentView(R.layout.movies_home_activity)
 
+
+
         if (savedInstanceState == null) {
             setFragment(MoviesDownloadTypes.NOW_PLAYING)
             setFragment(MoviesDownloadTypes.UPCOMING)
@@ -47,11 +49,11 @@ class MoviesHomeActivity : NavigationIconActivity(), HasFragmentInjector {
 
         movies_home_drawer_layout.setOnFocusChangeListener(object : View.OnFocusChangeListener{
             override fun onFocusChange(p0: View?, p1: Boolean) {
-                Log.v("drawer layout","Focus changed")
+                //Log.v("drawer layout","Focus changed")
             }
 
         })
-        Log.v("MoviesHomeActivity","is focusable: " + movies_home_drawer_layout.isFocusable.toString())
+        //Log.v("MoviesHomeActivity","is focusable: " + movies_home_drawer_layout.isFocusable.toString())
 
         search.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

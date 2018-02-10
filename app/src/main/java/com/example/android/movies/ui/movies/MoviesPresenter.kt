@@ -23,101 +23,89 @@ abstract class MoviesPresenter (val interactor: MoviesInteractor,
     protected lateinit var moviesResults:MovieResults
    // private var query = ""
    //private var discover = DiscoverQuery()
+    // the number of pages that a download has subscribed/completed
+    private var subscribed = 0
+    private var complete = 0
 
     override fun addView(view: MoviesContract.View,type:Int) {
         this.type = type
         this.view = view
     }
 
-
-    override fun downloadMoviesData(page:Int) {
-        //downloadMoviesData(1)
-        val observable: Observable<MovieResults>
-        when(type){
-            MoviesDownloadTypes.NOW_PLAYING ->
-                observable = interactor.getNowPlayingResults(BuildConfig.TMDB_API_KEY,page.toString())
-            MoviesDownloadTypes.UPCOMING ->
-                observable = interactor.getUpcomingResults(BuildConfig.TMDB_API_KEY,page.toString())
-            MoviesDownloadTypes.TOP_RATED ->
-                observable = interactor.getTopRatedResults(BuildConfig.TMDB_API_KEY,page.toString())
-            MoviesDownloadTypes.POPULAR ->
-                observable = interactor.getPopular(BuildConfig.TMDB_API_KEY,page.toString())
-        // MoviesDownloadTypes.RECOMMENDATIONS ->
-        //  observable = interactor.getRecommendations()
-            else -> {return}
-        }
-        downloadMoviesData(observable,page)
+    override fun getDownloadedMoviesData() {
+        if(complete>0) view.update(moviesResults.results.size)
     }
 
-  //  override fun downloadMoviesDataNextPage() {
-       // if (moviesResults.page < moviesResults.totalPages)
-           // downloadMoviesData(moviesResults.page+1)
-  //  }
+    override fun downloadMoviesData(page:Int) {
+        if (complete>=page)
+            view.update(moviesResults.results.size)
+        else if(subscribed<page) {
+            //downloadMoviesData(1)
+            val observable: Observable<MovieResults>
+            when (type) {
+                MoviesDownloadTypes.NOW_PLAYING ->
+                    observable = interactor.getNowPlayingResults(BuildConfig.TMDB_API_KEY, page.toString())
+                MoviesDownloadTypes.UPCOMING ->
+                    observable = interactor.getUpcomingResults(BuildConfig.TMDB_API_KEY, page.toString())
+                MoviesDownloadTypes.TOP_RATED ->
+                    observable = interactor.getTopRatedResults(BuildConfig.TMDB_API_KEY, page.toString())
+                MoviesDownloadTypes.POPULAR ->
+                    observable = interactor.getPopular(BuildConfig.TMDB_API_KEY, page.toString())
+                else -> {
+                    return
+                }
+            }
+            downloadMoviesData(observable, page)
+        }
+    }
+
+
 
     override fun downloadDiscoverData(discoverQuery: DiscoverQuery, page:Int) {
-        //discover = discoverQuery
-        downloadMoviesData(interactor.getDiscoverResults(BuildConfig.TMDB_API_KEY,discoverQuery.sortby,
-                discoverQuery.withGenres,discoverQuery.withoutGenres, discoverQuery.minVoteAverage,
-                discoverQuery.minVoteCount,discoverQuery.primaryReleaseYear,discoverQuery.minRuntime,
-                discoverQuery.maxRuntime,page.toString()),page)
+
+            downloadMoviesData(interactor.getDiscoverResults(BuildConfig.TMDB_API_KEY, discoverQuery.sortby,
+                    discoverQuery.withGenres, discoverQuery.withoutGenres, discoverQuery.minVoteAverage,
+                    discoverQuery.minVoteCount, discoverQuery.primaryReleaseYear, discoverQuery.minRuntime,
+                    discoverQuery.maxRuntime, page.toString()), page)
+
     }
 
     override fun search(query: String,page:Int) {
-        //this.query = query
-       // downloadMoviesData(1)
-        downloadMoviesData(interactor.getSearchResults(BuildConfig.TMDB_API_KEY,query,page.toString()),page)
+        downloadMoviesData(interactor.getSearchResults(
+                BuildConfig.TMDB_API_KEY, query, page.toString()), page)
     }
 
     override fun downloadRelatedMovies(id: Int, page: Int) {
-        val observable: Observable<MovieResults>
-        when(type){
-            MoviesDownloadTypes.RECOMMENDATIONS ->
-                observable = interactor.getRecommendations(id.toString(),BuildConfig.TMDB_API_KEY,page.toString())
-            MoviesDownloadTypes.SIMILAR ->
-                observable = interactor.getSimilar(id.toString(),BuildConfig.TMDB_API_KEY,page.toString())
-            else -> {return}
+        if (complete>=page)
+            view.update(moviesResults.results.size)
+        else if(subscribed<page) {
+            val observable: Observable<MovieResults>
+            when (type) {
+                MoviesDownloadTypes.RECOMMENDATIONS ->
+                    observable = interactor.getRecommendations(id.toString(),
+                            BuildConfig.TMDB_API_KEY, page.toString())
+                MoviesDownloadTypes.SIMILAR ->
+                    observable = interactor.getSimilar(id.toString(),
+                            BuildConfig.TMDB_API_KEY, page.toString())
+                else -> {
+                    return
+                }
+            }
+            downloadMoviesData(observable, page)
         }
-        downloadMoviesData(observable,page)
     }
 
-    //   fun downloadMoviesData(page:Int=1) {
-
-//        val observable: Observable<MovieResults>
-//        when(type){
-//            MoviesDownloadTypes.NOW_PLAYING ->
-//                observable = interactor.getNowPlayingResults(BuildConfig.TMDB_API_KEY,page.toString())
-//            MoviesDownloadTypes.UPCOMING ->
-//                observable = interactor.getUpcomingResults(BuildConfig.TMDB_API_KEY,page.toString())
-//            MoviesDownloadTypes.TOP_RATED ->
-//                observable = interactor.getTopRatedResults(BuildConfig.TMDB_API_KEY,page.toString())
-//            MoviesDownloadTypes.POPULAR ->
-//                observable = interactor.getPopular(BuildConfig.TMDB_API_KEY,page.toString())
-//            MoviesDownloadTypes.SEARCH ->
-//                observable = interactor.getSearchResults(BuildConfig.TMDB_API_KEY,query,page.toString())
-//            MoviesDownloadTypes.DISCOVER ->
-//                    observable = interactor.getDiscoverResults(BuildConfig.TMDB_API_KEY,discover.sortby,
-//                            discover.withGenres,discover.withoutGenres, discover.minVoteAverage,
-//                            discover.minVoteCount,discover.primaryReleaseYear,discover.minRuntime,
-//                            discover.maxRuntime,page.toString())
-//           // MoviesDownloadTypes.RECOMMENDATIONS ->
-//                  //  observable = interactor.getRecommendations()
-//            else -> {return}
-//        }
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-
-       // downloadMoviesData(observable,page)
-   // }
 
     private fun downloadMoviesData(observable: Observable<MovieResults>,page:Int=1){
         observable.subscribeOn(rxSchedulerProvider.subscribeOn())
                 .observeOn(rxSchedulerProvider.observeOn())
                 .subscribe(object : Observer<MovieResults> {
                     override fun onSubscribe(d: Disposable) {
+                        subscribed++
                     }
 
                     override fun onNext(mr: MovieResults) {
-                        Log.v("Results",page.toString())
+                       // Log.v("Results",page.toString())
                         if (page==1) moviesResults = mr
                         else {
                             moviesResults = MovieResults(
@@ -128,10 +116,12 @@ abstract class MoviesPresenter (val interactor: MoviesInteractor,
                     }
 
                     override fun onError(e: Throwable) {
+                        subscribed--
                     }
 
                     override fun onComplete() {
                         view.update(moviesResults.results.size)
+                        complete++
                     }
                 })
     }

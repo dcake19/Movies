@@ -5,7 +5,7 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import com.example.android.movies.TestApp
-import com.example.android.movies.ui.movies.list.BaseMoviesListFragment
+import com.example.android.movies.ui.movies.BaseMoviesListFragment
 
 import com.example.android.movies.ui.movies.list.search.MoviesSearchActivity
 import org.junit.Before

@@ -11,7 +11,6 @@ import com.example.android.movies.R
 import com.example.android.movies.ui.NavigationIconActivity
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
 import com.example.android.movies.ui.movies.list.MoviesListActivity
-import com.example.android.movies.ui.movies.list.BaseMoviesListFragment
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -37,16 +36,19 @@ class MoviesSearchActivity: NavigationIconActivity(), HasFragmentInjector {
             DispatchingAndroidInjector<Fragment>
 
    // lateinit var fragment: BaseMoviesListFragment
-    lateinit var fragment: SearchFragment
+   // lateinit var fragment: SearchFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
-        setFragment(intent.getStringExtra(SEARCH_QUERY))
+        if (savedInstanceState == null)
+            setFragment(intent.getStringExtra(SEARCH_QUERY))
 
         search.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                val fragment = fragmentManager.findFragmentByTag(SearchFragment::class.java.name)
+                        as SearchFragment
                 fragment.presenter.search(query?:"")
                 return true
             }
@@ -60,7 +62,7 @@ class MoviesSearchActivity: NavigationIconActivity(), HasFragmentInjector {
 
     private fun setFragment(query: String){
        //fragment = BaseMoviesListFragment()
-        fragment = SearchFragment()
+        val fragment = SearchFragment()
         val bundle = Bundle()
         bundle.putInt(MoviesListActivity.DOWNLOAD_TYPE_KEY,MoviesDownloadTypes.SEARCH)
         bundle.putString(SEARCH_QUERY,query)

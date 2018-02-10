@@ -22,22 +22,21 @@ class MovieCreditsFragment : Fragment(), MovieCreditsContract.View{
 
     companion object {
         const val CREDITS_TYPE = "credits_type"
-
     }
 
     @Inject lateinit var presenter: MovieCreditsContract.Presenter
    // @Inject
     lateinit var adapter: MovieCreditsAdapter
 
-    override fun onAttach(context: Context?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
-        super.onAttach(context)
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.v("MovieCreditsFragment","onCreateView")
-        retainInstance = true
-
+        //Log.v("MovieCreditsFragment","onCreateView")
         presenter.changeView(this)
         adapter = MovieCreditsAdapter(presenter,arguments.getInt(CREDITS_TYPE),
                 arguments.getInt(MovieDetailsActivity.MOVIE_INDICATOR_COLOR))
@@ -45,13 +44,10 @@ class MovieCreditsFragment : Fragment(), MovieCreditsContract.View{
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        Log.v("MovieCreditsFragment","onViewCreated")
         presenter.downloadCredits(arguments.getInt(MovieDetailsActivity.MOVIE_ID))
         super.onViewCreated(view, savedInstanceState)
 
         recycler_credits.apply {
-           // val linearLayout = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-           // layoutManager = linearLayout
             layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
             isNestedScrollingEnabled = false
         }

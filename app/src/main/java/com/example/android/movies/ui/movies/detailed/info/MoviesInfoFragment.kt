@@ -24,21 +24,14 @@ class MoviesInfoFragment : Fragment(), MoviesInfoContract.View{
     @Inject
     lateinit var presenter: MoviesInfoContract.Presenter
 
-    override fun onAttach(context: Context?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
-        super.onAttach(context)
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+        presenter.addView(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        //val app : App = activity.application as App
-//        val component = DaggerMoviesInfoComponent.builder()
-//                .appComponent(app.component)
-//                .moviesInfoModule(MoviesInfoModule(this))
-//                .build()
-
-        //component.inject(this)
-        presenter.addView(this)
         return inflater!!.inflate(R.layout.movie_details_info_fragment,container,false)
     }
 

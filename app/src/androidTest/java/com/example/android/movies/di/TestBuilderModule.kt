@@ -3,7 +3,7 @@ package com.example.android.movies.di
 import com.example.android.movies.ui.movies.home.MoviesHomeActivity
 import com.example.android.movies.ui.movies.home.MoviesHomeFragment
 import com.example.android.movies.ui.movies.list.MoviesListActivity
-import com.example.android.movies.ui.movies.list.BaseMoviesListFragment
+import com.example.android.movies.ui.movies.BaseMoviesListFragment
 import com.example.android.movies.ui.movies.list.discover.MoviesDiscoverActivity
 import com.example.android.movies.ui.movies.list.search.MoviesSearchActivity
 import com.example.android.movies.ui.people.list.PeopleListActivity

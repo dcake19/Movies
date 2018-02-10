@@ -11,15 +11,17 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+import okhttp3.OkHttpClient
 
-@Module
+@Module(includes = arrayOf(NetworkModule::class))
 class AppModule {
 
     @Singleton
     @Provides
-    fun provideMoviesApi(): MoviesApi {
+    fun provideMoviesApi(okHttpClient:OkHttpClient): MoviesApi {
         val retrofit = Retrofit.Builder()
                 .baseUrl("http://api.themoviedb.org")
+                .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -38,4 +40,5 @@ class AppModule {
             }
         }
     }
+
 }

@@ -33,15 +33,17 @@ class MoviesDiscoverActivity : NavigationIconActivity(),DiscoverGenres , HasFrag
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-        setFragment()
+
+        if (savedInstanceState == null)
+            setFragment()
 
         setSortbySpinner()
         setYearsSpinners()
 
         btn_find.setOnClickListener {
-            if(fragmentManager.findFragmentByTag(DiscoverFragment::class.java.canonicalName)!=null) {
+            if(fragmentManager.findFragmentByTag(DiscoverFragment::class.java.name)!=null) {
                 val fragment = fragmentManager
-                        .findFragmentByTag(DiscoverFragment::class.java.canonicalName)
+                        .findFragmentByTag(DiscoverFragment::class.java.name)
                         as DiscoverFragment
                 fragment.presenter.downloadDiscoverData(
                         DiscoverQuery(getSortByString(spinner_sort_by.selectedItemPosition),
@@ -53,20 +55,6 @@ class MoviesDiscoverActivity : NavigationIconActivity(),DiscoverGenres , HasFrag
                                 edit_text_runtime_min.text.toString(),
                                 edit_text_runtime_max.text.toString()))
             }
-//            if(fragmentManager.findFragmentByTag(BaseMoviesListFragment::class.java.canonicalName)!=null) {
-//                val fragment = fragmentManager
-//                        .findFragmentByTag(BaseMoviesListFragment::class.java.canonicalName)
-//                        as BaseMoviesListFragment
-//                fragment.presenter.downloadDiscoverData(
-//                        DiscoverQuery(getSortByString(spinner_sort_by.selectedItemPosition),
-//                                GenreUtil.getGenresIdList(includeGenres),
-//                                GenreUtil.getGenresIdList(excludeGenres),
-//                                edit_text_vote_average_min.text.toString(),
-//                                edit_text_vote_count_min.text.toString(),
-//                                spinner_release_year.selectedItem.toString(),
-//                                edit_text_runtime_min.text.toString(),
-//                                edit_text_runtime_max.text.toString()))
-//            }
 
         }
 
@@ -112,7 +100,6 @@ class MoviesDiscoverActivity : NavigationIconActivity(),DiscoverGenres , HasFrag
         ft.replace(R.id.movies_discover_content,fragment, DiscoverFragment::class.java.name)
         ft.commit()
     }
-
 
     private fun setSortbySpinner(){
         val adapterSortBy = ArrayAdapter.createFromResource(this,

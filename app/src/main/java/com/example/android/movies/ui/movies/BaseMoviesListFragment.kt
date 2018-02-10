@@ -1,4 +1,4 @@
-package com.example.android.movies.ui.movies.list
+package com.example.android.movies.ui.movies
 
 import android.os.Bundle
 import android.app.Fragment
@@ -11,42 +11,41 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.android.movies.R
 import com.example.android.movies.ui.EndlessRecyclerViewScrollListener
-import com.example.android.movies.ui.movies.MoviesContract
-import com.example.android.movies.ui.movies.MoviesDownloadTypes
-import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
 import com.example.android.movies.ui.movies.home.MoviesHomeActivity
-import com.example.android.movies.ui.movies.list.search.MoviesSearchActivity
+import com.example.android.movies.ui.movies.list.MoviesListAdapter
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.movies_home_fragment.*
+import timber.log.Timber
 import javax.inject.Inject
 
-open class BaseMoviesListFragment : Fragment(), MoviesContract.View {
+abstract class BaseMoviesListFragment : Fragment(), MoviesContract.View {
 
     @Inject lateinit var presenter: MoviesContract.Presenter
     //@Inject
     lateinit var adapter: MoviesListAdapter
 
     override fun onAttach(context: Context?) {
-        AndroidInjection.inject(this)
+        Timber.i("onAttach")
+
         super.onAttach(context)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+        Timber.i("onCreate")
+        super.onCreate(savedInstanceState)
         presenter.addView(this, arguments.getInt(MoviesHomeActivity.DOWNLOAD_TYPE_KEY))
+        retainInstance = true
+    }
+
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Timber.i("onCreateView")
+
         adapter = MoviesListAdapter(presenter)
         return inflater!!.inflate(R.layout.movies_list_fragment,container,false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-//        val type = arguments.getInt(MoviesListActivity.DOWNLOAD_TYPE_KEY)
-//
-//        if (type == MoviesDownloadTypes.SEARCH)
-//            presenter.search(arguments.getString(MoviesSearchActivity.SEARCH_QUERY,""))
-//        else if(type == MoviesDownloadTypes.RECOMMENDATIONS || type == MoviesDownloadTypes.SIMILAR)
-//            presenter.downloadRelatedMovies(arguments.getInt(MovieDetailsActivity.MOVIE_ID))
-//        else if(type != MoviesDownloadTypes.DISCOVER)
-//            presenter.downloadMoviesData()
-
         super.onViewCreated(view, savedInstanceState)
 
         recycler_movies.apply {
@@ -57,23 +56,12 @@ open class BaseMoviesListFragment : Fragment(), MoviesContract.View {
 
         if (recycler_movies.adapter == null)
             recycler_movies.adapter = adapter
-
-//        class EndlessListener(layout:LinearLayoutManager): EndlessRecyclerViewScrollListener(layout) {
-//            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-//                Log.v("EndlessListener","page: " + page.toString())
-//                presenter.downloadMoviesDataNextPage()
-//            }
-//        }
-//
-//        recycler_movies.addOnScrollListener(
-//                EndlessListener(recycler_movies.layoutManager as LinearLayoutManager))
-
     }
 
     protected fun addMultiPageRecyclerView(){
         class EndlessListener(layout: LinearLayoutManager): EndlessRecyclerViewScrollListener(layout) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                Log.v("EndlessListener","page: " + page.toString())
+                //Log.v("EndlessListener","page: " + page.toString())
                 presenter.downloadMoviesDataNextPage()
             }
         }
@@ -85,6 +73,11 @@ open class BaseMoviesListFragment : Fragment(), MoviesContract.View {
 
     override fun update(size: Int) {
         adapter.update(size)
+        //if (top) recycler_movies.scrollToPosition(0)
+    }
+
+    protected fun moveToTop(){
+        recycler_movies.scrollToPosition(0)
     }
 
 }
