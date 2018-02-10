@@ -20,28 +20,17 @@ import javax.inject.Inject
 class MoviesHomeFragment :Fragment(), MoviesContract.View {
 
     @Inject lateinit var presenter: MoviesContract.Presenter
-   //
   // @Inject
     lateinit var adapter: MoviesHomeAdapter
 
-    override fun onAttach(context: Context?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
-        super.onAttach(context)
+        super.onCreate(savedInstanceState)
+        presenter.addView(this, arguments.getInt(MoviesHomeActivity.DOWNLOAD_TYPE_KEY))
+        retainInstance = true
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-       // val type = arguments.getInt(MoviesHomeActivity.DOWNLOAD_TYPE_KEY)
-
-     //   val app : App = activity.application as App
-
-//        val component = DaggerMoviesHomeComponent.builder()
-//                .appComponent(app.component)
-//                .moviesHomeModule(MoviesHomeModule(this, type))
-//                .build()
-//
-//        component.inject(this)
-
-        presenter.addView(this,arguments.getInt(MoviesHomeActivity.DOWNLOAD_TYPE_KEY))
         adapter = MoviesHomeAdapter(presenter)
         return inflater!!.inflate(R.layout.movies_home_fragment,container,false)
     }

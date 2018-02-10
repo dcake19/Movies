@@ -2,9 +2,11 @@ package com.example.android.movies.ui.movies.list.discover
 
 import android.app.Fragment
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.widget.Toolbar
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import com.example.android.movies.R
 import com.example.android.movies.ui.NavigationIconActivity
 import com.example.android.movies.ui.movies.MoviesDownloadTypes
@@ -15,6 +17,7 @@ import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasFragmentInjector
+import kotlinx.android.synthetic.main.movie_details_appbar.*
 import kotlinx.android.synthetic.main.movies_discover_activity.*
 import kotlinx.android.synthetic.main.movies_discover_appbar.*
 import kotlinx.android.synthetic.main.movies_discover_content.*
@@ -22,6 +25,16 @@ import kotlinx.android.synthetic.main.movies_discover_filters.*
 import javax.inject.Inject
 
 class MoviesDiscoverActivity : NavigationIconActivity(),DiscoverGenres , HasFragmentInjector {
+
+    private val OUTSTATE_FILTERS_UP = "filters_up"
+    private val OUTSTATE_SORT_BY = "sort_by"
+    private val OUTSTATE_INCLUDE_GENRES = "include_genres"
+    private val OUTSTATE_EXCLUDE_GENRES = "exclude_genres"
+    private val OUTSTATE_VOTE_AVERAGE = "vote_average"
+    private val OUTSTATE_VOTE_COUNT = "vote_count"
+    private val OUTSTATE_RELEASE_YEAR = "release_year"
+    private val OUTSTATE_RUNTIME_MIN = "runtime_min"
+    private val OUTSTATE_RUNTIME_MAX = "runtime_max"
 
     @Inject
     lateinit var fragmentDispatchingAndroidInjector:
@@ -33,9 +46,6 @@ class MoviesDiscoverActivity : NavigationIconActivity(),DiscoverGenres , HasFrag
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-
-        if (savedInstanceState == null)
-            setFragment()
 
         setSortbySpinner()
         setYearsSpinners()
@@ -84,10 +94,15 @@ class MoviesDiscoverActivity : NavigationIconActivity(),DiscoverGenres , HasFrag
             genresDialog.show(supportFragmentManager,"dialog_exclude_genres")
         }
 
+        if (savedInstanceState == null)
+            setFragment()
+        else
+            loadState(savedInstanceState)
+
     }
 
+
     private fun setFragment(){
-        //val fragment = BaseMoviesListFragment()
         val fragment = DiscoverFragment()
         val bundle = Bundle()
         bundle.putInt(MoviesListActivity.DOWNLOAD_TYPE_KEY, MoviesDownloadTypes.DISCOVER)
@@ -128,6 +143,45 @@ class MoviesDiscoverActivity : NavigationIconActivity(),DiscoverGenres , HasFrag
             excludeGenres = genres
             text_exclude_genres.text = GenreUtil.getGenreList(excludeGenres, this)
         }
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        saveState(outState!!)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        saveState(outState!!)
+    }
+
+    private fun loadState(savedInstanceState: Bundle){
+        if(!savedInstanceState.getBoolean(OUTSTATE_FILTERS_UP))
+            btn_expand.setImageResource(R.drawable.ic_expand_less_white_24dp)
+        else
+            btn_expand.setImageResource(R.drawable.ic_expand_more_white_24dp)
+
+        spinner_sort_by.setSelection(savedInstanceState.getInt(OUTSTATE_SORT_BY))
+        setGenres(savedInstanceState.getBooleanArray(OUTSTATE_INCLUDE_GENRES),true)
+        setGenres(savedInstanceState.getBooleanArray(OUTSTATE_EXCLUDE_GENRES),false)
+        edit_text_vote_average_min.setText(savedInstanceState.getString(OUTSTATE_VOTE_AVERAGE)?:"")
+        edit_text_vote_count_min.setText(savedInstanceState.getString(OUTSTATE_VOTE_COUNT)?:"")
+        spinner_release_year.setSelection(savedInstanceState.getInt(OUTSTATE_RELEASE_YEAR))
+        edit_text_runtime_min.setText(savedInstanceState.getString(OUTSTATE_RUNTIME_MIN)?:"")
+        edit_text_runtime_max.setText(savedInstanceState.getString(OUTSTATE_RUNTIME_MAX)?:"")
+    }
+
+    private fun saveState(outState: Bundle){
+        outState.putBoolean(OUTSTATE_FILTERS_UP,expandable_layout.height==0)
+        outState.putInt(OUTSTATE_SORT_BY,spinner_sort_by.selectedItemPosition)
+        outState.putBooleanArray(OUTSTATE_INCLUDE_GENRES,includeGenres)
+        outState.putBooleanArray(OUTSTATE_EXCLUDE_GENRES,excludeGenres)
+        outState.putString(OUTSTATE_VOTE_AVERAGE,edit_text_vote_average_min.text.toString())
+        outState.putString(OUTSTATE_VOTE_COUNT,edit_text_vote_count_min.text.toString())
+        outState.putInt(OUTSTATE_RELEASE_YEAR,spinner_release_year.selectedItemPosition)
+        outState.putString(OUTSTATE_RUNTIME_MIN,edit_text_runtime_min.text.toString())
+        outState.putString(OUTSTATE_RUNTIME_MAX,edit_text_runtime_max.text.toString())
     }
 
     override fun getToolbar(): Toolbar {

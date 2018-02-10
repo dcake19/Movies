@@ -18,41 +18,38 @@ class PeopleCreditsPresenter @Inject constructor(val interactor:PeopleCreditsInt
    // private lateinit var personCredits:PersonCredits
     private lateinit var cast: List<Cast>
     private lateinit var crew: List<CrewMultipleJobs>
-    private var downloadComplete = false
-
+    private var subscribed = false
+    private var complete = false
 
     override fun changeView(view: PeopleCreditsContract.View) {
         this.view = view
     }
 
     override fun downloadCredits(id: Int) {
-        if (downloadComplete)
-            view.display(cast.size,crew.size)
-          //  view.display( personCredits.cast.size, personCredits.crew.size)
-        else {
+        if (complete)
+            view.display( cast.size,crew.size)
+        else if(!subscribed){
             val observable = interactor.getPersonCredits(id.toString(), BuildConfig.TMDB_API_KEY)
             observable.subscribeOn(rxSchedulerProvider.subscribeOn())
                     .observeOn(rxSchedulerProvider.observeOn())
                     .map { it -> Pair(it.cast,setCrewWithMultipleJobs(it)) }
                     .subscribe(object : Observer<Pair<List<Cast>,List<CrewMultipleJobs>>> {
                         override fun onNext(t: Pair<List<Cast>,List<CrewMultipleJobs>>) {
-                            //personCredits = t
                             cast = t.first
                             crew = t.second
-                            //view.display(personCredits.cast.size,personCredits.crew.size)
                             view.display(cast.size,crew.size)
                         }
 
                         override fun onError(e: Throwable?) {
-
+                            subscribed = false
                         }
 
                         override fun onComplete() {
-                            downloadComplete = true
+                            complete = true
                         }
 
                         override fun onSubscribe(d: Disposable?) {
-
+                            subscribed = true
                         }
                     })
         }
@@ -75,46 +72,6 @@ class PeopleCreditsPresenter @Inject constructor(val interactor:PeopleCreditsInt
         val crewList = map.toList().map {it->it.second}
         return crewList.sortedBy {it.order }
     }
-
-//    override fun getCastMovieId(position: Int): Int {
-//        return personCredits.cast.get(position).id
-//    }
-//
-//    override fun getCastMovieName(position: Int): String {
-//        return personCredits.cast.get(position).title
-//    }
-//
-//    override fun getCharacter(position: Int): String {
-//        return personCredits.cast.get(position).character
-//    }
-//
-//    override fun getCastMoviePosterPath(position: Int): String {
-//        return personCredits.cast.get(position).posterPath?:""
-//    }
-//
-//    override fun getCrewMovieId(position: Int): Int {
-//        return personCredits.crew.get(position).id
-//    }
-//
-//    override fun getCrewMovieName(position: Int): String {
-//        return personCredits.crew.get(position).title
-//    }
-//
-//    override fun getJob(position: Int): String {
-//        return personCredits.crew.get(position).job
-//    }
-//
-//    override fun getCrewMoviePosterPath(position: Int): String {
-//        return personCredits.crew.get(position).posterPath?:""
-//    }
-//
-//    override fun getCastMovieBackdropPath(position: Int): String {
-//        return personCredits.cast[position].backdropPath?:""
-//    }
-//
-//    override fun getCrewMovieBackdropPath(position: Int): String {
-//        return personCredits.crew[position].backdropPath?:""
-//    }
 
     override fun getCastMovieId(position: Int): Int {
         return cast.get(position).id

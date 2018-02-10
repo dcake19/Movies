@@ -22,19 +22,14 @@ class PeopleListFragment: Fragment(), PeopleListContract.View {
    // @Inject
     lateinit var adapter: PeopleListAdapter
 
-    override fun onAttach(context: Context?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
-        super.onAttach(context)
+        super.onCreate(savedInstanceState)
+        presenter.addView(this)
+        retainInstance = true
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-//        val app : App = activity.application as App
-//        DaggerPeopleListComponent.builder()
-//                .appComponent(app.component)
-//                .peopleListModule(PeopleListModule(this))
-//                .build().inject(this)
-        presenter.addView(this)
         adapter = PeopleListAdapter(presenter)
         return inflater!!.inflate(R.layout.people_list_fragment,container,false)
     }
@@ -67,5 +62,6 @@ class PeopleListFragment: Fragment(), PeopleListContract.View {
 
     override fun display(size: Int) {
         adapter.display(size)
+        recycler_people.scrollToPosition(0)
     }
 }

@@ -26,19 +26,13 @@ class PeopleCreditsFragment: Fragment(), PeopleCreditsContract.View {
    // @Inject
     lateinit var adapter: PeopleCreditsAdapter
 
-    override fun onAttach(context: Context?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
-        super.onAttach(context)
+        super.onCreate(savedInstanceState)
+        retainInstance = true
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-//        val peopleDetailed = activity as PeopleDetailedActivity
-//        DaggerPeopleCreditsComponent.builder()
-//                .peopleDetailedComponent(peopleDetailed.component)
-//                .peopleCreditsModule(PeopleCreditsModule(this,arguments.getInt(CREDITS_TYPE)))
-//                .build()
-//                .inject(this)
         presenter.changeView(this)
         adapter = PeopleCreditsAdapter(presenter,arguments.getInt(CREDITS_TYPE))
         retainInstance = true

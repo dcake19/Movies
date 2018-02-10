@@ -22,17 +22,24 @@ class PeopleListPresenter @Inject constructor(
     lateinit var view:PeopleListContract.View
     private lateinit var personResults:PersonResults
     private var query = ""
+    private var subscribed = 0
+    private var complete = 0
 
     override fun addView(view: PeopleListContract.View) {
         this.view = view
     }
 
     override fun downloadPopularPeople() {
+
        downloadPopularPeople(1)
     }
 
     private fun downloadPopularPeople(page:Int) {
-       download(page,interactor.getPopularPeople(BuildConfig.TMDB_API_KEY,page.toString()))
+        if(complete>=page)
+            view.display(personResults.results.size)
+        else if (subscribed<page)
+            download(page,interactor.getPopularPeople(BuildConfig.TMDB_API_KEY,page.toString()))
+
     }
 
     override fun downloadPeopleNextPage() {
@@ -45,12 +52,17 @@ class PeopleListPresenter @Inject constructor(
     }
 
     override fun searchPeople(query: String) {
+        complete = 0
+        subscribed = 0
         this.query = query
         searchPeople(1)
     }
 
     private fun searchPeople(page:Int){
-        download(page,interactor.getPersonSearchResults(
+        if(complete>=page)
+            view.display(personResults.results.size)
+        else if (subscribed<page)
+            download(page,interactor.getPersonSearchResults(
                 BuildConfig.TMDB_API_KEY, query,page.toString()))
     }
 
@@ -59,6 +71,7 @@ class PeopleListPresenter @Inject constructor(
                 .observeOn(rxSchedulerProvider.observeOn())
                 .subscribe(object : Observer<PersonResults> {
                     override fun onSubscribe(d: Disposable) {
+                        subscribed++
                     }
 
                     override fun onNext(pr: PersonResults) {
@@ -71,9 +84,11 @@ class PeopleListPresenter @Inject constructor(
                     }
 
                     override fun onError(e: Throwable) {
+                        subscribed--
                     }
 
                     override fun onComplete() {
+                        complete++
                     }
                 })
     }

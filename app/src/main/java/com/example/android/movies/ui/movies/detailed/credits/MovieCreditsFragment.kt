@@ -32,11 +32,9 @@ class MovieCreditsFragment : Fragment(), MovieCreditsContract.View{
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         retainInstance = true
-
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //Log.v("MovieCreditsFragment","onCreateView")
         presenter.changeView(this)
         adapter = MovieCreditsAdapter(presenter,arguments.getInt(CREDITS_TYPE),
                 arguments.getInt(MovieDetailsActivity.MOVIE_INDICATOR_COLOR))

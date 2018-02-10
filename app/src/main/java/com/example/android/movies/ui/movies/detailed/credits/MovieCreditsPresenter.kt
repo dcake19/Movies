@@ -26,7 +26,6 @@ class MovieCreditsPresenter @Inject constructor(val interactor: MovieCreditsInte
 
     override fun changeView(view: MovieCreditsContract.View) {
         this.view = view
-        Timber.v(hashCode().toString())
     }
 
     override fun downloadCredits(id: Int) {

@@ -18,20 +18,14 @@ class PeopleInfoFragment: Fragment(), PeopleInfoContract.View{
 
     @Inject lateinit var presenter: PeopleInfoContract.Presenter
 
-    override fun onAttach(context: Context?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
-        super.onAttach(context)
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+        presenter.addView(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-//        val app : App = activity.application as App
-//        val component = DaggerPeopleInfoComponent.builder()
-//                .appComponent(app.component)
-//                .peopleInfoModule(PeopleInfoModule(this))
-//                .build()
-//        component.inject(this)
-        presenter.addView(this)
         return inflater!!.inflate(R.layout.people_detailed_info_fragment,container,false)
     }
 

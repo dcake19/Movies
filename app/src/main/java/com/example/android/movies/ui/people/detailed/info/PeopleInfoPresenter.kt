@@ -20,34 +20,39 @@ class PeopleInfoPresenter @Inject constructor(val interactor: PeopleInfoInteract
 
     private lateinit var view: PeopleInfoContract.View
     private lateinit var personInfo:PersonInfo
+    private var subscribed = false
+    private var complete = false
 
     override fun addView(view: PeopleInfoContract.View) {
         this.view = view
     }
 
     override fun downloadPersonInfo(id: Int) {
+        if (complete)
+            display()
+        else if(!subscribed) {
+            val observable = interactor.getPersonInfo(id.toString(), BuildConfig.TMDB_API_KEY)
+            observable.subscribeOn(rxSchedulerProvider.subscribeOn())
+                    .observeOn(rxSchedulerProvider.observeOn())
+                    .subscribe(object : Observer<PersonInfo> {
+                        override fun onNext(t: PersonInfo) {
+                            personInfo = t
+                            display()
+                        }
 
-        val observable = interactor.getPersonInfo(id.toString(), BuildConfig.TMDB_API_KEY)
-        observable.subscribeOn(rxSchedulerProvider.subscribeOn())
-                .observeOn(rxSchedulerProvider.observeOn())
-                .subscribe(object : Observer<PersonInfo>{
-                    override fun onNext(t: PersonInfo) {
-                        personInfo = t
-                        display()
-                    }
+                        override fun onError(e: Throwable?) {
+                            subscribed = false
+                        }
 
-                    override fun onComplete() {
+                        override fun onSubscribe(d: Disposable?) {
+                            subscribed = true
+                        }
 
-                    }
-
-                    override fun onError(e: Throwable?) {
-
-                    }
-
-                    override fun onSubscribe(d: Disposable?) {
-
-                    }
-                })
+                        override fun onComplete() {
+                            complete = true
+                        }
+                    })
+        }
     }
 
     private fun display(){

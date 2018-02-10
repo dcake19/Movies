@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.app.Fragment
+import android.os.PersistableBundle
 import android.support.v4.widget.DrawerLayout
 import com.example.android.movies.R
 //import com.example.android.movies.di.people.detailed.DaggerPeopleDetailedComponent
@@ -36,6 +37,8 @@ class PeopleDetailedActivity : BaseNavigationActivity()  , HasFragmentInjector {
         }
     }
 
+    private val OUTSTATE_TAB_SELECTED = "tab_selected"
+
     @Inject
     lateinit var fragmentDispatchingAndroidInjector:
             DispatchingAndroidInjector<Fragment>
@@ -46,14 +49,16 @@ class PeopleDetailedActivity : BaseNavigationActivity()  , HasFragmentInjector {
 
         people_details_toolbar.title = intent.getStringExtra(PERSON_NAME)
 
-        setupTabs()
-        setFragment(0)
+        setupTabs(savedInstanceState?.getInt(OUTSTATE_TAB_SELECTED,0)?:0)
+
+        if(savedInstanceState==null)
+            setFragment(0)
     }
 
-    fun setupTabs(){
-        tabs.addTab(tabs.newTab().setText(getString(R.string.title_bio)),true)
-        tabs.addTab(tabs.newTab().setText(getString(R.string.title_cast)))
-        tabs.addTab(tabs.newTab().setText(getString(R.string.title_crew)))
+    fun setupTabs(selected:Int){
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_bio)),selected==0)
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_cast)),selected==1)
+        tabs.addTab(tabs.newTab().setText(getString(R.string.title_crew)),selected==2)
         tabs.setSelectedTabIndicatorHeight((4*resources.displayMetrics.density).toInt())
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
@@ -109,6 +114,16 @@ class PeopleDetailedActivity : BaseNavigationActivity()  , HasFragmentInjector {
     override fun onBackPressed() {
         finish()
       //  super.onBackPressed()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        outState!!.putInt(OUTSTATE_TAB_SELECTED,tabs.selectedTabPosition)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState!!.putInt(OUTSTATE_TAB_SELECTED,tabs.selectedTabPosition)
     }
 
     override fun getLayoutResourceId(): Int {

@@ -53,12 +53,7 @@ class MoviesInfoPresenter @Inject constructor(val interactor: MoviesInfoInteract
                             display()
                         }
                     })
-
         }
-        //{mi: MovieInfo -> saveMovieInfo(mi)},
-                     //   {subscribed=false},
-                     //   {complete=true},
-                     //   {subscribed=true})
     }
 
     private fun display(){

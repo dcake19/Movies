@@ -24,23 +24,14 @@ abstract class BaseMoviesListFragment : Fragment(), MoviesContract.View {
     //@Inject
     lateinit var adapter: MoviesListAdapter
 
-    override fun onAttach(context: Context?) {
-        Timber.i("onAttach")
-
-        super.onAttach(context)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
-        Timber.i("onCreate")
         super.onCreate(savedInstanceState)
         presenter.addView(this, arguments.getInt(MoviesHomeActivity.DOWNLOAD_TYPE_KEY))
         retainInstance = true
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Timber.i("onCreateView")
-
         adapter = MoviesListAdapter(presenter)
         return inflater!!.inflate(R.layout.movies_list_fragment,container,false)
     }
@@ -53,7 +44,6 @@ abstract class BaseMoviesListFragment : Fragment(), MoviesContract.View {
             layoutManager = linearLayout
             isNestedScrollingEnabled = false
         }
-
         if (recycler_movies.adapter == null)
             recycler_movies.adapter = adapter
     }
@@ -65,15 +55,12 @@ abstract class BaseMoviesListFragment : Fragment(), MoviesContract.View {
                 presenter.downloadMoviesDataNextPage()
             }
         }
-
         recycler_movies.addOnScrollListener(
                 EndlessListener(recycler_movies.layoutManager as LinearLayoutManager))
     }
 
-
     override fun update(size: Int) {
         adapter.update(size)
-        //if (top) recycler_movies.scrollToPosition(0)
     }
 
     protected fun moveToTop(){
