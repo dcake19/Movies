@@ -16,7 +16,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
 
-
     <dimen name="btn_square_side">48dp</dimen>
     <dimen name="btn_square_margin">2dp</dimen>
 
@@ -25,4 +24,7 @@
 
     <dimen name="list_image_height">120dp</dimen>
     <dimen name="list_image_width">80dp</dimen>
+
+    <dimen name="heart_height">80dp</dimen>
+    <dimen name="heart_width">80dp</dimen>
 </resources>

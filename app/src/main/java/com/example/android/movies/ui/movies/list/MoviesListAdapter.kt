@@ -1,8 +1,10 @@
 package com.example.android.movies.ui.movies.list
 
 import android.graphics.Color
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.GradientDrawable
+import android.support.graphics.drawable.AnimatedVectorDrawableCompat
 import android.support.v7.graphics.Palette
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -63,6 +65,12 @@ class MoviesListAdapter(val presenter: MoviesContract.Presenter, var size:Int = 
             val voteAverageCircle = text_user_score.background as GradientDrawable
             voteAverageCircle.setColor(ratingBackgroundColor)
             text_user_score.setTextColor(ratingTextColor)
+
+            image_heart.setOnClickListener {
+                val drawable = context.getDrawable(R.drawable.avd_heart_fill) as AnimatedVectorDrawable
+                image_heart.setImageDrawable(drawable)
+                drawable.start()
+            }
 
             layout_movies_item.setOnClickListener {
                 if (image_poster.drawable==null){

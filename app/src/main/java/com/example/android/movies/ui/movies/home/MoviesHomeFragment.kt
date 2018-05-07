@@ -20,7 +20,7 @@ import javax.inject.Inject
 class MoviesHomeFragment :Fragment(), MoviesContract.View {
 
     @Inject lateinit var presenter: MoviesContract.Presenter
-  // @Inject
+
     lateinit var adapter: MoviesHomeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
