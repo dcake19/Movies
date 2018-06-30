@@ -2,6 +2,7 @@ package com.example.android.movies
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import com.example.android.movies.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -31,7 +32,7 @@ open class App : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
-
+        Holder.INSTANCE = this
         Timber.plant(Timber.DebugTree())
 
         createComponent()
@@ -43,5 +44,12 @@ open class App : Application(), HasActivityInjector {
     }
 
     override fun activityInjector(): AndroidInjector<Activity> = activityInjector
+
+    object Holder{lateinit var INSTANCE : App}
+
+    companion object {
+        val instance: App by lazy { Holder.INSTANCE }
+        fun appContext() = instance.applicationContext
+    }
 
 }

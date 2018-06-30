@@ -12,10 +12,14 @@ interface MoviesInfoContract {
                     voteCount:String,budget:String,revenue:String,
                     runtime:String,genres:String,languages:String,
                     ratingBackgroundColor:Int,ratingTextColor:Int)
+        fun setFavorite()
     }
 
     interface Presenter{
         fun addView(view:View)
         fun downloadMovieInfo(id:Int)
+        fun setFavorite(id:Int)
+        fun changeFavorite()
+        fun isFavorite():Boolean
     }
 }

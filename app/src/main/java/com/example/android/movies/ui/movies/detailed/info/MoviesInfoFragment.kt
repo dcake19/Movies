@@ -4,6 +4,7 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.app.Fragment
 import android.content.Context
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.example.android.movies.loadImage
 import com.example.android.movies.ui.movies.detailed.MovieDetailsActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.movie_details_info_fragment.*
+import kotlinx.android.synthetic.main.movies_list_item.view.*
 import javax.inject.Inject
 
 
@@ -36,6 +38,7 @@ class MoviesInfoFragment : Fragment(), MoviesInfoContract.View{
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        presenter.setFavorite(arguments.getInt(MovieDetailsActivity.MOVIE_ID))
         presenter.downloadMovieInfo(arguments.getInt(MovieDetailsActivity.MOVIE_ID))
         super.onViewCreated(view, savedInstanceState)
     }
@@ -59,5 +62,29 @@ class MoviesInfoFragment : Fragment(), MoviesInfoContract.View{
         val voteAverageCircle = text_user_score.background as GradientDrawable
         voteAverageCircle.setColor(ratingBackgroundColor)
         text_user_score.setTextColor(ratingTextColor)
+
+
+
+    }
+
+    override fun setFavorite() {
+        val drawable = getHeartDrawable(presenter.isFavorite())
+        image_heart.setImageDrawable(drawable)
+        drawable.start()
+
+        image_heart.setOnClickListener {
+            presenter.changeFavorite()
+            val drawable = getHeartDrawable(presenter.isFavorite())
+            image_heart.setImageDrawable(drawable)
+            drawable.start()
+        }
+    }
+
+    fun getHeartDrawable(favorite: Boolean):AnimatedVectorDrawable{
+        val drawable = when{
+            favorite -> R.drawable.avd_heart_fill
+            else -> R.drawable.avd_heart_empty
+        }
+        return context.getDrawable(drawable) as AnimatedVectorDrawable
     }
 }

@@ -5,13 +5,19 @@ import com.example.android.movies.BuildConfig
 import com.example.android.movies.R
 import com.example.android.movies.RxSchedulerProvider
 import com.example.android.movies.api.data.movie.MovieInfo
+import com.example.android.movies.db.FavoriteMovies
 import com.example.android.movies.util.ColorUtil
 import com.example.android.movies.util.TextUtil
+import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+import io.reactivex.ObservableEmitter
+import io.reactivex.ObservableOnSubscribe
+
+
 
 
 class MoviesInfoPresenter @Inject constructor(val interactor: MoviesInfoInteractor,
@@ -21,6 +27,8 @@ class MoviesInfoPresenter @Inject constructor(val interactor: MoviesInfoInteract
 
     private lateinit var movieInfo:MovieInfo
     lateinit var view:MoviesInfoContract.View
+    private var favorite = false
+
     private var subscribed = false
     private var complete = false
 
@@ -56,6 +64,47 @@ class MoviesInfoPresenter @Inject constructor(val interactor: MoviesInfoInteract
         }
     }
 
+    override fun setFavorite(id:Int) {
+        val observable = Observable.create<MutableList<FavoriteMovies>> { e ->
+            e.onNext(interactor.getAll())
+        }
+
+        val observer = object: Observer<MutableList<FavoriteMovies>>{
+            override fun onComplete() {
+
+            }
+
+            override fun onError(e: Throwable?) {
+
+            }
+
+            override fun onNext(favorites: MutableList<FavoriteMovies>?) {
+                if (favorites!=null){
+                    for (f in favorites){
+                        if (f.tmdbId==id){
+                            favorite = true
+                            break
+                        }
+                    }
+                    view.setFavorite()
+                }
+            }
+
+            override fun onSubscribe(d: Disposable?) {
+
+            }
+
+        }
+
+        observable.subscribeOn(rxSchedulerProvider.subscribeOn())
+                .observeOn(rxSchedulerProvider.observeOn())
+                .subscribe (observer)
+    }
+
+    override fun isFavorite(): Boolean {
+        return  favorite
+    }
+
     private fun display(){
         view.display(movieInfo.overview?:"",
                 movieInfo.posterPath?:"",
@@ -86,4 +135,22 @@ class MoviesInfoPresenter @Inject constructor(val interactor: MoviesInfoInteract
         else return ""
     }
 
+    override fun changeFavorite() {
+        if (favorite){
+            favorite = false
+            Thread {
+                val fm = FavoriteMovies()
+                fm.tmdbId = movieInfo.id
+                interactor.deleteMovie(fm)
+            }.start()
+
+        }else{
+            favorite = true
+            Thread {
+                val fm = FavoriteMovies()
+                fm.tmdbId = movieInfo.id
+                interactor.insert(fm)
+            }.start()
+        }
+    }
 }
